@@ -238,6 +238,10 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
   <div class="topbar">
     <h2>SynthCo Research Manager</h2>
     <div class="user-info">
+      <button onclick="exportAllData()" style="background:rgba(0,184,148,.15);color:var(--success);border-color:var(--success)">&#11015; Export All Data</button>
+      <button onclick="document.getElementById('import-file').click()" style="background:rgba(116,185,255,.15);color:var(--info);border-color:var(--info)">&#11014; Import Data</button>
+      <input type="file" id="import-file" accept=".json" style="display:none" onchange="importAllData(event)">
+      <span style="border-left:1px solid var(--border);height:20px"></span>
       <span>Logged in as <strong>admin</strong></span>
       <button onclick="doLogout()">Sign Out</button>
     </div>
@@ -2269,6 +2273,81 @@ function downloadFile(filename, content) {
   link.href = URL.createObjectURL(blob);
   link.download = filename;
   link.click();
+}
+
+// ==================== EXPORT / IMPORT ALL DATA ====================
+function exportAllData() {
+  const data = {
+    _format: 'synthco_research_manager_v1',
+    _exportedAt: new Date().toISOString(),
+    api_keys: JSON.parse(localStorage.getItem('api_keys') || '{}'),
+    user_entities: JSON.parse(localStorage.getItem('user_entities') || '[]'),
+    entity_overrides: JSON.parse(localStorage.getItem('entity_overrides') || '{}'),
+    reviews: JSON.parse(localStorage.getItem('reviews') || '{}'),
+    reviews_r2: JSON.parse(localStorage.getItem('reviews_r2') || '{}'),
+    edge_cases: JSON.parse(localStorage.getItem('edge_cases') || '[]'),
+    checklists: {}
+  };
+
+  // Save all checklist states
+  ['phase1-checklist','phase2-checklist','phase3-checklist','phase4-checklist'].forEach(id => {
+    const saved = localStorage.getItem('checklist_'+id);
+    if(saved) data.checklists[id] = JSON.parse(saved);
+  });
+
+  const json = JSON.stringify(data, null, 2);
+  const blob = new Blob([json], {type:'application/json'});
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = 'synthco_data.json';
+  link.click();
+  showToast('All data exported to synthco_data.json');
+}
+
+function importAllData(event) {
+  const file = event.target.files[0];
+  if(!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const data = JSON.parse(e.target.result);
+      if(data._format !== 'synthco_research_manager_v1') {
+        showToast('Invalid file format', 'var(--danger)');
+        return;
+      }
+
+      const count = {entities:0, reviews:0, keys:0};
+
+      if(data.api_keys) { localStorage.setItem('api_keys', JSON.stringify(data.api_keys)); count.keys = Object.keys(data.api_keys).length; }
+      if(data.user_entities) { localStorage.setItem('user_entities', JSON.stringify(data.user_entities)); count.entities = data.user_entities.length; }
+      if(data.entity_overrides) localStorage.setItem('entity_overrides', JSON.stringify(data.entity_overrides));
+      if(data.reviews) { localStorage.setItem('reviews', JSON.stringify(data.reviews)); count.reviews = Object.keys(data.reviews).length; }
+      if(data.reviews_r2) localStorage.setItem('reviews_r2', JSON.stringify(data.reviews_r2));
+      if(data.edge_cases) localStorage.setItem('edge_cases', JSON.stringify(data.edge_cases));
+
+      if(data.checklists) {
+        Object.entries(data.checklists).forEach(([id, states]) => {
+          localStorage.setItem('checklist_'+id, JSON.stringify(states));
+        });
+      }
+
+      // Re-render everything
+      renderApiKeys();
+      renderUserEntities();
+      renderSampleTable();
+      renderBorderlineReview();
+      renderEdgeCases();
+      renderChecklists();
+      populateEdgeCaseSelect();
+
+      showToast(`Imported: ${count.entities} entities, ${count.reviews} reviews, ${count.keys} API keys`);
+    } catch(err) {
+      showToast('Error reading file: ' + err.message, 'var(--danger)');
+    }
+  };
+  reader.readAsText(file);
+  event.target.value = '';
 }
 
 function exportSampleCSV() {
