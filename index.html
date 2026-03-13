@@ -238,9 +238,20 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
   <div class="topbar">
     <h2>SynthCo Research Manager</h2>
     <div class="user-info">
-      <button onclick="exportAllData()" style="background:rgba(0,184,148,.15);color:var(--success);border-color:var(--success)">&#11015; Export All Data</button>
-      <button onclick="document.getElementById('import-file').click()" style="background:rgba(116,185,255,.15);color:var(--info);border-color:var(--info)">&#11014; Import Data</button>
-      <input type="file" id="import-file" accept=".json" style="display:none" onchange="importAllData(event)">
+      <div style="position:relative;display:inline-block" onmouseenter="document.getElementById('data-tooltip').style.display='block'" onmouseleave="document.getElementById('data-tooltip').style.display='none'">
+        <button onclick="exportAllData()" style="background:rgba(0,184,148,.15);color:var(--success);border-color:var(--success)">&#11015; Export All Data</button>
+        <button onclick="document.getElementById('import-file').click()" style="background:rgba(116,185,255,.15);color:var(--info);border-color:var(--info)">&#11014; Import Data</button>
+        <button style="padding:4px 8px;font-size:.7rem;border-radius:50%;min-width:22px">?</button>
+        <input type="file" id="import-file" accept=".json" style="display:none" onchange="importAllData(event)">
+        <div id="data-tooltip" style="display:none;position:absolute;top:100%;right:0;margin-top:8px;width:340px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;z-index:200;box-shadow:0 8px 30px rgba(0,0,0,.5);font-size:.8rem;line-height:1.6;color:var(--text-muted)">
+          <strong style="color:var(--text);font-size:.85rem">How data sync works:</strong><br>
+          1. Work locally — all changes auto-save in your browser<br>
+          2. Click <strong style="color:var(--success)">Export All Data</strong> to download <code>synthco_data.json</code><br>
+          3. Save it in your project folder and push to GitHub<br>
+          4. To continue on another device: open the app and click <strong style="color:var(--info)">Import Data</strong> to load the JSON<br><br>
+          <span style="font-size:.75rem">Includes: entities, classifications, reviews, checklists, edge cases.<br>&#128274; API keys are <strong>never exported</strong> — they stay in your local browser only.</span>
+        </div>
+      </div>
       <span style="border-left:1px solid var(--border);height:20px"></span>
       <span>Logged in as <strong>admin</strong></span>
       <button onclick="doLogout()">Sign Out</button>
@@ -2280,7 +2291,6 @@ function exportAllData() {
   const data = {
     _format: 'synthco_research_manager_v1',
     _exportedAt: new Date().toISOString(),
-    api_keys: JSON.parse(localStorage.getItem('api_keys') || '{}'),
     user_entities: JSON.parse(localStorage.getItem('user_entities') || '[]'),
     entity_overrides: JSON.parse(localStorage.getItem('entity_overrides') || '{}'),
     reviews: JSON.parse(localStorage.getItem('reviews') || '{}'),
@@ -2317,9 +2327,8 @@ function importAllData(event) {
         return;
       }
 
-      const count = {entities:0, reviews:0, keys:0};
+      const count = {entities:0, reviews:0};
 
-      if(data.api_keys) { localStorage.setItem('api_keys', JSON.stringify(data.api_keys)); count.keys = Object.keys(data.api_keys).length; }
       if(data.user_entities) { localStorage.setItem('user_entities', JSON.stringify(data.user_entities)); count.entities = data.user_entities.length; }
       if(data.entity_overrides) localStorage.setItem('entity_overrides', JSON.stringify(data.entity_overrides));
       if(data.reviews) { localStorage.setItem('reviews', JSON.stringify(data.reviews)); count.reviews = Object.keys(data.reviews).length; }
@@ -2341,7 +2350,7 @@ function importAllData(event) {
       renderChecklists();
       populateEdgeCaseSelect();
 
-      showToast(`Imported: ${count.entities} entities, ${count.reviews} reviews, ${count.keys} API keys`);
+      showToast(`Imported: ${count.entities} entities, ${count.reviews} reviews (API keys kept local only)`);
     } catch(err) {
       showToast('Error reading file: ' + err.message, 'var(--danger)');
     }
