@@ -162,6 +162,22 @@ tr:hover { background:rgba(255,255,255,.02); }
 .signal-card h4 { font-size:.85rem; margin-bottom:6px; }
 .signal-card p { font-size:.8rem; color:var(--text-muted); line-height:1.4; }
 
+/* METHODOLOGY */
+.method-flow { display:flex; align-items:flex-start; gap:0; flex-wrap:wrap; justify-content:center; margin:24px 0; }
+.method-step { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:16px; width:180px; text-align:center; position:relative; }
+.method-step .step-num { width:32px; height:32px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-weight:700; font-size:.85rem; margin-bottom:8px; }
+.method-step h4 { font-size:.85rem; margin-bottom:6px; }
+.method-step p { font-size:.75rem; color:var(--text-muted); line-height:1.4; }
+.method-arrow { display:flex; align-items:center; font-size:1.5rem; color:var(--border); padding:0 4px; margin-top:30px; }
+.method-legend { display:flex; gap:20px; flex-wrap:wrap; margin-top:16px; justify-content:center; }
+.method-legend span { display:flex; align-items:center; gap:6px; font-size:.8rem; color:var(--text-muted); }
+.method-legend .dot { width:12px; height:12px; border-radius:50%; }
+
+.criteria-box { background:rgba(255,255,255,.02); border-radius:8px; padding:16px; border-left:3px solid var(--accent); margin-bottom:12px; }
+.criteria-box h4 { color:var(--info); margin-bottom:8px; font-size:.9rem; }
+.criteria-box ul { padding-left:18px; font-size:.83rem; color:var(--text-muted); line-height:1.7; }
+.criteria-box ul li { margin-bottom:2px; }
+
 /* RESPONSIVE */
 @media (max-width:768px) {
   .grid-4,.grid-3,.grid-2 { grid-template-columns:1fr; }
@@ -198,6 +214,7 @@ tr:hover { background:rgba(255,255,255,.02); }
   <!-- TABS -->
   <div class="tabs">
     <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+    <button class="tab-btn" data-tab="methodology">Methodology</button>
     <button class="tab-btn" data-tab="phase1">Phase 1: Sources & Setup</button>
     <button class="tab-btn" data-tab="phase2">Phase 2: Data Collection</button>
     <button class="tab-btn" data-tab="phase3">Phase 3: Detection & Classification</button>
@@ -340,6 +357,337 @@ tr:hover { background:rgba(255,255,255,.02); }
           <tr><th>Task</th><th>Phase</th><th>Assigned</th><th>Status</th><th>Due</th><th>Priority</th></tr>
         </thead>
         <tbody id="tasks-table"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ============ METHODOLOGY ============ -->
+  <div id="methodology" class="tab-content">
+    <div class="phase-header">
+      <div class="phase-icon" style="background:rgba(116,185,255,.15)">&#128218;</div>
+      <div>
+        <h2>Research Methodology</h2>
+        <div class="sub">Mixed-methods approach: OSINT + NLP + Manual Verification</div>
+      </div>
+    </div>
+
+    <!-- RESEARCH QUESTION -->
+    <div class="card mb-16">
+      <h3>Research Objective</h3>
+      <p style="font-size:.95rem;line-height:1.7;margin-top:8px">
+        This study investigates the emergence of <strong>synthetic companies</strong> — legal entities created or operated primarily by AI agents with minimal or no human involvement. We aim to: (1) develop a taxonomy of AI-enabled organizational forms, (2) build a detection methodology to identify them, (3) construct a validated international sample, and (4) analyze the ethical, governance, and accountability implications for a high-impact academic article.
+      </p>
+      <p style="font-size:.85rem;line-height:1.7;margin-top:12px;color:var(--text-muted)">
+        <strong>Context:</strong> Sam Altman (OpenAI) predicted "one-person billion-dollar companies" powered by AI agents. Dario Amodei (Anthropic) expects this by 2026. Meanwhile, cases like HurumoAI (a Wired experiment with fully AI employees), Dictador's robot CEO "Mika", and NetDragon's AI CEO "Tang Yu" show this is already happening. We study the full spectrum: from legitimate agentic organizations to fully synthetic (potentially fraudulent) entities.
+      </p>
+    </div>
+
+    <!-- VISUAL PIPELINE FLOW -->
+    <div class="card mb-16">
+      <h3>Methodological Pipeline — Overview</h3>
+      <p style="font-size:.8rem;color:var(--text-muted);margin-bottom:8px">The research follows a 5-phase funnel approach, from broad automated scanning to deep human verification:</p>
+
+      <div class="method-flow">
+        <div class="method-step">
+          <div class="step-num" style="background:rgba(116,185,255,.2);color:var(--info)">1</div>
+          <h4>Source Setup</h4>
+          <p>Configure 10+ data sources: registries, APIs, scrapers, blockchain monitors</p>
+          <div style="margin-top:8px"><span class="badge badge-agent">Agent</span></div>
+        </div>
+        <div class="method-arrow">&#10132;</div>
+        <div class="method-step">
+          <div class="step-num" style="background:rgba(0,184,148,.2);color:var(--success)">2</div>
+          <h4>Data Collection</h4>
+          <p>OSINT scan: scrape registries, websites, social media. 500+ entities screened</p>
+          <div style="margin-top:8px"><span class="badge badge-agent">Agent</span> <span class="badge badge-human">Human</span></div>
+        </div>
+        <div class="method-arrow">&#10132;</div>
+        <div class="method-step">
+          <div class="step-num" style="background:rgba(253,203,110,.2);color:var(--warning)">3</div>
+          <h4>Detection</h4>
+          <p>Apply Synthetic Score (0–100) using 8 weighted signals. Classify by taxonomy</p>
+          <div style="margin-top:8px"><span class="badge badge-agent">Agent</span></div>
+        </div>
+        <div class="method-arrow">&#10132;</div>
+        <div class="method-step">
+          <div class="step-num" style="background:rgba(233,69,96,.2);color:var(--highlight)">4</div>
+          <h4>Verification</h4>
+          <p>7-step protocol: registry cross-check, direct contact, site visits, NLP analysis</p>
+          <div style="margin-top:8px"><span class="badge badge-human">Human</span></div>
+        </div>
+        <div class="method-arrow">&#10132;</div>
+        <div class="method-step">
+          <div class="step-num" style="background:rgba(162,155,254,.2);color:#a29bfe">5</div>
+          <h4>Validation</h4>
+          <p>Final sample construction, inter-rater reliability, power analysis</p>
+          <div style="margin-top:8px"><span class="badge badge-human">Human</span> <span class="badge badge-agent">Agent</span></div>
+        </div>
+      </div>
+
+      <div class="method-legend">
+        <span><span class="dot" style="background:var(--info)"></span> Agent = Automated by AI</span>
+        <span><span class="dot" style="background:var(--warning)"></span> Human = Requires researcher action</span>
+        <span><span class="dot" style="background:var(--highlight)"></span> Critical = Cannot be skipped</span>
+      </div>
+    </div>
+
+    <!-- FUNNEL CHART -->
+    <div class="grid grid-2 mb-16">
+      <div class="card">
+        <h3>Detection Funnel</h3>
+        <p style="font-size:.8rem;color:var(--text-muted);margin-bottom:12px">How entities are progressively filtered from raw data to validated sample:</p>
+        <canvas id="chart-funnel" height="280"></canvas>
+      </div>
+      <div class="card">
+        <h3>Agent vs. Human Effort Distribution</h3>
+        <p style="font-size:.8rem;color:var(--text-muted);margin-bottom:12px">Percentage of tasks assigned to automated agents vs. human researchers per phase:</p>
+        <canvas id="chart-effort" height="280"></canvas>
+      </div>
+    </div>
+
+    <!-- TAXONOMY -->
+    <div class="card mb-16">
+      <h3>Taxonomy of AI-Enabled Organizational Forms</h3>
+      <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:16px">We classify entities into five categories based on the degree of AI involvement in operations and governance:</p>
+
+      <div style="overflow-x:auto">
+        <table>
+          <thead><tr><th style="width:60px">Level</th><th>Category</th><th>Definition</th><th>AI Role</th><th>Human Role</th><th>Example</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><span style="display:inline-block;width:36px;height:36px;border-radius:8px;background:rgba(0,184,148,.15);color:var(--success);text-align:center;line-height:36px;font-weight:700">1</span></td>
+              <td><strong>Agentic Organization</strong></td>
+              <td>Real company using AI agents extensively for core operations</td>
+              <td>Operations, customer service, coding, analytics</td>
+              <td>Strategy, oversight, legal, final decisions</td>
+              <td>Midjourney, Cognition AI</td>
+            </tr>
+            <tr>
+              <td><span style="display:inline-block;width:36px;height:36px;border-radius:8px;background:rgba(116,185,255,.15);color:var(--info);text-align:center;line-height:36px;font-weight:700">2</span></td>
+              <td><strong>Multi-Agent System Corp</strong></td>
+              <td>Organization where interconnected AI agents manage most business functions</td>
+              <td>Interconnected agents handle end-to-end workflows</td>
+              <td>Minimal supervision, strategic direction</td>
+              <td>Fetch.ai, SingularityNET</td>
+            </tr>
+            <tr>
+              <td><span style="display:inline-block;width:36px;height:36px;border-radius:8px;background:rgba(253,203,110,.15);color:var(--warning);text-align:center;line-height:36px;font-weight:700">3</span></td>
+              <td><strong>Agentic DAO</strong></td>
+              <td>Decentralized organization with AI-driven governance and execution</td>
+              <td>Voting, treasury management, proposal execution</td>
+              <td>Token holders set rules, ethical oversight</td>
+              <td>ai16z, Olas Governatooorr, NEAR AI Delegates</td>
+            </tr>
+            <tr>
+              <td><span style="display:inline-block;width:36px;height:36px;border-radius:8px;background:rgba(233,69,96,.15);color:var(--highlight);text-align:center;line-height:36px;font-weight:700">4</span></td>
+              <td><strong>Synthetic Company</strong></td>
+              <td>Entity with no real human operations — fully AI-generated presence</td>
+              <td>Everything: website, communications, "employees", outputs</td>
+              <td>None or single founder with no real involvement</td>
+              <td>HurumoAI, NeuralForge Ltd</td>
+            </tr>
+            <tr>
+              <td><span style="display:inline-block;width:36px;height:36px;border-radius:8px;background:rgba(214,48,49,.15);color:var(--danger);text-align:center;line-height:36px;font-weight:700">5</span></td>
+              <td><strong>AI-Enhanced Shell</strong></td>
+              <td>Traditional shell/phantom company using AI to simulate legitimate activity</td>
+              <td>Content generation, fake engagement, simulated operations</td>
+              <td>Fraud orchestration (hidden)</td>
+              <td>PhantomTech BV, GhostWork GmbH</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SYNTHETIC SCORE -->
+    <div class="card mb-16">
+      <h3>Synthetic Score — Detection Algorithm</h3>
+      <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:16px">Each entity receives a composite score (0–100) based on 8 weighted signals. Higher scores indicate greater likelihood of being synthetic:</p>
+
+      <div class="grid grid-2">
+        <div>
+          <canvas id="chart-weights" height="300"></canvas>
+        </div>
+        <div>
+          <div class="criteria-box">
+            <h4>Score Interpretation</h4>
+            <ul>
+              <li><strong style="color:var(--success)">0–30:</strong> Likely a real company with legitimate operations. AI is a tool, not the operator.</li>
+              <li><strong style="color:var(--info)">31–50:</strong> Agentic organization — heavy AI use but clear human presence. Needs review.</li>
+              <li><strong style="color:var(--warning)">51–70:</strong> Ambiguous — could be heavily automated or partially synthetic. Requires deep verification (Phase 4).</li>
+              <li><strong style="color:var(--highlight)">71–85:</strong> High probability of synthetic entity. Multiple red flags detected. Priority for human verification.</li>
+              <li><strong style="color:var(--danger)">86–100:</strong> Almost certainly synthetic or a shell. AI-generated content, no employees, phantom address, no financial records.</li>
+            </ul>
+          </div>
+          <div class="criteria-box" style="margin-top:12px">
+            <h4>8 Detection Signals</h4>
+            <ul>
+              <li><strong>S1 (20%):</strong> No verified employees (LinkedIn, Glassdoor cross-check)</li>
+              <li><strong>S2 (15%):</strong> AI-generated web content (GLTR/GPTZero score)</li>
+              <li><strong>S3 (15%):</strong> Virtual/fake registered address</li>
+              <li><strong>S4 (15%):</strong> Missing financial records or zero filings</li>
+              <li><strong>S5 (10%):</strong> Domain age vs. incorporation date mismatch</li>
+              <li><strong>S6 (10%):</strong> Web traffic anomalies (bot ratio, fake sources)</li>
+              <li><strong>S7 (10%):</strong> No real product or service delivered</li>
+              <li><strong>S8 (5%):</strong> AI references in corporate identity ("AI CEO")</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DATA RELIABILITY INDEX -->
+    <div class="card mb-16">
+      <h3>Data Reliability Index (DRI) — How We Measure Confidence</h3>
+      <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:16px">The DRI is a meta-indicator that measures how much we can trust the data collected. It is calculated from 4 components:</p>
+
+      <div class="grid grid-4">
+        <div class="criteria-box" style="border-color:var(--success)">
+          <h4 style="color:var(--success)">Source Diversity (25%)</h4>
+          <ul>
+            <li>How many independent sources confirm a data point?</li>
+            <li>Single source = low; 3+ sources = high</li>
+            <li>Penalizes over-reliance on one platform</li>
+          </ul>
+        </div>
+        <div class="criteria-box" style="border-color:var(--info)">
+          <h4 style="color:var(--info)">Cross-Validation Rate (25%)</h4>
+          <ul>
+            <li>% of entities validated by 2+ methods</li>
+            <li>Registry + OSINT + contact = triple validation</li>
+            <li>Target: &gt;60% of sample</li>
+          </ul>
+        </div>
+        <div class="criteria-box" style="border-color:var(--warning)">
+          <h4 style="color:var(--warning)">Verification Depth (25%)</h4>
+          <ul>
+            <li>How many of the 7 verification steps completed per entity?</li>
+            <li>1-2 steps = shallow; 5+ = deep</li>
+            <li>Deeper = more reliable classification</li>
+          </ul>
+        </div>
+        <div class="criteria-box" style="border-color:var(--highlight)">
+          <h4 style="color:var(--highlight)">Sample Coverage (25%)</h4>
+          <ul>
+            <li>Geographic + sector representativeness</li>
+            <li>Min. 20 countries, 5 entity types</li>
+            <li>Avoids US/UK bias in results</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- VERIFICATION FLOWCHART -->
+    <div class="card mb-16">
+      <h3>Verification Protocol — Decision Flowchart</h3>
+      <p style="font-size:.8rem;color:var(--text-muted);margin-bottom:16px">For each candidate entity, this is the step-by-step verification process:</p>
+
+      <div style="overflow-x:auto">
+        <div class="method-flow" style="gap:0">
+          <div class="method-step" style="width:150px;border-color:var(--info)">
+            <div class="step-num" style="background:rgba(116,185,255,.2);color:var(--info)">A</div>
+            <h4>Registry Check</h4>
+            <p>Verify in 2+ business registries</p>
+            <div style="margin-top:6px"><span class="badge badge-agent">Agent</span></div>
+          </div>
+          <div class="method-arrow">&#10132;</div>
+          <div class="method-step" style="width:150px;border-color:var(--warning)">
+            <div class="step-num" style="background:rgba(253,203,110,.2);color:var(--warning)">B</div>
+            <h4>Contact Test</h4>
+            <p>Email/call — is the response human?</p>
+            <div style="margin-top:6px"><span class="badge badge-human">Human</span></div>
+          </div>
+          <div class="method-arrow">&#10132;</div>
+          <div class="method-step" style="width:150px;border-color:var(--warning)">
+            <div class="step-num" style="background:rgba(253,203,110,.2);color:var(--warning)">C</div>
+            <h4>Address Check</h4>
+            <p>Google Street View or site visit</p>
+            <div style="margin-top:6px"><span class="badge badge-human">Human</span></div>
+          </div>
+          <div class="method-arrow">&#10132;</div>
+          <div class="method-step" style="width:150px;border-color:var(--info)">
+            <div class="step-num" style="background:rgba(116,185,255,.2);color:var(--info)">D</div>
+            <h4>NLP Analysis</h4>
+            <p>AI text detection on all communications</p>
+            <div style="margin-top:6px"><span class="badge badge-agent">Agent</span></div>
+          </div>
+          <div class="method-arrow">&#10132;</div>
+          <div class="method-step" style="width:150px;border-color:var(--warning)">
+            <div class="step-num" style="background:rgba(253,203,110,.2);color:var(--warning)">E</div>
+            <h4>3rd Party</h4>
+            <p>Contact clients, check reviews</p>
+            <div style="margin-top:6px"><span class="badge badge-human">Human</span></div>
+          </div>
+          <div class="method-arrow">&#10132;</div>
+          <div class="method-step" style="width:150px;border-color:var(--highlight)">
+            <div class="step-num" style="background:rgba(233,69,96,.2);color:var(--highlight)">F</div>
+            <h4>Classify</h4>
+            <p>Confirmed / Dismissed / Indeterminate</p>
+            <div style="margin-top:6px"><span class="badge badge-human">Human</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:20px;padding:16px;background:rgba(233,69,96,.05);border-radius:8px;border:1px solid rgba(233,69,96,.2)">
+        <p style="font-size:.85rem;color:var(--text);line-height:1.7">
+          <strong style="color:var(--highlight)">Decision Rule:</strong> An entity is classified as <em>"Confirmed Synthetic"</em> only if it fails <strong>3 or more</strong> verification steps (B–E).
+          If it fails 1–2 steps, it is classified as <em>"Indeterminate"</em> and flagged for additional investigation.
+          If it passes all steps, it is <em>"Dismissed"</em> as a legitimate (though potentially agentic) organization.
+          Every classification decision must be documented with evidence and reasoning.
+        </p>
+      </div>
+    </div>
+
+    <!-- SAMPLING STRATEGY -->
+    <div class="card mb-16">
+      <h3>Sampling Strategy</h3>
+      <div class="grid grid-3 mt-16">
+        <div class="criteria-box" style="border-color:#a29bfe">
+          <h4 style="color:#a29bfe">Purposive Sampling</h4>
+          <ul>
+            <li>Known cases from literature and media (HurumoAI, Mika, Tang Yu, terra0, etc.)</li>
+            <li>These anchor the sample and validate our detection method</li>
+            <li>Target: 20+ documented cases</li>
+          </ul>
+        </div>
+        <div class="criteria-box" style="border-color:var(--info)">
+          <h4 style="color:var(--info)">Systematic OSINT Scan</h4>
+          <ul>
+            <li>Automated scraping of 10+ registries and platforms</li>
+            <li>Keyword-based filtering + Synthetic Score ranking</li>
+            <li>Target: 200+ entities screened, top 50-80 selected</li>
+          </ul>
+        </div>
+        <div class="criteria-box" style="border-color:var(--success)">
+          <h4 style="color:var(--success)">Snowball / Referral</h4>
+          <ul>
+            <li>Each confirmed case leads to related entities (partners, competitors, copycats)</li>
+            <li>DAO networks often reference each other</li>
+            <li>Expert interviews may reveal unpublished cases</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- TIMELINE VISUAL -->
+    <div class="card mb-16">
+      <h3>Timeline & Effort Allocation</h3>
+      <canvas id="chart-timeline" height="200"></canvas>
+    </div>
+
+    <!-- LIMITATIONS -->
+    <div class="card">
+      <h3>Known Limitations & Mitigation</h3>
+      <table>
+        <thead><tr><th>Limitation</th><th>Impact</th><th>Mitigation Strategy</th></tr></thead>
+        <tbody>
+          <tr><td>AI text detectors have false positives</td><td>May over-classify as synthetic</td><td>Use AI detection as one signal among 8, not sole criterion. Human review for all borderline cases.</td></tr>
+          <tr><td>OSINT cannot access private company data</td><td>Incomplete picture of operations</td><td>Supplement with direct contact, 3rd party interviews, and public financial filings where available.</td></tr>
+          <tr><td>Selection bias towards English-speaking entities</td><td>Under-representation of Asia, LatAm, Africa</td><td>Include registries from Japan (EDINET), Brazil (Junta Comercial), South Korea (DART), India (MCA). Use translators.</td></tr>
+          <tr><td>Rapidly evolving landscape</td><td>New entities appear/disappear weekly</td><td>30-day collection window with clear cutoff date. Acknowledge temporal limitation in paper.</td></tr>
+          <tr><td>Ethical/legal constraints on investigation</td><td>Cannot access all company internals</td><td>Limit to publicly available data (OSINT). Ethics committee review if needed.</td></tr>
+          <tr><td>Decentralized entities lack jurisdiction</td><td>No registry to verify DAOs</td><td>Use on-chain data (Etherscan, Snapshot, DeepDAO) as proxy verification source.</td></tr>
+        </tbody>
       </table>
     </div>
   </div>
@@ -963,6 +1311,7 @@ function initApp() {
   renderTasks();
   renderGantt();
   renderCharts();
+  renderMethodologyCharts();
   renderSampleTable();
   renderChecklists();
 }
@@ -1097,6 +1446,106 @@ function renderSampleTable() {
       <td><span class="badge ${statusClass}">${s.status}</span></td>
     </tr>`;
   }).join('');
+}
+
+function renderMethodologyCharts() {
+  // Funnel chart
+  new Chart(document.getElementById('chart-funnel'), {
+    type: 'bar',
+    data: {
+      labels: ['Raw Scrape\n(All sources)', 'Keyword Filter\n(AI-related)', 'Synthetic Score\n(Scored 0-100)', 'High Score\n(Score > 50)', 'Human Verified\n(Protocol done)', 'Final Sample'],
+      datasets: [{
+        label: 'Entities',
+        data: [520, 210, 60, 38, 16, 0],
+        backgroundColor: ['rgba(116,185,255,.3)','rgba(116,185,255,.4)','rgba(0,184,148,.4)','rgba(253,203,110,.4)','rgba(233,69,96,.4)','rgba(136,136,136,.3)'],
+        borderColor: ['#74b9ff','#74b9ff','#00b894','#fdcb6e','#e94560','#888'],
+        borderWidth: 1,
+        borderRadius: 4
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      plugins:{legend:{display:false}},
+      scales:{
+        x:{ticks:{color:'#888'},grid:{color:'#2a2a4a'}},
+        y:{ticks:{color:'#ccc',font:{size:11}},grid:{color:'#2a2a4a'}}
+      }
+    }
+  });
+
+  // Agent vs Human effort
+  new Chart(document.getElementById('chart-effort'), {
+    type: 'bar',
+    data: {
+      labels: ['Phase 1\nSetup', 'Phase 2\nCollection', 'Phase 3\nDetection', 'Phase 4\nVerification', 'Phase 5\nValidation'],
+      datasets: [
+        {label:'Agent (Automated)', data:[70,75,80,30,50], backgroundColor:'rgba(116,185,255,.5)', borderColor:'#74b9ff', borderWidth:1},
+        {label:'Human (Manual)', data:[30,25,20,70,50], backgroundColor:'rgba(253,203,110,.5)', borderColor:'#fdcb6e', borderWidth:1}
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins:{legend:{position:'bottom',labels:{color:'#888',font:{size:11}}}},
+      scales:{
+        x:{stacked:true, ticks:{color:'#888'},grid:{color:'#2a2a4a'}},
+        y:{stacked:true, max:100, ticks:{color:'#888',callback:v=>v+'%'},grid:{color:'#2a2a4a'}}
+      }
+    }
+  });
+
+  // Scoring weights radar chart
+  new Chart(document.getElementById('chart-weights'), {
+    type: 'radar',
+    data: {
+      labels: ['No Employees\n(20%)', 'AI Content\n(15%)', 'Fake Address\n(15%)', 'No Financials\n(15%)', 'Domain Mismatch\n(10%)', 'Traffic Anomaly\n(10%)', 'No Product\n(10%)', 'AI Identity\n(5%)'],
+      datasets: [{
+        label: 'Weight',
+        data: [20, 15, 15, 15, 10, 10, 10, 5],
+        backgroundColor: 'rgba(233,69,96,.15)',
+        borderColor: '#e94560',
+        borderWidth: 2,
+        pointBackgroundColor: '#e94560',
+        pointRadius: 4
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins:{legend:{display:false}},
+      scales:{
+        r:{
+          angleLines:{color:'#2a2a4a'},
+          grid:{color:'#2a2a4a'},
+          pointLabels:{color:'#aaa',font:{size:10}},
+          ticks:{display:false},
+          suggestedMin:0, suggestedMax:25
+        }
+      }
+    }
+  });
+
+  // Timeline area chart
+  new Chart(document.getElementById('chart-timeline'), {
+    type: 'line',
+    data: {
+      labels: Array.from({length:30},(_,i)=>{const d=new Date(2026,2,13+i);return d.toLocaleDateString('en',{month:'short',day:'numeric'})}),
+      datasets: [
+        {label:'Phase 1',data:[...Array(5).fill(1),...Array(25).fill(null)],borderColor:'#74b9ff',backgroundColor:'rgba(116,185,255,.1)',fill:true,tension:.3,pointRadius:0},
+        {label:'Phase 2',data:[...Array(5).fill(null),...Array(10).fill(1),...Array(15).fill(null)],borderColor:'#00b894',backgroundColor:'rgba(0,184,148,.1)',fill:true,tension:.3,pointRadius:0},
+        {label:'Phase 3',data:[...Array(12).fill(null),...Array(10).fill(1),...Array(8).fill(null)],borderColor:'#fdcb6e',backgroundColor:'rgba(253,203,110,.1)',fill:true,tension:.3,pointRadius:0},
+        {label:'Phase 4',data:[...Array(18).fill(null),...Array(10).fill(1),...Array(2).fill(null)],borderColor:'#e94560',backgroundColor:'rgba(233,69,96,.1)',fill:true,tension:.3,pointRadius:0},
+        {label:'Phase 5',data:[...Array(22).fill(null),...Array(8).fill(1)],borderColor:'#a29bfe',backgroundColor:'rgba(162,155,254,.1)',fill:true,tension:.3,pointRadius:0},
+      ]
+    },
+    options: {
+      responsive:true,
+      plugins:{legend:{position:'bottom',labels:{color:'#888',font:{size:11}}}},
+      scales:{
+        x:{ticks:{color:'#888',maxRotation:45,maxTicksLimit:10},grid:{color:'#2a2a4a'}},
+        y:{display:false}
+      }
+    }
+  });
 }
 
 function renderChecklists() {
