@@ -179,11 +179,42 @@ tr:hover { background:rgba(255,255,255,.02); }
 .criteria-box ul { padding-left:18px; font-size:.83rem; color:var(--text-muted); line-height:1.7; }
 .criteria-box ul li { margin-bottom:2px; }
 
+/* FORMS */
+.form-group { margin-bottom:12px; }
+.form-group label { display:block; font-size:.8rem; color:var(--text-muted); margin-bottom:4px; text-transform:uppercase; letter-spacing:.5px; }
+.form-input { width:100%; padding:10px 12px; border:1px solid var(--border); border-radius:6px; background:#0f0f1a; color:var(--text); font-size:.85rem; }
+.form-input:focus { outline:none; border-color:var(--highlight); }
+.form-input::placeholder { color:#555; }
+select.form-input { cursor:pointer; }
+textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
+.form-row { display:flex; gap:12px; }
+.form-row .form-group { flex:1; }
+.api-key-display { display:flex; align-items:center; gap:8px; background:#0f0f1a; padding:8px 12px; border-radius:6px; border:1px solid var(--border); margin-bottom:8px; }
+.api-key-display .key-name { font-weight:600; min-width:140px; font-size:.8rem; }
+.api-key-display .key-value { flex:1; font-family:monospace; font-size:.8rem; color:var(--success); }
+.api-key-display .btn { padding:4px 10px; font-size:.75rem; }
+.api-status { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:6px; }
+.api-status.active { background:var(--success); }
+.api-status.missing { background:var(--danger); }
+
+/* REVIEW CARDS */
+.review-card { background:rgba(255,255,255,.02); border:1px solid var(--border); border-radius:10px; padding:16px; margin-bottom:12px; }
+.review-card .review-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
+.review-card .review-header h4 { font-size:.95rem; }
+.review-card .review-body { font-size:.85rem; color:var(--text-muted); line-height:1.6; }
+.review-card .review-actions { display:flex; gap:8px; margin-top:12px; flex-wrap:wrap; align-items:center; }
+.review-card .review-actions select, .review-card .review-actions input { padding:6px 10px; border:1px solid var(--border); border-radius:4px; background:#0f0f1a; color:var(--text); font-size:.8rem; }
+.review-card .review-actions textarea { padding:6px 10px; border:1px solid var(--border); border-radius:4px; background:#0f0f1a; color:var(--text); font-size:.8rem; flex:1; min-width:200px; height:32px; font-family:inherit; }
+
+.toast { position:fixed; bottom:24px; right:24px; background:var(--success); color:#fff; padding:12px 20px; border-radius:8px; font-size:.85rem; font-weight:600; z-index:9999; opacity:0; transition:opacity .3s; pointer-events:none; }
+.toast.show { opacity:1; }
+
 /* RESPONSIVE */
 @media (max-width:768px) {
   .grid-4,.grid-3,.grid-2 { grid-template-columns:1fr; }
   .gantt-label { min-width:120px; font-size:.7rem; }
   .tabs { flex-wrap:wrap; }
+  .form-row { flex-direction:column; }
 }
 </style>
 </head>
@@ -779,6 +810,47 @@ tr:hover { background:rgba(255,255,255,.02); }
       </ol>
     </div>
 
+    <!-- API KEY MANAGEMENT -->
+    <div class="card mb-16">
+      <div class="flex-between mb-16">
+        <h3 style="margin:0">API Key Management</h3>
+        <span style="font-size:.75rem;color:var(--text-muted)">Keys are stored locally in your browser (localStorage) — never sent anywhere</span>
+      </div>
+      <div id="api-keys-list"></div>
+      <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">
+        <h4 style="font-size:.85rem;margin-bottom:12px;color:var(--text-muted)">Add / Update API Key</h4>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Service</label>
+            <select class="form-input" id="api-service">
+              <option value="">Select service...</option>
+              <option value="Companies House UK">Companies House UK</option>
+              <option value="SEC EDGAR">SEC EDGAR (User-Agent)</option>
+              <option value="Crunchbase">Crunchbase</option>
+              <option value="OpenCorporates">OpenCorporates</option>
+              <option value="GitHub">GitHub</option>
+              <option value="DeepDAO">DeepDAO</option>
+              <option value="SimilarWeb">SimilarWeb</option>
+              <option value="GPTZero">GPTZero / AI Detector</option>
+              <option value="Etherscan">Etherscan</option>
+              <option value="Other">Other (custom)</option>
+            </select>
+          </div>
+          <div class="form-group" id="api-custom-name-group" style="display:none">
+            <label>Custom Service Name</label>
+            <input type="text" class="form-input" id="api-custom-name" placeholder="e.g. Ahrefs">
+          </div>
+          <div class="form-group" style="flex:2">
+            <label>API Key / Token</label>
+            <input type="password" class="form-input" id="api-key-input" placeholder="Paste your API key here...">
+          </div>
+          <div class="form-group" style="flex:0;align-self:flex-end">
+            <button class="btn btn-primary" onclick="saveApiKey()">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="card">
       <h3>Phase 1 — Task Checklist</h3>
       <ul class="checklist" id="phase1-checklist"></ul>
@@ -886,6 +958,68 @@ tr:hover { background:rgba(255,255,255,.02); }
       </ol>
     </div>
 
+    <!-- ADD NEW ENTITY FORM -->
+    <div class="card mb-16">
+      <h3>Add New Entity Found</h3>
+      <p style="font-size:.8rem;color:var(--text-muted);margin-bottom:16px">Use this form to add companies/entities you discover during manual scanning. They will appear in the Phase 5 sample table for classification.</p>
+      <div class="form-row">
+        <div class="form-group" style="flex:2">
+          <label>Entity Name</label>
+          <input type="text" class="form-input" id="new-entity-name" placeholder="e.g. RoboStartup Ltd">
+        </div>
+        <div class="form-group">
+          <label>Country</label>
+          <input type="text" class="form-input" id="new-entity-country" placeholder="e.g. UK">
+        </div>
+        <div class="form-group">
+          <label>Type</label>
+          <select class="form-input" id="new-entity-type">
+            <option value="Synthetic Company">Synthetic Company</option>
+            <option value="Agentic Organization">Agentic Organization</option>
+            <option value="Multi-Agent System">Multi-Agent System</option>
+            <option value="Agentic DAO">Agentic DAO</option>
+            <option value="AI-Enhanced Shell">AI-Enhanced Shell</option>
+            <option value="Unknown">Unknown — needs review</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Employees (known)</label>
+          <input type="number" class="form-input" id="new-entity-employees" placeholder="0" min="0">
+        </div>
+        <div class="form-group">
+          <label>Domain Age</label>
+          <input type="text" class="form-input" id="new-entity-domain" placeholder="e.g. 3mo, 1yr">
+        </div>
+        <div class="form-group">
+          <label>Source</label>
+          <input type="text" class="form-input" id="new-entity-source" placeholder="Where you found it">
+        </div>
+        <div class="form-group">
+          <label>Source URL</label>
+          <input type="url" class="form-input" id="new-entity-url" placeholder="https://...">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Notes / Why do you think it's synthetic?</label>
+        <textarea class="form-input" id="new-entity-notes" placeholder="Describe what you found: AI-generated content, no employees on LinkedIn, fake address, etc."></textarea>
+      </div>
+      <button class="btn btn-primary" onclick="addNewEntity()">Add Entity to Sample</button>
+    </div>
+
+    <!-- USER-ADDED ENTITIES -->
+    <div class="card mb-16" id="user-entities-card" style="display:none">
+      <div class="flex-between mb-16">
+        <h3 style="margin:0">Your Added Entities</h3>
+        <span style="font-size:.8rem;color:var(--text-muted)" id="user-entities-count"></span>
+      </div>
+      <table>
+        <thead><tr><th>Entity</th><th>Country</th><th>Type</th><th>Source</th><th>Notes</th><th>Actions</th></tr></thead>
+        <tbody id="user-entities-table"></tbody>
+      </table>
+    </div>
+
     <div class="card">
       <h3>Phase 2 — Task Checklist</h3>
       <ul class="checklist" id="phase2-checklist"></ul>
@@ -976,6 +1110,41 @@ tr:hover { background:rgba(255,255,255,.02); }
       </ol>
     </div>
 
+    <!-- BORDERLINE CASES REVIEW PANEL -->
+    <div class="card mb-16">
+      <div class="flex-between mb-16">
+        <h3 style="margin:0">Borderline Cases Review (Score 40–70)</h3>
+        <div>
+          <label style="font-size:.8rem;color:var(--text-muted);margin-right:8px">
+            <input type="checkbox" id="toggle-reviewer2" onchange="toggleReviewer2()"> Second Reviewer Mode
+          </label>
+          <button class="btn btn-ghost" onclick="exportReviews()" style="font-size:.75rem">Export Reviews CSV</button>
+        </div>
+      </div>
+      <p style="font-size:.8rem;color:var(--text-muted);margin-bottom:16px">These entities have ambiguous scores. Review each one and assign a classification. <span id="reviewer2-label" style="display:none;color:var(--warning)">&#9679; Second reviewer mode active — classifications will be saved separately for inter-rater comparison.</span></p>
+      <div id="borderline-review-list"></div>
+    </div>
+
+    <!-- EDGE CASE DOCUMENTATION -->
+    <div class="card mb-16">
+      <h3>Edge Case Documentation</h3>
+      <p style="font-size:.8rem;color:var(--text-muted);margin-bottom:16px">Document any entity that was difficult to classify. These notes will inform the methodology limitations section of the article.</p>
+      <div class="form-row">
+        <div class="form-group" style="flex:1">
+          <label>Entity Name</label>
+          <select class="form-input" id="edge-entity-select"></select>
+        </div>
+        <div class="form-group" style="flex:2">
+          <label>Why is this an edge case?</label>
+          <textarea class="form-input" id="edge-case-note" placeholder="e.g. 'Has 2 LinkedIn employees but profiles look fake; website has mix of human and AI content; registered in Delaware as LLC with nominee agent...'"></textarea>
+        </div>
+        <div class="form-group" style="flex:0;align-self:flex-end">
+          <button class="btn btn-primary" onclick="saveEdgeCase()">Save</button>
+        </div>
+      </div>
+      <div id="edge-cases-list" style="margin-top:16px"></div>
+    </div>
+
     <div class="card">
       <h3>Phase 3 — Task Checklist</h3>
       <ul class="checklist" id="phase3-checklist"></ul>
@@ -1055,15 +1224,77 @@ tr:hover { background:rgba(255,255,255,.02); }
     </div>
 
     <div class="card mb-16">
-      <h3>Initial Automated Sample — Detected Entities</h3>
-      <p style="font-size:.8rem;color:var(--text-muted);margin-bottom:12px">Auto-populated from OSINT pipeline. Synthetic Score: 0 (clearly human) – 100 (clearly synthetic).</p>
+      <div class="flex-between">
+        <h3 style="margin:0">Sample — All Detected Entities</h3>
+        <div style="display:flex;gap:8px;align-items:center">
+          <select class="form-input" id="sample-filter" onchange="renderSampleTable()" style="width:auto;padding:6px 10px;font-size:.8rem">
+            <option value="all">All entities</option>
+            <option value="documented">Documented only</option>
+            <option value="pending">Pending verification</option>
+            <option value="confirmed">Confirmed synthetic</option>
+            <option value="dismissed">Dismissed</option>
+            <option value="user">My added entities</option>
+          </select>
+          <button class="btn btn-ghost" onclick="exportSampleCSV()" style="font-size:.75rem">Export CSV</button>
+        </div>
+      </div>
+      <p style="font-size:.8rem;color:var(--text-muted);margin:8px 0 12px">Click on any entity row to edit its classification, type, and notes. Changes are saved automatically.</p>
       <div style="overflow-x:auto">
         <table id="sample-table">
           <thead>
-            <tr><th>Entity</th><th>Country</th><th>Type</th><th>Synth Score</th><th>Employees</th><th>Domain Age</th><th>AI Content</th><th>Source</th><th>Status</th></tr>
+            <tr><th>Entity</th><th>Country</th><th>Type</th><th>Synth Score</th><th>Employees</th><th>Domain Age</th><th>AI Content</th><th>Source</th><th>Status</th><th>Actions</th></tr>
           </thead>
           <tbody></tbody>
         </table>
+      </div>
+    </div>
+
+    <!-- EDIT ENTITY MODAL (inline) -->
+    <div class="card mb-16" id="edit-entity-panel" style="display:none;border-left:4px solid var(--info)">
+      <div class="flex-between mb-16">
+        <h3 style="margin:0;color:var(--info)">Edit Entity: <span id="edit-entity-name"></span></h3>
+        <button class="btn btn-ghost" onclick="closeEditPanel()">Close</button>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Classification / Status</label>
+          <select class="form-input" id="edit-status">
+            <option value="Pending Verification">Pending Verification</option>
+            <option value="Under Review">Under Review</option>
+            <option value="Confirmed">Confirmed Synthetic</option>
+            <option value="Confirmed — Marketing">Confirmed — Marketing Stunt</option>
+            <option value="Dismissed — Real Co.">Dismissed — Real Company</option>
+            <option value="Indeterminate">Indeterminate</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Entity Type</label>
+          <select class="form-input" id="edit-type">
+            <option value="Synthetic Company">Synthetic Company</option>
+            <option value="Agentic Organization">Agentic Organization</option>
+            <option value="Multi-Agent System">Multi-Agent System</option>
+            <option value="Agentic DAO">Agentic DAO</option>
+            <option value="AI-Enhanced Shell">AI-Enhanced Shell</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Synthetic Score Override</label>
+          <input type="number" class="form-input" id="edit-score" min="0" max="100" placeholder="0-100">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Employees (updated)</label>
+          <input type="number" class="form-input" id="edit-employees" min="0">
+        </div>
+        <div class="form-group" style="flex:2">
+          <label>Verification Notes</label>
+          <textarea class="form-input" id="edit-notes" placeholder="Your findings: what you verified, what you found, why you classified it this way..."></textarea>
+        </div>
+      </div>
+      <div style="margin-top:12px;display:flex;gap:8px">
+        <button class="btn btn-primary" onclick="saveEntityEdit()">Save Changes</button>
+        <button class="btn btn-ghost" onclick="deleteEntity()" style="color:var(--danger);border-color:var(--danger)">Remove from Sample</button>
       </div>
     </div>
 
@@ -1153,6 +1384,9 @@ tr:hover { background:rgba(255,255,255,.02); }
     </div>
   </div>
 </div>
+
+<!-- TOAST NOTIFICATION -->
+<div class="toast" id="toast"></div>
 
 <script>
 // ==================== AUTH ====================
@@ -1309,12 +1543,23 @@ const SAMPLE_DATA = [
 
 // ==================== INIT ====================
 function initApp() {
+  loadUserData();
   renderTasks();
   renderGantt();
   renderCharts();
   renderMethodologyCharts();
   renderSampleTable();
   renderChecklists();
+  renderApiKeys();
+  renderUserEntities();
+  renderBorderlineReview();
+  renderEdgeCases();
+  populateEdgeCaseSelect();
+
+  // Show/hide custom API name field
+  document.getElementById('api-service').addEventListener('change', function() {
+    document.getElementById('api-custom-name-group').style.display = this.value === 'Other' ? 'block' : 'none';
+  });
 }
 
 function renderTasks() {
@@ -1430,13 +1675,40 @@ function renderCharts() {
   });
 }
 
+function getAllEntities() {
+  // Merge built-in SAMPLE_DATA with user-added entities, applying any saved overrides
+  const overrides = JSON.parse(localStorage.getItem('entity_overrides') || '{}');
+  const userEntities = JSON.parse(localStorage.getItem('user_entities') || '[]');
+
+  const all = SAMPLE_DATA.map((s,i) => {
+    const key = 'builtin_'+i;
+    const o = overrides[key] || {};
+    return {...s, _key:key, status:o.status||s.status, type:o.type||s.type, score:o.score!==undefined?o.score:s.score, employees:o.employees!==undefined?o.employees:s.employees, notes:o.notes||'', _deleted:o._deleted||false};
+  }).filter(s => !s._deleted);
+
+  const userMapped = userEntities.map((u,i) => ({
+    entity:u.name, country:u.country, type:u.type, score:u.score||50, employees:u.employees||0, domain:u.domain||'?', ai:'?', source:u.source||'Manual', status:u.status||'Pending Verification', real:false, notes:u.notes||'', _key:'user_'+i, _isUser:true
+  }));
+
+  return [...all, ...userMapped];
+}
+
 function renderSampleTable() {
   const tbody = document.querySelector('#sample-table tbody');
-  tbody.innerHTML = SAMPLE_DATA.map(s => {
+  const filter = document.getElementById('sample-filter')?.value || 'all';
+  let entities = getAllEntities();
+
+  if(filter==='documented') entities = entities.filter(s=>s.real);
+  else if(filter==='pending') entities = entities.filter(s=>s.status.includes('Pending'));
+  else if(filter==='confirmed') entities = entities.filter(s=>s.status.includes('Confirmed'));
+  else if(filter==='dismissed') entities = entities.filter(s=>s.status.includes('Dismissed'));
+  else if(filter==='user') entities = entities.filter(s=>s._isUser);
+
+  tbody.innerHTML = entities.map(s => {
     const scoreColor = s.score>=80?'var(--danger)':s.score>=60?'var(--warning)':s.score>=40?'var(--info)':'var(--success)';
     const statusClass = s.status.includes('Confirmed')?'badge-done':s.status.includes('Dismissed')?'badge-pending':s.status.includes('Pending V')?'badge-blocked':'badge-progress';
-    return `<tr class="sample-row" style="${s.real?'background:rgba(0,184,148,.04)':''}">
-      <td>${s.entity} ${s.real?'<span style="color:var(--success);font-size:.65rem">&#9679; DOCUMENTED</span>':''}</td>
+    return `<tr class="sample-row" style="${s.real?'background:rgba(0,184,148,.04)':s._isUser?'background:rgba(116,185,255,.04)':''}">
+      <td>${s.entity} ${s.real?'<span style="color:var(--success);font-size:.65rem">&#9679; DOC</span>':''}${s._isUser?'<span style="color:var(--info);font-size:.65rem">&#9679; ADDED</span>':''}</td>
       <td>${s.country}</td>
       <td><span style="font-size:.8rem">${s.type}</span></td>
       <td><span style="color:${scoreColor};font-weight:700">${s.score}</span></td>
@@ -1445,6 +1717,7 @@ function renderSampleTable() {
       <td>${s.ai}</td>
       <td><span style="font-size:.75rem;color:var(--text-muted)">${s.source}</span></td>
       <td><span class="badge ${statusClass}">${s.status}</span></td>
+      <td><button class="btn btn-ghost" style="padding:3px 8px;font-size:.7rem" onclick="openEditPanel('${s._key}')">Edit</button></td>
     </tr>`;
   }).join('');
 }
@@ -1631,6 +1904,381 @@ function saveChecklist(id, index, checked) {
   localStorage.setItem('checklist_'+id, JSON.stringify(states));
   const span = el.querySelectorAll('li')[index].querySelector('span:last-child');
   span.style = checked ? 'text-decoration:line-through;color:var(--text-muted)' : '';
+}
+
+// ==================== TOAST ====================
+function showToast(msg, color) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.background = color || 'var(--success)';
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ==================== LOAD USER DATA ====================
+function loadUserData() {
+  // Init localStorage structures if missing
+  if(!localStorage.getItem('api_keys')) localStorage.setItem('api_keys','{}');
+  if(!localStorage.getItem('user_entities')) localStorage.setItem('user_entities','[]');
+  if(!localStorage.getItem('entity_overrides')) localStorage.setItem('entity_overrides','{}');
+  if(!localStorage.getItem('reviews')) localStorage.setItem('reviews','{}');
+  if(!localStorage.getItem('reviews_r2')) localStorage.setItem('reviews_r2','{}');
+  if(!localStorage.getItem('edge_cases')) localStorage.setItem('edge_cases','[]');
+}
+
+// ==================== API KEY MANAGEMENT ====================
+function renderApiKeys() {
+  const keys = JSON.parse(localStorage.getItem('api_keys') || '{}');
+  const services = ['Companies House UK','SEC EDGAR','Crunchbase','OpenCorporates','GitHub','DeepDAO','SimilarWeb','GPTZero','Etherscan'];
+  const el = document.getElementById('api-keys-list');
+
+  // Also add any custom keys
+  Object.keys(keys).forEach(k => { if(!services.includes(k)) services.push(k); });
+
+  el.innerHTML = services.map(s => {
+    const hasKey = keys[s];
+    const masked = hasKey ? hasKey.substring(0,4) + '••••••••' + hasKey.substring(hasKey.length-4) : '';
+    return `<div class="api-key-display">
+      <span class="api-status ${hasKey?'active':'missing'}"></span>
+      <span class="key-name">${s}</span>
+      <span class="key-value">${hasKey ? masked : '<span style="color:var(--danger)">Not configured</span>'}</span>
+      ${hasKey ? `<button class="btn btn-ghost" onclick="toggleShowKey('${s}',this)">Show</button>` : ''}
+      ${hasKey ? `<button class="btn btn-ghost" style="color:var(--danger);border-color:var(--danger)" onclick="removeApiKey('${s}')">Remove</button>` : ''}
+    </div>`;
+  }).join('');
+}
+
+function toggleShowKey(service, btn) {
+  const keys = JSON.parse(localStorage.getItem('api_keys') || '{}');
+  const valSpan = btn.parentElement.querySelector('.key-value');
+  if(btn.textContent === 'Show') {
+    valSpan.textContent = keys[service];
+    btn.textContent = 'Hide';
+  } else {
+    valSpan.innerHTML = keys[service].substring(0,4) + '••••••••' + keys[service].substring(keys[service].length-4);
+    btn.textContent = 'Show';
+  }
+}
+
+function saveApiKey() {
+  let service = document.getElementById('api-service').value;
+  if(service === 'Other') service = document.getElementById('api-custom-name').value.trim();
+  const key = document.getElementById('api-key-input').value.trim();
+  if(!service || !key) { showToast('Please select a service and enter a key','var(--danger)'); return; }
+
+  const keys = JSON.parse(localStorage.getItem('api_keys') || '{}');
+  keys[service] = key;
+  localStorage.setItem('api_keys', JSON.stringify(keys));
+
+  document.getElementById('api-key-input').value = '';
+  document.getElementById('api-service').value = '';
+  renderApiKeys();
+  showToast('API key saved for ' + service);
+}
+
+function removeApiKey(service) {
+  const keys = JSON.parse(localStorage.getItem('api_keys') || '{}');
+  delete keys[service];
+  localStorage.setItem('api_keys', JSON.stringify(keys));
+  renderApiKeys();
+  showToast('API key removed', 'var(--warning)');
+}
+
+// ==================== ADD NEW ENTITY ====================
+function addNewEntity() {
+  const name = document.getElementById('new-entity-name').value.trim();
+  const country = document.getElementById('new-entity-country').value.trim();
+  const type = document.getElementById('new-entity-type').value;
+  const employees = parseInt(document.getElementById('new-entity-employees').value) || 0;
+  const domain = document.getElementById('new-entity-domain').value.trim() || '?';
+  const source = document.getElementById('new-entity-source').value.trim() || 'Manual';
+  const url = document.getElementById('new-entity-url').value.trim();
+  const notes = document.getElementById('new-entity-notes').value.trim();
+
+  if(!name) { showToast('Entity name is required','var(--danger)'); return; }
+  if(!country) { showToast('Country is required','var(--danger)'); return; }
+
+  const entities = JSON.parse(localStorage.getItem('user_entities') || '[]');
+  entities.push({name, country, type, employees, domain, source, url, notes, status:'Pending Verification', score:50, addedAt:new Date().toISOString()});
+  localStorage.setItem('user_entities', JSON.stringify(entities));
+
+  // Clear form
+  ['new-entity-name','new-entity-country','new-entity-employees','new-entity-domain','new-entity-source','new-entity-url','new-entity-notes'].forEach(id => document.getElementById(id).value = '');
+
+  renderUserEntities();
+  renderSampleTable();
+  populateEdgeCaseSelect();
+  showToast('Entity "' + name + '" added to sample');
+}
+
+function renderUserEntities() {
+  const entities = JSON.parse(localStorage.getItem('user_entities') || '[]');
+  const card = document.getElementById('user-entities-card');
+  const tbody = document.getElementById('user-entities-table');
+  const count = document.getElementById('user-entities-count');
+
+  if(entities.length === 0) { card.style.display = 'none'; return; }
+  card.style.display = 'block';
+  count.textContent = entities.length + ' entities added';
+
+  tbody.innerHTML = entities.map((e,i) => `
+    <tr>
+      <td><strong>${e.name}</strong></td>
+      <td>${e.country}</td>
+      <td>${e.type}</td>
+      <td>${e.source}${e.url ? ' <a href="'+e.url+'" target="_blank" style="color:var(--info)">&#8599;</a>' : ''}</td>
+      <td style="font-size:.8rem;color:var(--text-muted);max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${e.notes}">${e.notes || '—'}</td>
+      <td><button class="btn btn-ghost" style="padding:3px 8px;font-size:.7rem;color:var(--danger);border-color:var(--danger)" onclick="removeUserEntity(${i})">Remove</button></td>
+    </tr>
+  `).join('');
+}
+
+function removeUserEntity(index) {
+  const entities = JSON.parse(localStorage.getItem('user_entities') || '[]');
+  entities.splice(index, 1);
+  localStorage.setItem('user_entities', JSON.stringify(entities));
+  renderUserEntities();
+  renderSampleTable();
+  showToast('Entity removed', 'var(--warning)');
+}
+
+// ==================== EDIT ENTITY (Phase 5) ====================
+let currentEditKey = null;
+
+function openEditPanel(key) {
+  currentEditKey = key;
+  const panel = document.getElementById('edit-entity-panel');
+  const entities = getAllEntities();
+  const entity = entities.find(e => e._key === key);
+  if(!entity) return;
+
+  document.getElementById('edit-entity-name').textContent = entity.entity;
+  document.getElementById('edit-status').value = entity.status.includes('Confirmed') && !entity.status.includes('Marketing') ? 'Confirmed' : entity.status;
+  document.getElementById('edit-type').value = entity.type;
+  document.getElementById('edit-score').value = entity.score;
+  document.getElementById('edit-employees').value = entity.employees;
+  document.getElementById('edit-notes').value = entity.notes || '';
+
+  panel.style.display = 'block';
+  panel.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function closeEditPanel() {
+  document.getElementById('edit-entity-panel').style.display = 'none';
+  currentEditKey = null;
+}
+
+function saveEntityEdit() {
+  if(!currentEditKey) return;
+
+  if(currentEditKey.startsWith('user_')) {
+    const idx = parseInt(currentEditKey.split('_')[1]);
+    const entities = JSON.parse(localStorage.getItem('user_entities') || '[]');
+    if(entities[idx]) {
+      entities[idx].status = document.getElementById('edit-status').value;
+      entities[idx].type = document.getElementById('edit-type').value;
+      entities[idx].score = parseInt(document.getElementById('edit-score').value) || 50;
+      entities[idx].employees = parseInt(document.getElementById('edit-employees').value) || 0;
+      entities[idx].notes = document.getElementById('edit-notes').value;
+      localStorage.setItem('user_entities', JSON.stringify(entities));
+    }
+  } else {
+    const overrides = JSON.parse(localStorage.getItem('entity_overrides') || '{}');
+    overrides[currentEditKey] = {
+      status: document.getElementById('edit-status').value,
+      type: document.getElementById('edit-type').value,
+      score: parseInt(document.getElementById('edit-score').value),
+      employees: parseInt(document.getElementById('edit-employees').value),
+      notes: document.getElementById('edit-notes').value
+    };
+    localStorage.setItem('entity_overrides', JSON.stringify(overrides));
+  }
+
+  renderSampleTable();
+  renderBorderlineReview();
+  closeEditPanel();
+  showToast('Entity updated successfully');
+}
+
+function deleteEntity() {
+  if(!currentEditKey) return;
+  if(!confirm('Remove this entity from the sample?')) return;
+
+  if(currentEditKey.startsWith('user_')) {
+    const idx = parseInt(currentEditKey.split('_')[1]);
+    const entities = JSON.parse(localStorage.getItem('user_entities') || '[]');
+    entities.splice(idx, 1);
+    localStorage.setItem('user_entities', JSON.stringify(entities));
+    renderUserEntities();
+  } else {
+    const overrides = JSON.parse(localStorage.getItem('entity_overrides') || '{}');
+    overrides[currentEditKey] = overrides[currentEditKey] || {};
+    overrides[currentEditKey]._deleted = true;
+    localStorage.setItem('entity_overrides', JSON.stringify(overrides));
+  }
+
+  renderSampleTable();
+  renderBorderlineReview();
+  closeEditPanel();
+  showToast('Entity removed from sample', 'var(--warning)');
+}
+
+// ==================== BORDERLINE REVIEW (Phase 3) ====================
+function renderBorderlineReview() {
+  const entities = getAllEntities().filter(e => e.score >= 40 && e.score <= 70);
+  const reviews = JSON.parse(localStorage.getItem('reviews') || '{}');
+  const reviews2 = JSON.parse(localStorage.getItem('reviews_r2') || '{}');
+  const isR2 = document.getElementById('toggle-reviewer2')?.checked;
+  const store = isR2 ? reviews2 : reviews;
+  const el = document.getElementById('borderline-review-list');
+
+  if(entities.length === 0) {
+    el.innerHTML = '<p style="color:var(--text-muted);font-size:.85rem">No entities in the 40-70 score range. Adjust scores or add more entities.</p>';
+    return;
+  }
+
+  el.innerHTML = entities.map(e => {
+    const r = store[e._key] || {};
+    const scoreColor = e.score>=60?'var(--warning)':'var(--info)';
+    return `<div class="review-card">
+      <div class="review-header">
+        <h4>${e.entity}</h4>
+        <div>
+          <span style="color:${scoreColor};font-weight:700;margin-right:12px">Score: ${e.score}</span>
+          <span class="badge badge-${e.type==='Agentic Organization'?'agent':'progress'}" style="font-size:.7rem">${e.type}</span>
+          <span style="font-size:.75rem;color:var(--text-muted);margin-left:8px">${e.country}</span>
+        </div>
+      </div>
+      <div class="review-body">
+        <strong>Current info:</strong> ${e.employees} employees | Domain: ${e.domain} | AI content: ${e.ai} | Source: ${e.source}
+        ${e.notes ? '<br><strong>Notes:</strong> ' + e.notes : ''}
+      </div>
+      <div class="review-actions">
+        <select onchange="saveReview('${e._key}','classification',this.value)" style="min-width:160px">
+          <option value="" ${!r.classification?'selected':''}>-- Classify --</option>
+          <option value="Confirmed Synthetic" ${r.classification==='Confirmed Synthetic'?'selected':''}>Confirmed Synthetic</option>
+          <option value="Agentic Organization" ${r.classification==='Agentic Organization'?'selected':''}>Agentic Organization (Real)</option>
+          <option value="Multi-Agent System" ${r.classification==='Multi-Agent System'?'selected':''}>Multi-Agent System</option>
+          <option value="Agentic DAO" ${r.classification==='Agentic DAO'?'selected':''}>Agentic DAO</option>
+          <option value="Dismissed" ${r.classification==='Dismissed'?'selected':''}>Dismissed — Real Company</option>
+          <option value="Indeterminate" ${r.classification==='Indeterminate'?'selected':''}>Indeterminate</option>
+        </select>
+        <select onchange="saveReview('${e._key}','confidence',this.value)">
+          <option value="" ${!r.confidence?'selected':''}>Confidence?</option>
+          <option value="high" ${r.confidence==='high'?'selected':''}>High confidence</option>
+          <option value="medium" ${r.confidence==='medium'?'selected':''}>Medium confidence</option>
+          <option value="low" ${r.confidence==='low'?'selected':''}>Low confidence</option>
+        </select>
+        <textarea onchange="saveReview('${e._key}','reasoning',this.value)" placeholder="Reasoning for your classification...">${r.reasoning||''}</textarea>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function saveReview(key, field, value) {
+  const isR2 = document.getElementById('toggle-reviewer2')?.checked;
+  const storeKey = isR2 ? 'reviews_r2' : 'reviews';
+  const reviews = JSON.parse(localStorage.getItem(storeKey) || '{}');
+  if(!reviews[key]) reviews[key] = {};
+  reviews[key][field] = value;
+  reviews[key].updatedAt = new Date().toISOString();
+  localStorage.setItem(storeKey, JSON.stringify(reviews));
+  showToast((isR2?'R2: ':'') + 'Review saved');
+}
+
+function toggleReviewer2() {
+  const isR2 = document.getElementById('toggle-reviewer2').checked;
+  document.getElementById('reviewer2-label').style.display = isR2 ? 'inline' : 'none';
+  renderBorderlineReview();
+}
+
+function exportReviews() {
+  const r1 = JSON.parse(localStorage.getItem('reviews') || '{}');
+  const r2 = JSON.parse(localStorage.getItem('reviews_r2') || '{}');
+  const allKeys = [...new Set([...Object.keys(r1), ...Object.keys(r2)])];
+  const entities = getAllEntities();
+
+  let csv = 'Entity,Score,R1_Classification,R1_Confidence,R1_Reasoning,R2_Classification,R2_Confidence,R2_Reasoning\n';
+  allKeys.forEach(k => {
+    const e = entities.find(x => x._key === k);
+    const name = e ? e.entity.replace(/,/g,';') : k;
+    const score = e ? e.score : '';
+    const v1 = r1[k] || {};
+    const v2 = r2[k] || {};
+    csv += `"${name}",${score},"${v1.classification||''}","${v1.confidence||''}","${(v1.reasoning||'').replace(/"/g,"'")}","${v2.classification||''}","${v2.confidence||''}","${(v2.reasoning||'').replace(/"/g,"'")}"\n`;
+  });
+
+  downloadFile('reviews_export.csv', csv);
+  showToast('Reviews exported as CSV');
+}
+
+// ==================== EDGE CASES ====================
+function populateEdgeCaseSelect() {
+  const sel = document.getElementById('edge-entity-select');
+  if(!sel) return;
+  const entities = getAllEntities();
+  sel.innerHTML = '<option value="">Select entity...</option>' + entities.map(e => `<option value="${e._key}">${e.entity} (score: ${e.score})</option>`).join('');
+}
+
+function saveEdgeCase() {
+  const key = document.getElementById('edge-entity-select').value;
+  const note = document.getElementById('edge-case-note').value.trim();
+  if(!key || !note) { showToast('Select an entity and write a note','var(--danger)'); return; }
+
+  const entities = getAllEntities();
+  const entity = entities.find(e => e._key === key);
+  const cases = JSON.parse(localStorage.getItem('edge_cases') || '[]');
+  cases.push({key, entity: entity?.entity || key, note, createdAt: new Date().toISOString()});
+  localStorage.setItem('edge_cases', JSON.stringify(cases));
+
+  document.getElementById('edge-case-note').value = '';
+  document.getElementById('edge-entity-select').value = '';
+  renderEdgeCases();
+  showToast('Edge case documented');
+}
+
+function renderEdgeCases() {
+  const cases = JSON.parse(localStorage.getItem('edge_cases') || '[]');
+  const el = document.getElementById('edge-cases-list');
+  if(!el) return;
+  if(cases.length === 0) { el.innerHTML = '<p style="color:var(--text-muted);font-size:.8rem">No edge cases documented yet.</p>'; return; }
+
+  el.innerHTML = cases.map((c,i) => `
+    <div style="padding:10px;background:rgba(255,255,255,.02);border-radius:6px;margin-bottom:8px;display:flex;align-items:flex-start;gap:12px">
+      <div style="flex:1">
+        <strong style="color:var(--warning)">${c.entity}</strong>
+        <p style="font-size:.8rem;color:var(--text-muted);margin-top:4px">${c.note}</p>
+        <span style="font-size:.7rem;color:#555">${new Date(c.createdAt).toLocaleDateString()}</span>
+      </div>
+      <button class="btn btn-ghost" style="padding:2px 8px;font-size:.7rem;color:var(--danger);border-color:var(--danger)" onclick="removeEdgeCase(${i})">&#10005;</button>
+    </div>
+  `).join('');
+}
+
+function removeEdgeCase(i) {
+  const cases = JSON.parse(localStorage.getItem('edge_cases') || '[]');
+  cases.splice(i, 1);
+  localStorage.setItem('edge_cases', JSON.stringify(cases));
+  renderEdgeCases();
+}
+
+// ==================== EXPORT ====================
+function downloadFile(filename, content) {
+  const blob = new Blob([content], {type:'text/csv;charset=utf-8;'});
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = filename;
+  link.click();
+}
+
+function exportSampleCSV() {
+  const entities = getAllEntities();
+  let csv = 'Entity,Country,Type,SynthScore,Employees,DomainAge,AIContent,Source,Status,Documented,Notes\n';
+  entities.forEach(e => {
+    csv += `"${e.entity}","${e.country}","${e.type}",${e.score},${e.employees},"${e.domain}","${e.ai}","${e.source}","${e.status}",${e.real?'Yes':'No'},"${(e.notes||'').replace(/"/g,"'")}"\n`;
+  });
+  downloadFile('synthco_sample_export.csv', csv);
+  showToast('Sample exported as CSV');
 }
 </script>
 
