@@ -206,6 +206,31 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
 .review-card .review-actions select, .review-card .review-actions input { padding:6px 10px; border:1px solid var(--border); border-radius:4px; background:#0f0f1a; color:var(--text); font-size:.8rem; }
 .review-card .review-actions textarea { padding:6px 10px; border:1px solid var(--border); border-radius:4px; background:#0f0f1a; color:var(--text); font-size:.8rem; flex:1; min-width:200px; height:32px; font-family:inherit; }
 
+/* VERIFICATION WORKSPACE */
+.verify-entity { background:var(--card); border:1px solid var(--border); border-radius:12px; margin-bottom:16px; overflow:hidden; }
+.verify-entity.collapsed .verify-body { display:none; }
+.verify-header { padding:14px 20px; display:flex; align-items:center; gap:16px; cursor:pointer; transition:background .2s; }
+.verify-header:hover { background:rgba(255,255,255,.02); }
+.verify-header .entity-name { font-weight:700; flex:1; }
+.verify-header .verify-progress { display:flex; gap:3px; }
+.verify-header .verify-progress .step-dot { width:20px; height:8px; border-radius:4px; background:#222; }
+.verify-header .verify-progress .step-dot.done { background:var(--success); }
+.verify-header .verify-progress .step-dot.partial { background:var(--warning); }
+.verify-body { padding:0 20px 20px; }
+.verify-step { display:flex; align-items:flex-start; gap:12px; padding:12px 0; border-bottom:1px solid var(--border); }
+.verify-step:last-child { border-bottom:none; }
+.verify-step .step-check { margin-top:2px; accent-color:var(--success); }
+.verify-step .step-info { flex:1; }
+.verify-step .step-info h5 { font-size:.85rem; margin-bottom:4px; display:flex; align-items:center; gap:8px; }
+.verify-step .step-info p { font-size:.8rem; color:var(--text-muted); line-height:1.4; margin-bottom:6px; }
+.verify-step .step-actions { display:flex; gap:6px; flex-wrap:wrap; align-items:center; }
+.verify-step .step-actions input, .verify-step .step-actions select, .verify-step .step-actions textarea {
+  padding:5px 8px; border:1px solid var(--border); border-radius:4px; background:#0f0f1a; color:var(--text); font-size:.8rem; font-family:inherit;
+}
+.verify-step .step-actions textarea { min-width:250px; height:28px; }
+.verify-step .step-actions a { font-size:.8rem; }
+.verify-step .auto-result { background:rgba(116,185,255,.08); border:1px solid rgba(116,185,255,.2); border-radius:6px; padding:8px 12px; margin-top:6px; font-size:.8rem; }
+
 .toast { position:fixed; bottom:24px; right:24px; background:var(--success); color:#fff; padding:12px 20px; border-radius:8px; font-size:.85rem; font-weight:600; z-index:9999; opacity:0; transition:opacity .3s; pointer-events:none; }
 .toast.show { opacity:1; }
 
@@ -1177,51 +1202,53 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
       <div class="phase-status"><span class="badge badge-pending">Upcoming</span></div>
     </div>
 
+    <!-- VERIFICATION SUMMARY -->
+    <div class="grid grid-4 mb-16">
+      <div class="card kpi">
+        <h3>To Verify</h3>
+        <div class="big-number yellow" id="v4-to-verify">0</div>
+        <div class="sub">Score &gt; 50</div>
+      </div>
+      <div class="card kpi">
+        <h3>In Progress</h3>
+        <div class="big-number blue" id="v4-in-progress">0</div>
+        <div class="sub">Partially verified</div>
+      </div>
+      <div class="card kpi">
+        <h3>Completed</h3>
+        <div class="big-number green" id="v4-completed">0</div>
+        <div class="sub">All 7 steps done</div>
+      </div>
+      <div class="card kpi">
+        <h3>Avg. Verification</h3>
+        <div class="big-number blue" id="v4-avg">0%</div>
+        <div class="sub">Steps completed</div>
+      </div>
+    </div>
+
+    <!-- FILTER -->
     <div class="card mb-16">
-      <h3>Verification Protocol Steps</h3>
-      <table>
-        <thead><tr><th>#</th><th>Step</th><th>Method</th><th>Assigned</th><th>Reliability Boost</th></tr></thead>
-        <tbody>
-          <tr><td>1</td><td>Registry Cross-Check</td><td>Verify incorporation, directors, filings across 2+ independent registries</td><td><span class="badge badge-agent">Agent</span></td><td>+15%</td></tr>
-          <tr><td>2</td><td>Direct Contact Attempt</td><td>Phone call, email — assess if response is human or automated</td><td><span class="badge badge-human">Human</span></td><td>+20%</td></tr>
-          <tr><td>3</td><td>Physical Address Verification</td><td>Google Street View + local inquiry or site visit</td><td><span class="badge badge-human">Human</span></td><td>+15%</td></tr>
-          <tr><td>4</td><td>Financial Document Review</td><td>Request/obtain invoices, tax filings, bank statements</td><td><span class="badge badge-human">Human</span></td><td>+20%</td></tr>
-          <tr><td>5</td><td>Third-Party Interviews</td><td>Contact alleged clients, suppliers, ex-employees</td><td><span class="badge badge-human">Human</span></td><td>+15%</td></tr>
-          <tr><td>6</td><td>Linguistic Analysis</td><td>NLP analysis of all communications for AI-generation signals</td><td><span class="badge badge-agent">Agent</span></td><td>+10%</td></tr>
-          <tr><td>7</td><td>Final Classification</td><td>Assign: Confirmed Synthetic / Dismissed / Indeterminate</td><td><span class="badge badge-human">Human</span></td><td>+5%</td></tr>
-        </tbody>
-      </table>
+      <div class="flex-between">
+        <h3 style="margin:0">Verification Workspace</h3>
+        <div style="display:flex;gap:8px;align-items:center">
+          <select class="form-input" id="v4-filter" onchange="renderVerificationCards()" style="width:auto;padding:6px 10px;font-size:.8rem">
+            <option value="all">All entities (score &gt; 50)</option>
+            <option value="not-started">Not started</option>
+            <option value="in-progress">In progress</option>
+            <option value="complete">Completed</option>
+          </select>
+          <button class="btn btn-ghost" onclick="exportVerificationCSV()" style="font-size:.75rem">Export CSV</button>
+        </div>
+      </div>
+      <p style="font-size:.8rem;color:var(--text-muted);margin-top:8px">
+        For each entity, complete the 7 verification steps. Steps marked <span class="badge badge-agent" style="font-size:.65rem">Agent</span> include automated tools. Steps marked <span class="badge badge-human" style="font-size:.65rem">Human</span> require your input.
+      </p>
     </div>
 
-    <div class="card mb-16" style="border-left:4px solid var(--highlight)">
-      <h3 style="color:var(--highlight)">&#9888; Your Actions — Phase 4 (Critical — Human Only)</h3>
-      <ol style="padding-left:20px;font-size:.85rem;line-height:1.8;color:var(--text)">
-        <li><strong>Direct contact attempts:</strong> For entities with Synthetic Score &gt; 70:
-          <ul style="margin:4px 0 8px 16px;list-style:disc">
-            <li>Send a professional inquiry email (template: <em>"We are researchers studying AI-driven organizations. Could you confirm whether [entity name] employs human staff?"</em>)</li>
-            <li>Call any listed phone numbers. Record: did a human answer? Was it a bot?</li>
-            <li>Try to schedule a video call — can they show a real office/team?</li>
-          </ul>
-        </li>
-        <li><strong>Address verification:</strong> For top 15 entities:
-          <ul style="margin:4px 0 8px 16px;list-style:disc">
-            <li>Enter their registered address into <a href="https://www.google.com/maps" style="color:var(--info)" target="_blank">Google Maps Street View</a></li>
-            <li>Is it a real office building? A virtual office / mailbox service? An empty lot?</li>
-            <li>Take screenshots and save in <code>/verification/addresses/</code></li>
-          </ul>
-        </li>
-        <li><strong>Third-party interviews:</strong> For confirmed synthetic entities:
-          <ul style="margin:4px 0 8px 16px;list-style:disc">
-            <li>Contact any listed clients, partners, or suppliers</li>
-            <li>Search for reviews on Glassdoor, Trustpilot, G2</li>
-            <li>Check if anyone has publicly mentioned working with them</li>
-          </ul>
-        </li>
-        <li><strong>Final classification:</strong> Assign each entity one of: <em>Confirmed Synthetic</em>, <em>Confirmed Agentic</em>, <em>Dismissed (Real)</em>, or <em>Indeterminate</em>. Document your reasoning.</li>
-      </ol>
-    </div>
+    <!-- ENTITY VERIFICATION CARDS -->
+    <div id="verification-cards"></div>
 
-    <div class="card">
+    <div class="card mt-24">
       <h3>Phase 4 — Task Checklist</h3>
       <ul class="checklist" id="phase4-checklist"></ul>
     </div>
@@ -1570,6 +1597,7 @@ function initApp() {
   renderBorderlineReview();
   renderEdgeCases();
   populateEdgeCaseSelect();
+  renderVerificationCards();
 
   // Show/hide custom API name field
   document.getElementById('api-service').addEventListener('change', function() {
@@ -1939,6 +1967,7 @@ function loadUserData() {
   if(!localStorage.getItem('reviews')) localStorage.setItem('reviews','{}');
   if(!localStorage.getItem('reviews_r2')) localStorage.setItem('reviews_r2','{}');
   if(!localStorage.getItem('edge_cases')) localStorage.setItem('edge_cases','[]');
+  if(!localStorage.getItem('verifications')) localStorage.setItem('verifications','{}');
 }
 
 // ==================== API KEY MANAGEMENT ====================
@@ -2286,6 +2315,262 @@ function downloadFile(filename, content) {
   link.click();
 }
 
+// ==================== PHASE 4: VERIFICATION WORKSPACE ====================
+const VERIFY_STEPS = [
+  {id:'registry', name:'Registry Cross-Check', who:'agent', boost:15,
+    desc:'Verify incorporation, directors, and filings across 2+ independent registries.',
+    auto: true,
+    autoLinks: e => {
+      const q = encodeURIComponent(e.entity.replace(/\(.*?\)/g,'').trim());
+      return [
+        {label:'OpenCorporates', url:'https://opencorporates.com/companies?q='+q},
+        {label:'Companies House UK', url:'https://find-and-update.company-information.service.gov.uk/search?q='+q},
+        {label:'SEC EDGAR', url:'https://efts.sec.gov/LATEST/search-index?q='+q},
+        {label:'Google "'+e.entity+' registration"', url:'https://www.google.com/search?q='+encodeURIComponent('"'+e.entity.replace(/\(.*?\)/g,'').trim()+'" company registration OR incorporated OR registry')},
+      ];
+    }
+  },
+  {id:'contact', name:'Direct Contact Attempt', who:'human', boost:20,
+    desc:'Send email or call. Record: did a human answer? Was it a chatbot? Template below.',
+    fields: ['method','response'],
+    template: 'Dear [Entity], we are academic researchers studying AI-driven organizations. Could you confirm whether your company employs human staff and describe your operational structure? Thank you.'
+  },
+  {id:'address', name:'Physical Address Verification', who:'human', boost:15,
+    desc:'Check registered address via Google Street View. Is it a real office, virtual address, or empty?',
+    auto: true,
+    autoLinks: e => {
+      const q = encodeURIComponent(e.entity.replace(/\(.*?\)/g,'').trim() + ' ' + e.country + ' address');
+      return [
+        {label:'Google Maps Search', url:'https://www.google.com/maps/search/'+encodeURIComponent(e.entity.replace(/\(.*?\)/g,'').trim()+' '+e.country)},
+        {label:'Search Address', url:'https://www.google.com/search?q='+q},
+      ];
+    },
+    fields: ['address_type']
+  },
+  {id:'financial', name:'Financial Document Review', who:'human', boost:20,
+    desc:'Check for public financial filings, tax records, reported revenue. Zero filings = red flag.',
+    auto: true,
+    autoLinks: e => {
+      const q = encodeURIComponent(e.entity.replace(/\(.*?\)/g,'').trim());
+      return [
+        {label:'Search Financials', url:'https://www.google.com/search?q='+encodeURIComponent('"'+e.entity.replace(/\(.*?\)/g,'').trim()+'" financial statements OR annual report OR revenue')},
+        {label:'Crunchbase', url:'https://www.crunchbase.com/textsearch?q='+q},
+      ];
+    },
+    fields: ['financial_status']
+  },
+  {id:'thirdparty', name:'Third-Party Verification', who:'human', boost:15,
+    desc:'Contact alleged clients/suppliers. Search for reviews on Glassdoor, Trustpilot, G2.',
+    auto: true,
+    autoLinks: e => {
+      const q = encodeURIComponent(e.entity.replace(/\(.*?\)/g,'').trim());
+      return [
+        {label:'Glassdoor', url:'https://www.glassdoor.com/Search/results.htm?keyword='+q},
+        {label:'Trustpilot', url:'https://www.trustpilot.com/search?query='+q},
+        {label:'Google Reviews', url:'https://www.google.com/search?q='+encodeURIComponent('"'+e.entity.replace(/\(.*?\)/g,'').trim()+'" review OR experience OR "worked at"')},
+      ];
+    }
+  },
+  {id:'nlp', name:'Linguistic / AI Text Analysis', who:'agent', boost:10,
+    desc:'Paste the company\'s website text or communications below. Analyze for AI-generation signals.',
+    auto: true,
+    autoLinks: e => {
+      const q = encodeURIComponent(e.entity.replace(/\(.*?\)/g,'').trim());
+      return [
+        {label:'GPTZero (paste text)', url:'https://gptzero.me/'},
+        {label:'ZeroGPT', url:'https://www.zerogpt.com/'},
+        {label:'View Website', url:'https://www.google.com/search?q='+q+'&btnI=1'},
+        {label:'Wayback Machine', url:'https://web.archive.org/web/*/'+q.replace(/%20/g,'')+'.*'},
+      ];
+    },
+    fields: ['ai_percentage']
+  },
+  {id:'classification', name:'Final Classification', who:'human', boost:5,
+    desc:'Based on all evidence, assign the final classification for this entity.',
+    fields: ['final_class','confidence']
+  }
+];
+
+function renderVerificationCards() {
+  const entities = getAllEntities().filter(e => e.score > 50).sort((a,b) => b.score - a.score);
+  const verifs = JSON.parse(localStorage.getItem('verifications') || '{}');
+  const filter = document.getElementById('v4-filter')?.value || 'all';
+  const container = document.getElementById('verification-cards');
+
+  // Calculate KPIs
+  let toVerify=0, inProgress=0, completed=0, totalSteps=0, doneSteps=0;
+  entities.forEach(e => {
+    const v = verifs[e._key] || {};
+    const done = VERIFY_STEPS.filter(s => v[s.id]?.done).length;
+    totalSteps += 7;
+    doneSteps += done;
+    if(done === 0) toVerify++;
+    else if(done < 7) inProgress++;
+    else completed++;
+  });
+  document.getElementById('v4-to-verify').textContent = toVerify;
+  document.getElementById('v4-in-progress').textContent = inProgress;
+  document.getElementById('v4-completed').textContent = completed;
+  document.getElementById('v4-avg').textContent = totalSteps > 0 ? Math.round(doneSteps/totalSteps*100)+'%' : '0%';
+
+  // Filter
+  let filtered = entities;
+  if(filter === 'not-started') filtered = entities.filter(e => { const v=verifs[e._key]||{}; return VERIFY_STEPS.filter(s=>v[s.id]?.done).length===0; });
+  else if(filter === 'in-progress') filtered = entities.filter(e => { const v=verifs[e._key]||{}; const d=VERIFY_STEPS.filter(s=>v[s.id]?.done).length; return d>0&&d<7; });
+  else if(filter === 'complete') filtered = entities.filter(e => { const v=verifs[e._key]||{}; return VERIFY_STEPS.filter(s=>v[s.id]?.done).length===7; });
+
+  if(filtered.length === 0) {
+    container.innerHTML = '<div class="card"><p style="color:var(--text-muted);text-align:center;padding:20px">No entities match this filter.</p></div>';
+    return;
+  }
+
+  container.innerHTML = filtered.map(e => {
+    const v = verifs[e._key] || {};
+    const doneCount = VERIFY_STEPS.filter(s => v[s.id]?.done).length;
+    const scoreColor = e.score>=80?'var(--danger)':e.score>=60?'var(--warning)':'var(--info)';
+    const isCollapsed = doneCount === 7;
+
+    return `<div class="verify-entity ${isCollapsed?'collapsed':''}" id="ve-${e._key}">
+      <div class="verify-header" onclick="toggleVerifyEntity('${e._key}')">
+        <span style="color:${scoreColor};font-weight:700;min-width:32px">${e.score}</span>
+        <span class="entity-name">${e.entity}</span>
+        <span style="font-size:.8rem;color:var(--text-muted)">${e.country}</span>
+        <span class="badge ${e.type.includes('Synthetic')?'badge-blocked':e.type.includes('DAO')?'badge-progress':'badge-agent'}" style="font-size:.7rem">${e.type}</span>
+        <div class="verify-progress">
+          ${VERIFY_STEPS.map(s => `<div class="step-dot ${v[s.id]?.done?'done':v[s.id]?.notes?'partial':''}"></div>`).join('')}
+        </div>
+        <span style="font-size:.8rem;color:var(--text-muted)">${doneCount}/7</span>
+      </div>
+      <div class="verify-body">
+        ${VERIFY_STEPS.map(s => {
+          const sv = v[s.id] || {};
+          return `<div class="verify-step">
+            <input type="checkbox" class="step-check" ${sv.done?'checked':''} onchange="saveVerifyStep('${e._key}','${s.id}','done',this.checked)">
+            <div class="step-info">
+              <h5>${s.name} <span class="badge ${s.who==='agent'?'badge-agent':'badge-human'}" style="font-size:.6rem">${s.who==='agent'?'Auto':'Human'}</span> <span style="font-size:.7rem;color:var(--success)">+${s.boost}% reliability</span></h5>
+              <p>${s.desc}</p>
+              ${s.auto && s.autoLinks ? `<div class="step-actions" style="margin-bottom:6px">${s.autoLinks(e).map(l => `<a href="${l.url}" target="_blank" class="btn btn-ghost" style="padding:3px 8px;font-size:.7rem">${l.label} &#8599;</a>`).join('')}</div>` : ''}
+              ${s.template ? `<div class="auto-result"><strong>Email template:</strong><br><span style="color:var(--text-muted);font-size:.8rem">${s.template.replace('[Entity]',e.entity)}</span> <button class="btn btn-ghost" style="padding:2px 6px;font-size:.65rem;margin-left:8px" onclick="navigator.clipboard.writeText(this.parentElement.querySelector('span').textContent);showToast('Copied!')">Copy</button></div>` : ''}
+              <div class="step-actions" style="margin-top:6px">
+                ${s.id==='contact' ? `
+                  <select onchange="saveVerifyStep('${e._key}','${s.id}','method',this.value)">
+                    <option value="" ${!sv.method?'selected':''}>Contact method...</option>
+                    <option value="email" ${sv.method==='email'?'selected':''}>Email sent</option>
+                    <option value="phone" ${sv.method==='phone'?'selected':''}>Phone call</option>
+                    <option value="video" ${sv.method==='video'?'selected':''}>Video call</option>
+                    <option value="none" ${sv.method==='none'?'selected':''}>No contact info found</option>
+                  </select>
+                  <select onchange="saveVerifyStep('${e._key}','${s.id}','response',this.value)">
+                    <option value="" ${!sv.response?'selected':''}>Response...</option>
+                    <option value="human" ${sv.response==='human'?'selected':''}>Human responded</option>
+                    <option value="bot" ${sv.response==='bot'?'selected':''}>Bot / automated response</option>
+                    <option value="no-reply" ${sv.response==='no-reply'?'selected':''}>No reply</option>
+                    <option value="bounced" ${sv.response==='bounced'?'selected':''}>Email bounced / number invalid</option>
+                  </select>
+                ` : ''}
+                ${s.id==='address' ? `
+                  <select onchange="saveVerifyStep('${e._key}','${s.id}','address_type',this.value)">
+                    <option value="" ${!sv.address_type?'selected':''}>Address type...</option>
+                    <option value="real-office" ${sv.address_type==='real-office'?'selected':''}>Real office / building</option>
+                    <option value="coworking" ${sv.address_type==='coworking'?'selected':''}>Coworking / shared space</option>
+                    <option value="virtual" ${sv.address_type==='virtual'?'selected':''}>Virtual office / mailbox</option>
+                    <option value="residential" ${sv.address_type==='residential'?'selected':''}>Residential address</option>
+                    <option value="empty" ${sv.address_type==='empty'?'selected':''}>Empty lot / non-existent</option>
+                    <option value="unknown" ${sv.address_type==='unknown'?'selected':''}>Cannot determine</option>
+                  </select>
+                ` : ''}
+                ${s.id==='financial' ? `
+                  <select onchange="saveVerifyStep('${e._key}','${s.id}','financial_status',this.value)">
+                    <option value="" ${!sv.financial_status?'selected':''}>Financial status...</option>
+                    <option value="filings-found" ${sv.financial_status==='filings-found'?'selected':''}>Filings found — has revenue</option>
+                    <option value="filings-zero" ${sv.financial_status==='filings-zero'?'selected':''}>Filings found — zero revenue</option>
+                    <option value="no-filings" ${sv.financial_status==='no-filings'?'selected':''}>No filings found</option>
+                    <option value="private" ${sv.financial_status==='private'?'selected':''}>Private — data unavailable</option>
+                  </select>
+                ` : ''}
+                ${s.id==='nlp' ? `
+                  <input type="text" placeholder="AI detection %" style="width:80px" value="${sv.ai_percentage||''}" onchange="saveVerifyStep('${e._key}','${s.id}','ai_percentage',this.value)">
+                ` : ''}
+                ${s.id==='classification' ? `
+                  <select onchange="saveVerifyStep('${e._key}','${s.id}','final_class',this.value)" style="min-width:160px">
+                    <option value="" ${!sv.final_class?'selected':''}>Final classification...</option>
+                    <option value="Confirmed Synthetic" ${sv.final_class==='Confirmed Synthetic'?'selected':''}>Confirmed Synthetic</option>
+                    <option value="Confirmed Agentic" ${sv.final_class==='Confirmed Agentic'?'selected':''}>Confirmed Agentic (Real)</option>
+                    <option value="Dismissed" ${sv.final_class==='Dismissed'?'selected':''}>Dismissed — Real Company</option>
+                    <option value="Indeterminate" ${sv.final_class==='Indeterminate'?'selected':''}>Indeterminate</option>
+                  </select>
+                  <select onchange="saveVerifyStep('${e._key}','${s.id}','confidence',this.value)">
+                    <option value="" ${!sv.confidence?'selected':''}>Confidence...</option>
+                    <option value="high" ${sv.confidence==='high'?'selected':''}>High</option>
+                    <option value="medium" ${sv.confidence==='medium'?'selected':''}>Medium</option>
+                    <option value="low" ${sv.confidence==='low'?'selected':''}>Low</option>
+                  </select>
+                ` : ''}
+                <textarea placeholder="Notes / findings..." onchange="saveVerifyStep('${e._key}','${s.id}','notes',this.value)">${sv.notes||''}</textarea>
+              </div>
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggleVerifyEntity(key) {
+  document.getElementById('ve-'+key)?.classList.toggle('collapsed');
+}
+
+function saveVerifyStep(entityKey, stepId, field, value) {
+  const verifs = JSON.parse(localStorage.getItem('verifications') || '{}');
+  if(!verifs[entityKey]) verifs[entityKey] = {};
+  if(!verifs[entityKey][stepId]) verifs[entityKey][stepId] = {};
+  verifs[entityKey][stepId][field] = value;
+  verifs[entityKey][stepId].updatedAt = new Date().toISOString();
+  localStorage.setItem('verifications', JSON.stringify(verifs));
+
+  // Update KPIs without full re-render
+  const entities = getAllEntities().filter(e => e.score > 50);
+  let toVerify=0, inProgress=0, completed=0, totalSteps=0, doneSteps=0;
+  entities.forEach(e => {
+    const v = verifs[e._key] || {};
+    const done = VERIFY_STEPS.filter(s => v[s.id]?.done).length;
+    totalSteps += 7;
+    doneSteps += done;
+    if(done === 0) toVerify++;
+    else if(done < 7) inProgress++;
+    else completed++;
+  });
+  document.getElementById('v4-to-verify').textContent = toVerify;
+  document.getElementById('v4-in-progress').textContent = inProgress;
+  document.getElementById('v4-completed').textContent = completed;
+  document.getElementById('v4-avg').textContent = totalSteps > 0 ? Math.round(doneSteps/totalSteps*100)+'%' : '0%';
+
+  // Update progress dots in header
+  const header = document.querySelector(`#ve-${entityKey} .verify-progress`);
+  if(header) {
+    const v = verifs[entityKey] || {};
+    header.innerHTML = VERIFY_STEPS.map(s => `<div class="step-dot ${v[s.id]?.done?'done':v[s.id]?.notes?'partial':''}"></div>`).join('');
+    const countEl = document.querySelector(`#ve-${entityKey} .verify-header span:last-child`);
+    if(countEl) countEl.textContent = VERIFY_STEPS.filter(s => v[s.id]?.done).length + '/7';
+  }
+
+  if(field === 'done') showToast(value ? 'Step completed' : 'Step unchecked', value ? 'var(--success)' : 'var(--warning)');
+}
+
+function exportVerificationCSV() {
+  const entities = getAllEntities().filter(e => e.score > 50);
+  const verifs = JSON.parse(localStorage.getItem('verifications') || '{}');
+  let csv = 'Entity,Score,Country,Type,Registry,Contact_Method,Contact_Response,Address_Type,Financial,ThirdParty,NLP_AI%,Final_Class,Confidence,Steps_Done,Notes\n';
+  entities.forEach(e => {
+    const v = verifs[e._key] || {};
+    const done = VERIFY_STEPS.filter(s => v[s.id]?.done).length;
+    const allNotes = VERIFY_STEPS.map(s => v[s.id]?.notes || '').filter(n=>n).join(' | ');
+    csv += `"${e.entity}",${e.score},"${e.country}","${e.type}","${v.registry?.done?'Yes':'No'}","${v.contact?.method||''}","${v.contact?.response||''}","${v.address?.address_type||''}","${v.financial?.financial_status||''}","${v.thirdparty?.done?'Done':'Pending'}","${v.nlp?.ai_percentage||''}","${v.classification?.final_class||''}","${v.classification?.confidence||''}",${done},"${allNotes.replace(/"/g,"'")}"\n`;
+  });
+  downloadFile('verification_export.csv', csv);
+  showToast('Verification data exported');
+}
+
 // ==================== EXPORT / IMPORT ALL DATA ====================
 function exportAllData() {
   const data = {
@@ -2296,6 +2581,7 @@ function exportAllData() {
     reviews: JSON.parse(localStorage.getItem('reviews') || '{}'),
     reviews_r2: JSON.parse(localStorage.getItem('reviews_r2') || '{}'),
     edge_cases: JSON.parse(localStorage.getItem('edge_cases') || '[]'),
+    verifications: JSON.parse(localStorage.getItem('verifications') || '{}'),
     checklists: {}
   };
 
@@ -2334,6 +2620,7 @@ function importAllData(event) {
       if(data.reviews) { localStorage.setItem('reviews', JSON.stringify(data.reviews)); count.reviews = Object.keys(data.reviews).length; }
       if(data.reviews_r2) localStorage.setItem('reviews_r2', JSON.stringify(data.reviews_r2));
       if(data.edge_cases) localStorage.setItem('edge_cases', JSON.stringify(data.edge_cases));
+      if(data.verifications) localStorage.setItem('verifications', JSON.stringify(data.verifications));
 
       if(data.checklists) {
         Object.entries(data.checklists).forEach(([id, states]) => {
