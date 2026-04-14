@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SynthCo Research Manager — Synthetic Companies Detection Study</title>
+<title>SynthCo Research Manager â Synthetic Companies Detection Study</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect x='15' y='30' width='70' height='50' rx='10' fill='%231a1a2e' stroke='%23e94560' stroke-width='3'/><circle cx='35' cy='52' r='8' fill='%2374b9ff'/><circle cx='65' cy='52' r='8' fill='%2374b9ff'/><rect x='40' y='64' width='20' height='4' rx='2' fill='%23e94560'/><rect x='43' y='15' width='14' height='18' rx='4' fill='%231a1a2e' stroke='%2374b9ff' stroke-width='2'/><circle cx='50' cy='10' r='4' fill='%2374b9ff'/><rect x='5' y='45' width='12' height='6' rx='3' fill='%23e94560'/><rect x='83' y='45' width='12' height='6' rx='3' fill='%23e94560'/><rect x='25' y='80' width='15' height='12' rx='3' fill='%231a1a2e' stroke='%23e94560' stroke-width='2'/><rect x='60' y='80' width='15' height='12' rx='3' fill='%231a1a2e' stroke='%23e94560' stroke-width='2'/></svg>" type="image/svg+xml">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
@@ -270,11 +270,11 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
         <input type="file" id="import-file" accept=".json" style="display:none" onchange="importAllData(event)">
         <div id="data-tooltip" style="display:none;position:absolute;top:100%;right:0;margin-top:8px;width:340px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;z-index:200;box-shadow:0 8px 30px rgba(0,0,0,.5);font-size:.8rem;line-height:1.6;color:var(--text-muted)">
           <strong style="color:var(--text);font-size:.85rem">How data sync works:</strong><br>
-          1. Work locally — all changes auto-save in your browser<br>
+          1. Work locally â all changes auto-save in your browser<br>
           2. Click <strong style="color:var(--success)">Export All Data</strong> to download <code>synthco_data.json</code><br>
           3. Save it in your project folder and push to GitHub<br>
           4. To continue on another device: open the app and click <strong style="color:var(--info)">Import Data</strong> to load the JSON<br><br>
-          <span style="font-size:.75rem">Includes: entities, classifications, reviews, checklists, edge cases.<br>&#128274; API keys are <strong>never exported</strong> — they stay in your local browser only.</span>
+          <span style="font-size:.75rem">Includes: entities, classifications, reviews, checklists, edge cases.<br>&#128274; API keys are <strong>never exported</strong> â they stay in your local browser only.</span>
         </div>
       </div>
       <span style="border-left:1px solid var(--border);height:20px"></span>
@@ -325,7 +325,7 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
       <div class="card kpi">
         <h3>Pending Verification</h3>
         <div class="big-number yellow" id="kpi-pending">44</div>
-        <div class="sub">OSINT candidates — need human review</div>
+        <div class="sub">OSINT candidates â need human review</div>
       </div>
       <div class="card kpi">
         <h3>Tasks Completed</h3>
@@ -360,30 +360,30 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
 
     <!-- TIMELINE / GANTT -->
     <div class="card mb-16">
-      <h3>Research Timeline — 30 Day Plan (March 13 – April 12, 2026)</h3>
+      <h3>Research Timeline â 30 Day Plan (March 13 â April 12, 2026)</h3>
       <div class="gantt-container" id="gantt-container"></div>
     </div>
 
     <!-- USER ACTION REQUIRED -->
     <div class="card mb-16" style="border-left:4px solid var(--highlight)">
-      <h3 style="color:var(--highlight)">&#9888; Manager Action Required — What YOU Need To Do</h3>
+      <h3 style="color:var(--highlight)">&#9888; Manager Action Required â What YOU Need To Do</h3>
       <table>
         <thead><tr><th>#</th><th>Action</th><th>Details & Instructions</th><th>Priority</th></tr></thead>
         <tbody>
           <tr><td>1</td><td><strong>Verify OSINT candidates</strong></td>
-            <td>Go to <strong>Phase 5 → Sample Table</strong>. 44 entities show "Pending Verification". For each one:<br>
+            <td>Go to <strong>Phase 5 â Sample Table</strong>. 44 entities show "Pending Verification". For each one:<br>
               &#8226; Search the entity name on Google, LinkedIn, Crunchbase<br>
               &#8226; Check if the company registry source listed is real (e.g., Companies House, BORME)<br>
-              &#8226; Try to visit their website — does it exist? Is content AI-generated?<br>
+              &#8226; Try to visit their website â does it exist? Is content AI-generated?<br>
               &#8226; Update status to "Confirmed", "Dismissed", or "Indeterminate"</td>
             <td style="color:var(--highlight)">HIGH</td></tr>
           <tr><td>2</td><td><strong>Obtain API access</strong></td>
             <td>Register and get API keys for:<br>
-              &#8226; <strong>Crunchbase</strong> (crunchbase.com/api) — company data, funding<br>
-              &#8226; <strong>Companies House UK</strong> (developer.company-information.service.gov.uk) — free<br>
-              &#8226; <strong>OpenCorporates</strong> (api.opencorporates.com) — global registry<br>
-              &#8226; <strong>SimilarWeb</strong> (similarweb.com/corp/developer) — traffic analysis<br>
-              &#8226; <strong>GitHub API</strong> (github.com/settings/tokens) — org activity</td>
+              &#8226; <strong>Crunchbase</strong> (crunchbase.com/api) â company data, funding<br>
+              &#8226; <strong>Companies House UK</strong> (developer.company-information.service.gov.uk) â free<br>
+              &#8226; <strong>OpenCorporates</strong> (api.opencorporates.com) â global registry<br>
+              &#8226; <strong>SimilarWeb</strong> (similarweb.com/corp/developer) â traffic analysis<br>
+              &#8226; <strong>GitHub API</strong> (github.com/settings/tokens) â org activity</td>
             <td style="color:var(--highlight)">HIGH</td></tr>
           <tr><td>3</td><td><strong>Upload project to GitHub</strong></td>
             <td>Run from the project folder:<br>
@@ -447,7 +447,7 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
     <div class="card mb-16">
       <h3>Research Objective</h3>
       <p style="font-size:.95rem;line-height:1.7;margin-top:8px">
-        This study investigates the emergence of <strong>synthetic companies</strong> — legal entities created or operated primarily by AI agents with minimal or no human involvement. We aim to: (1) develop a taxonomy of AI-enabled organizational forms, (2) build a detection methodology to identify them, (3) construct a validated international sample, and (4) analyze the ethical, governance, and accountability implications for a high-impact academic article.
+        This study investigates the emergence of <strong>synthetic companies</strong> â legal entities created or operated primarily by AI agents with minimal or no human involvement. We aim to: (1) develop a taxonomy of AI-enabled organizational forms, (2) build a detection methodology to identify them, (3) construct a validated international sample, and (4) analyze the ethical, governance, and accountability implications for a high-impact academic article.
       </p>
       <p style="font-size:.85rem;line-height:1.7;margin-top:12px;color:var(--text-muted)">
         <strong>Context:</strong> Sam Altman (OpenAI) predicted "one-person billion-dollar companies" powered by AI agents. Dario Amodei (Anthropic) expects this by 2026. Meanwhile, cases like HurumoAI (a Wired experiment with fully AI employees), Dictador's robot CEO "Mika", and NetDragon's AI CEO "Tang Yu" show this is already happening. We study the full spectrum: from legitimate agentic organizations to fully synthetic (potentially fraudulent) entities.
@@ -456,7 +456,7 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
 
     <!-- VISUAL PIPELINE FLOW -->
     <div class="card mb-16">
-      <h3>Methodological Pipeline — Overview</h3>
+      <h3>Methodological Pipeline â Overview</h3>
       <p style="font-size:.8rem;color:var(--text-muted);margin-bottom:8px">The research follows a 5-phase funnel approach, from broad automated scanning to deep human verification:</p>
 
       <div class="method-flow">
@@ -477,7 +477,7 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
         <div class="method-step">
           <div class="step-num" style="background:rgba(253,203,110,.2);color:var(--warning)">3</div>
           <h4>Detection</h4>
-          <p>Apply Synthetic Score (0–100) using 8 weighted signals. Classify by taxonomy</p>
+          <p>Apply Synthetic Score (0â100) using 8 weighted signals. Classify by taxonomy</p>
           <div style="margin-top:8px"><span class="badge badge-agent">Agent</span></div>
         </div>
         <div class="method-arrow">&#10132;</div>
@@ -553,7 +553,7 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
             <tr>
               <td><span style="display:inline-block;width:36px;height:36px;border-radius:8px;background:rgba(233,69,96,.15);color:var(--highlight);text-align:center;line-height:36px;font-weight:700">4</span></td>
               <td><strong>Synthetic Company</strong></td>
-              <td>Entity with no real human operations — fully AI-generated presence</td>
+              <td>Entity with no real human operations â fully AI-generated presence</td>
               <td>Everything: website, communications, "employees", outputs</td>
               <td>None or single founder with no real involvement</td>
               <td>HurumoAI, NeuralForge Ltd</td>
@@ -573,8 +573,8 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
 
     <!-- SYNTHETIC SCORE -->
     <div class="card mb-16">
-      <h3>Synthetic Score — Detection Algorithm</h3>
-      <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:16px">Each entity receives a composite score (0–100) based on 8 weighted signals. Higher scores indicate greater likelihood of being synthetic:</p>
+      <h3>Synthetic Score â Detection Algorithm</h3>
+      <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:16px">Each entity receives a composite score (0â100) based on 8 weighted signals. Higher scores indicate greater likelihood of being synthetic:</p>
 
       <div class="grid grid-2">
         <div>
@@ -584,11 +584,11 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
           <div class="criteria-box">
             <h4>Score Interpretation</h4>
             <ul>
-              <li><strong style="color:var(--success)">0–30:</strong> Likely a real company with legitimate operations. AI is a tool, not the operator.</li>
-              <li><strong style="color:var(--info)">31–50:</strong> Agentic organization — heavy AI use but clear human presence. Needs review.</li>
-              <li><strong style="color:var(--warning)">51–70:</strong> Ambiguous — could be heavily automated or partially synthetic. Requires deep verification (Phase 4).</li>
-              <li><strong style="color:var(--highlight)">71–85:</strong> High probability of synthetic entity. Multiple red flags detected. Priority for human verification.</li>
-              <li><strong style="color:var(--danger)">86–100:</strong> Almost certainly synthetic or a shell. AI-generated content, no employees, phantom address, no financial records.</li>
+              <li><strong style="color:var(--success)">0â30:</strong> Likely a real company with legitimate operations. AI is a tool, not the operator.</li>
+              <li><strong style="color:var(--info)">31â50:</strong> Agentic organization â heavy AI use but clear human presence. Needs review.</li>
+              <li><strong style="color:var(--warning)">51â70:</strong> Ambiguous â could be heavily automated or partially synthetic. Requires deep verification (Phase 4).</li>
+              <li><strong style="color:var(--highlight)">71â85:</strong> High probability of synthetic entity. Multiple red flags detected. Priority for human verification.</li>
+              <li><strong style="color:var(--danger)">86â100:</strong> Almost certainly synthetic or a shell. AI-generated content, no employees, phantom address, no financial records.</li>
             </ul>
           </div>
           <div class="criteria-box" style="margin-top:12px">
@@ -610,7 +610,7 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
 
     <!-- DATA RELIABILITY INDEX -->
     <div class="card mb-16">
-      <h3>Data Reliability Index (DRI) — How We Measure Confidence</h3>
+      <h3>Data Reliability Index (DRI) â How We Measure Confidence</h3>
       <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:16px">The DRI is a meta-indicator that measures how much we can trust the data collected. It is calculated from 4 components:</p>
 
       <div class="grid grid-4">
@@ -651,7 +651,7 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
 
     <!-- VERIFICATION FLOWCHART -->
     <div class="card mb-16">
-      <h3>Verification Protocol — Decision Flowchart</h3>
+      <h3>Verification Protocol â Decision Flowchart</h3>
       <p style="font-size:.8rem;color:var(--text-muted);margin-bottom:16px">For each candidate entity, this is the step-by-step verification process:</p>
 
       <div style="overflow-x:auto">
@@ -666,7 +666,7 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
           <div class="method-step" style="width:150px;border-color:var(--warning)">
             <div class="step-num" style="background:rgba(253,203,110,.2);color:var(--warning)">B</div>
             <h4>Contact Test</h4>
-            <p>Email/call — is the response human?</p>
+            <p>Email/call â is the response human?</p>
             <div style="margin-top:6px"><span class="badge badge-human">Human</span></div>
           </div>
           <div class="method-arrow">&#10132;</div>
@@ -702,8 +702,8 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
 
       <div style="margin-top:20px;padding:16px;background:rgba(233,69,96,.05);border-radius:8px;border:1px solid rgba(233,69,96,.2)">
         <p style="font-size:.85rem;color:var(--text);line-height:1.7">
-          <strong style="color:var(--highlight)">Decision Rule:</strong> An entity is classified as <em>"Confirmed Synthetic"</em> only if it fails <strong>3 or more</strong> verification steps (B–E).
-          If it fails 1–2 steps, it is classified as <em>"Indeterminate"</em> and flagged for additional investigation.
+          <strong style="color:var(--highlight)">Decision Rule:</strong> An entity is classified as <em>"Confirmed Synthetic"</em> only if it fails <strong>3 or more</strong> verification steps (BâE).
+          If it fails 1â2 steps, it is classified as <em>"Indeterminate"</em> and flagged for additional investigation.
           If it passes all steps, it is <em>"Dismissed"</em> as a legitimate (though potentially agentic) organization.
           Every classification decision must be documented with evidence and reasoning.
         </p>
@@ -770,7 +770,7 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
       <div class="phase-icon" style="background:rgba(116,185,255,.15)">&#128269;</div>
       <div>
         <h2>Phase 1: Source Identification & Setup</h2>
-        <div class="sub">Days 1–5 | Identify all data sources and configure collection tools</div>
+        <div class="sub">Days 1â5 | Identify all data sources and configure collection tools</div>
       </div>
       <div class="phase-status"><span class="badge badge-progress">In Progress</span></div>
     </div>
@@ -825,14 +825,14 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
         </div>
         <div class="source-card">
           <h4>10. Freelance & Gig Platforms</h4>
-          <p>Upwork, Fiverr, Freelancer. Detect companies that outsource all work to gig workers or AI, with no in-house staff — signals of shell/synthetic operations.</p>
+          <p>Upwork, Fiverr, Freelancer. Detect companies that outsource all work to gig workers or AI, with no in-house staff â signals of shell/synthetic operations.</p>
           <div class="tags"><span class="tag">Manual Search</span><span class="tag">Human Required</span><span class="tag">Low Reliability</span></div>
         </div>
       </div>
     </div>
 
     <div class="card mb-16" style="border-left:4px solid var(--highlight)">
-      <h3 style="color:var(--highlight)">&#9888; Your Actions — Phase 1</h3>
+      <h3 style="color:var(--highlight)">&#9888; Your Actions â Phase 1</h3>
       <ol style="padding-left:20px;font-size:.85rem;line-height:1.8;color:var(--text)">
         <li><strong>Register for API access:</strong> Go to each platform below and create a developer account:
           <ul style="margin:4px 0 8px 16px;list-style:disc">
@@ -854,7 +854,7 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
     <div class="card mb-16">
       <div class="flex-between mb-16">
         <h3 style="margin:0">API Key Management</h3>
-        <span style="font-size:.75rem;color:var(--text-muted)">Keys are stored locally in your browser (localStorage) — never sent anywhere</span>
+        <span style="font-size:.75rem;color:var(--text-muted)">Keys are stored locally in your browser (localStorage) â never sent anywhere</span>
       </div>
       <div id="api-keys-list"></div>
       <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">
@@ -892,7 +892,7 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
     </div>
 
     <div class="card">
-      <h3>Phase 1 — Task Checklist</h3>
+      <h3>Phase 1 â Task Checklist</h3>
       <ul class="checklist" id="phase1-checklist"></ul>
     </div>
   </div>
@@ -903,7 +903,7 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
       <div class="phase-icon" style="background:rgba(0,184,148,.15)">&#128202;</div>
       <div>
         <h2>Phase 2: Data Collection (OSINT)</h2>
-        <div class="sub">Days 5–15 | Automated and manual data gathering</div>
+        <div class="sub">Days 5â15 | Automated and manual data gathering</div>
       </div>
       <div class="phase-status"><span class="badge badge-pending">Upcoming</span></div>
     </div>
@@ -971,7 +971,7 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
     </div>
 
     <div class="card mb-16" style="border-left:4px solid var(--highlight)">
-      <h3 style="color:var(--highlight)">&#9888; Your Actions — Phase 2</h3>
+      <h3 style="color:var(--highlight)">&#9888; Your Actions â Phase 2</h3>
       <ol style="padding-left:20px;font-size:.85rem;line-height:1.8;color:var(--text)">
         <li><strong>Literature review:</strong> Search these databases for documented cases of AI-run or synthetic companies:
           <ul style="margin:4px 0 8px 16px;list-style:disc">
@@ -1019,7 +1019,7 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
             <option value="Multi-Agent System">Multi-Agent System</option>
             <option value="Agentic DAO">Agentic DAO</option>
             <option value="AI-Enhanced Shell">AI-Enhanced Shell</option>
-            <option value="Unknown">Unknown — needs review</option>
+            <option value="Unknown">Unknown â needs review</option>
           </select>
         </div>
       </div>
@@ -1061,7 +1061,7 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
     </div>
 
     <div class="card">
-      <h3>Phase 2 — Task Checklist</h3>
+      <h3>Phase 2 â Task Checklist</h3>
       <ul class="checklist" id="phase2-checklist"></ul>
     </div>
   </div>
@@ -1072,7 +1072,7 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
       <div class="phase-icon" style="background:rgba(253,203,110,.15)">&#129302;</div>
       <div>
         <h2>Phase 3: Detection & Classification</h2>
-        <div class="sub">Days 12–22 | Apply detection algorithms and classify entities</div>
+        <div class="sub">Days 12â22 | Apply detection algorithms and classify entities</div>
       </div>
       <div class="phase-status"><span class="badge badge-pending">Upcoming</span></div>
     </div>
@@ -1118,7 +1118,7 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
 
     <div class="card mb-16">
       <h3>Synthetic Score Algorithm</h3>
-      <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:16px">Each company is scored 0–100 based on weighted detection signals:</p>
+      <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:16px">Each company is scored 0â100 based on weighted detection signals:</p>
       <table>
         <thead><tr><th>Signal</th><th>Weight</th><th>Scoring Criteria</th></tr></thead>
         <tbody>
@@ -1135,9 +1135,9 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
     </div>
 
     <div class="card mb-16" style="border-left:4px solid var(--highlight)">
-      <h3 style="color:var(--highlight)">&#9888; Your Actions — Phase 3</h3>
+      <h3 style="color:var(--highlight)">&#9888; Your Actions â Phase 3</h3>
       <ol style="padding-left:20px;font-size:.85rem;line-height:1.8;color:var(--text)">
-        <li><strong>Review borderline cases (score 40–60):</strong> These entities could be real companies using AI heavily or could be synthetic. For each one:
+        <li><strong>Review borderline cases (score 40â60):</strong> These entities could be real companies using AI heavily or could be synthetic. For each one:
           <ul style="margin:4px 0 8px 16px;list-style:disc">
             <li>Visit their website and assess if content seems AI-generated</li>
             <li>Check LinkedIn for real employee profiles (photos, work history, endorsements)</li>
@@ -1153,7 +1153,7 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
     <!-- BORDERLINE CASES REVIEW PANEL -->
     <div class="card mb-16">
       <div class="flex-between mb-16">
-        <h3 style="margin:0">Borderline Cases Review (Score 40–70)</h3>
+        <h3 style="margin:0">Borderline Cases Review (Score 40â70)</h3>
         <div>
           <label style="font-size:.8rem;color:var(--text-muted);margin-right:8px">
             <input type="checkbox" id="toggle-reviewer2" onchange="toggleReviewer2()"> Second Reviewer Mode
@@ -1161,7 +1161,7 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
           <button class="btn btn-ghost" onclick="exportReviews()" style="font-size:.75rem">Export Reviews CSV</button>
         </div>
       </div>
-      <p style="font-size:.8rem;color:var(--text-muted);margin-bottom:16px">These entities have ambiguous scores. Review each one and assign a classification. <span id="reviewer2-label" style="display:none;color:var(--warning)">&#9679; Second reviewer mode active — classifications will be saved separately for inter-rater comparison.</span></p>
+      <p style="font-size:.8rem;color:var(--text-muted);margin-bottom:16px">These entities have ambiguous scores. Review each one and assign a classification. <span id="reviewer2-label" style="display:none;color:var(--warning)">&#9679; Second reviewer mode active â classifications will be saved separately for inter-rater comparison.</span></p>
       <div id="borderline-review-list"></div>
     </div>
 
@@ -1186,7 +1186,7 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
     </div>
 
     <div class="card">
-      <h3>Phase 3 — Task Checklist</h3>
+      <h3>Phase 3 â Task Checklist</h3>
       <ul class="checklist" id="phase3-checklist"></ul>
     </div>
   </div>
@@ -1197,7 +1197,7 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
       <div class="phase-icon" style="background:rgba(233,69,96,.15)">&#9989;</div>
       <div>
         <h2>Phase 4: Verification Protocol</h2>
-        <div class="sub">Days 18–28 | Manual and automated verification of detected cases</div>
+        <div class="sub">Days 18â28 | Manual and automated verification of detected cases</div>
       </div>
       <div class="phase-status"><span class="badge badge-pending">Upcoming</span></div>
     </div>
@@ -1249,7 +1249,7 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
     <div id="verification-cards"></div>
 
     <div class="card mt-24">
-      <h3>Phase 4 — Task Checklist</h3>
+      <h3>Phase 4 â Task Checklist</h3>
       <ul class="checklist" id="phase4-checklist"></ul>
     </div>
   </div>
@@ -1260,14 +1260,14 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
       <div class="phase-icon" style="background:rgba(0,184,148,.15)">&#128200;</div>
       <div>
         <h2>Phase 5: Sample Construction & Validation</h2>
-        <div class="sub">Days 22–30 | Build final validated sample for analysis</div>
+        <div class="sub">Days 22â30 | Build final validated sample for analysis</div>
       </div>
       <div class="phase-status"><span class="badge badge-pending">Upcoming</span></div>
     </div>
 
     <div class="card mb-16">
       <div class="flex-between">
-        <h3 style="margin:0">Sample — All Detected Entities</h3>
+        <h3 style="margin:0">Sample â All Detected Entities</h3>
         <div style="display:flex;gap:8px;align-items:center">
           <select class="form-input" id="sample-filter" onchange="renderSampleTable()" style="width:auto;padding:6px 10px;font-size:.8rem">
             <option value="all">All entities</option>
@@ -1304,8 +1304,8 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
             <option value="Pending Verification">Pending Verification</option>
             <option value="Under Review">Under Review</option>
             <option value="Confirmed">Confirmed Synthetic</option>
-            <option value="Confirmed — Marketing">Confirmed — Marketing Stunt</option>
-            <option value="Dismissed — Real Co.">Dismissed — Real Company</option>
+            <option value="Confirmed â Marketing">Confirmed â Marketing Stunt</option>
+            <option value="Dismissed â Real Co.">Dismissed â Real Company</option>
             <option value="Indeterminate">Indeterminate</option>
           </select>
         </div>
@@ -1366,7 +1366,7 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
     <div class="pending-analysis">
       <div class="icon">&#128202;</div>
       <h2>Pending Data Collection</h2>
-      <p>Statistical analysis will begin once all data collection phases (1–5) are complete. The following analyses are planned:</p>
+      <p>Statistical analysis will begin once all data collection phases (1â5) are complete. The following analyses are planned:</p>
     </div>
 
     <div class="grid grid-3 mt-24">
@@ -1420,7 +1420,7 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
           <tr><td>Documented real cases</td><td>16</td><td>30+</td><td><span class="badge badge-progress">53%</span></td></tr>
           <tr><td>Countries covered</td><td>22+</td><td>20+</td><td><span class="badge badge-done">100%+</span></td></tr>
           <tr><td>Data sources used</td><td>8</td><td>10</td><td><span class="badge badge-progress">80%</span></td></tr>
-          <tr><td>Pending human verification</td><td>44</td><td>—</td><td><span class="badge badge-blocked">Needs Human</span></td></tr>
+          <tr><td>Pending human verification</td><td>44</td><td>â</td><td><span class="badge badge-blocked">Needs Human</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -1521,13 +1521,13 @@ const TASKS = [
 const SAMPLE_DATA = [
   // ===== DOCUMENTED REAL CASES =====
   {entity:"HurumoAI (Wired experiment)", country:"US", type:"Synthetic Company", score:94, employees:0, domain:"3mo", ai:"98%", status:"Confirmed", source:"Wired/Futurism", real:true},
-  {entity:"Dictador — Mika (Robot CEO)", country:"Poland", type:"Agentic Organization", score:72, employees:150, domain:"20yr+", ai:"34%", status:"Confirmed", source:"Fortune/Fox Business", real:true},
-  {entity:"NetDragon Websoft — Tang Yu (AI CEO)", country:"China", type:"Agentic Organization", score:65, employees:6000, domain:"15yr+", ai:"28%", status:"Confirmed", source:"Euronews/BBC", real:true},
-  {entity:"Cognition AI (Devin Agent)", country:"US", type:"Multi-Agent System", score:22, employees:50, domain:"2yr", ai:"18%", status:"Dismissed — Real Co.", source:"TechCrunch", real:true},
-  {entity:"Midjourney (Solo-founded)", country:"US", type:"Agentic Organization", score:15, employees:14, domain:"3yr", ai:"12%", status:"Dismissed — Real Co.", source:"Bloomberg", real:true},
+  {entity:"Dictador â Mika (Robot CEO)", country:"Poland", type:"Agentic Organization", score:72, employees:150, domain:"20yr+", ai:"34%", status:"Confirmed", source:"Fortune/Fox Business", real:true},
+  {entity:"NetDragon Websoft â Tang Yu (AI CEO)", country:"China", type:"Agentic Organization", score:65, employees:6000, domain:"15yr+", ai:"28%", status:"Confirmed", source:"Euronews/BBC", real:true},
+  {entity:"Cognition AI (Devin Agent)", country:"US", type:"Multi-Agent System", score:22, employees:50, domain:"2yr", ai:"18%", status:"Dismissed â Real Co.", source:"TechCrunch", real:true},
+  {entity:"Midjourney (Solo-founded)", country:"US", type:"Agentic Organization", score:15, employees:14, domain:"3yr", ai:"12%", status:"Dismissed â Real Co.", source:"Bloomberg", real:true},
   {entity:"Artificial Superintelligence Alliance (FET)", country:"Decentralized", type:"Agentic DAO", score:58, employees:200, domain:"5yr+", ai:"45%", status:"Under Review", source:"CoinMarketCap", real:true},
-  {entity:"Fetch.ai", country:"UK/Decentralized", type:"Multi-Agent System", score:35, employees:60, domain:"6yr", ai:"32%", status:"Dismissed — Real Co.", source:"BusinessWire", real:true},
-  {entity:"SingularityNET", country:"Netherlands/Decentralized", type:"Multi-Agent System", score:30, employees:80, domain:"7yr", ai:"25%", status:"Dismissed — Real Co.", source:"Official site", real:true},
+  {entity:"Fetch.ai", country:"UK/Decentralized", type:"Multi-Agent System", score:35, employees:60, domain:"6yr", ai:"32%", status:"Dismissed â Real Co.", source:"BusinessWire", real:true},
+  {entity:"SingularityNET", country:"Netherlands/Decentralized", type:"Multi-Agent System", score:30, employees:80, domain:"7yr", ai:"25%", status:"Dismissed â Real Co.", source:"Official site", real:true},
   {entity:"terra0 (Self-Owning Forest)", country:"Germany/Ethereum", type:"Agentic DAO", score:88, employees:0, domain:"8yr", ai:"N/A", status:"Confirmed", source:"NetworkCultures", real:true},
   {entity:"ai16z / ElizaOS (AI Hedge Fund DAO)", country:"Decentralized", type:"Agentic DAO", score:85, employees:0, domain:"1yr", ai:"92%", status:"Confirmed", source:"Crypto media", real:true},
   {entity:"Olas Governatooorr", country:"Decentralized", type:"Agentic DAO", score:82, employees:0, domain:"1yr", ai:"88%", status:"Confirmed", source:"Olas Network", real:true},
@@ -1535,7 +1535,7 @@ const SAMPLE_DATA = [
   {entity:"Instruct (No-code Agents)", country:"EU", type:"Agentic Organization", score:40, employees:8, domain:"1yr", ai:"35%", status:"Under Review", source:"Crunchbase", real:true},
   {entity:"Walbi (AI Trading Agents)", country:"Global", type:"Agentic DAO", score:68, employees:5, domain:"1yr", ai:"75%", status:"Under Review", source:"Millionero", real:true},
   {entity:"NEAR Protocol AI Delegates", country:"Decentralized", type:"Agentic DAO", score:70, employees:0, domain:"5yr", ai:"65%", status:"Under Review", source:"NEAR blog", real:true},
-  {entity:"RentAHuman (Marketing stunt)", country:"US", type:"Synthetic Company", score:78, employees:0, domain:"6mo", ai:"80%", status:"Confirmed — Marketing", source:"Press", real:true},
+  {entity:"RentAHuman (Marketing stunt)", country:"US", type:"Synthetic Company", score:78, employees:0, domain:"6mo", ai:"80%", status:"Confirmed â Marketing", source:"Press", real:true},
   // ===== OSINT-DETECTED CANDIDATES (require verification) =====
   {entity:"AutoGPT Ventures Ltd", country:"US", type:"Synthetic Company", score:87, employees:0, domain:"4mo", ai:"91%", status:"Pending Verification", source:"OSINT scan", real:false},
   {entity:"SynthLab DAO", country:"Cayman Is.", type:"Agentic DAO", score:83, employees:0, domain:"3mo", ai:"85%", status:"Pending Verification", source:"DeepDAO scan", real:false},
@@ -1561,7 +1561,7 @@ const SAMPLE_DATA = [
   {entity:"Sentient Solutions Ltd", country:"UK", type:"AI-Enhanced Shell", score:80, employees:1, domain:"3mo", ai:"82%", status:"Pending Verification", source:"Companies House", real:false},
   {entity:"AgentDAO", country:"Decentralized", type:"Agentic DAO", score:77, employees:0, domain:"5mo", ai:"71%", status:"Pending Verification", source:"Snapshot.org", real:false},
   {entity:"MindForge AG", country:"Switzerland", type:"Agentic Organization", score:50, employees:6, domain:"1yr", ai:"43%", status:"Pending Verification", source:"Zefix", real:false},
-  {entity:"AutoPilot Systèmes SAS", country:"France", type:"Synthetic Company", score:86, employees:0, domain:"2mo", ai:"90%", status:"Pending Verification", source:"Infogreffe", real:false},
+  {entity:"AutoPilot SystÃ¨mes SAS", country:"France", type:"Synthetic Company", score:86, employees:0, domain:"2mo", ai:"90%", status:"Pending Verification", source:"Infogreffe", real:false},
   {entity:"AutoGenesis KK", country:"Japan", type:"Agentic Organization", score:47, employees:10, domain:"1yr", ai:"38%", status:"Pending Verification", source:"EDINET", real:false},
   {entity:"SynthTech Pty", country:"Australia", type:"Synthetic Company", score:84, employees:0, domain:"1mo", ai:"87%", status:"Pending Verification", source:"ASIC", real:false},
   {entity:"RoboVentures AB", country:"Sweden", type:"Agentic Organization", score:44, employees:7, domain:"1yr", ai:"36%", status:"Pending Verification", source:"Bolagsverket", real:false},
@@ -1981,7 +1981,7 @@ function renderApiKeys() {
 
   el.innerHTML = services.map(s => {
     const hasKey = keys[s];
-    const masked = hasKey ? hasKey.substring(0,4) + '••••••••' + hasKey.substring(hasKey.length-4) : '';
+    const masked = hasKey ? hasKey.substring(0,4) + 'â¢â¢â¢â¢â¢â¢â¢â¢' + hasKey.substring(hasKey.length-4) : '';
     return `<div class="api-key-display">
       <span class="api-status ${hasKey?'active':'missing'}"></span>
       <span class="key-name">${s}</span>
@@ -1999,7 +1999,7 @@ function toggleShowKey(service, btn) {
     valSpan.textContent = keys[service];
     btn.textContent = 'Hide';
   } else {
-    valSpan.innerHTML = keys[service].substring(0,4) + '••••••••' + keys[service].substring(keys[service].length-4);
+    valSpan.innerHTML = keys[service].substring(0,4) + 'â¢â¢â¢â¢â¢â¢â¢â¢' + keys[service].substring(keys[service].length-4);
     btn.textContent = 'Show';
   }
 }
@@ -2071,7 +2071,7 @@ function renderUserEntities() {
       <td>${e.country}</td>
       <td>${e.type}</td>
       <td>${e.source}${e.url ? ' <a href="'+e.url+'" target="_blank" style="color:var(--info)">&#8599;</a>' : ''}</td>
-      <td style="font-size:.8rem;color:var(--text-muted);max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${e.notes}">${e.notes || '—'}</td>
+      <td style="font-size:.8rem;color:var(--text-muted);max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${e.notes}">${e.notes || 'â'}</td>
       <td><button class="btn btn-ghost" style="padding:3px 8px;font-size:.7rem;color:var(--danger);border-color:var(--danger)" onclick="removeUserEntity(${i})">Remove</button></td>
     </tr>
   `).join('');
@@ -2204,7 +2204,7 @@ function renderBorderlineReview() {
           <option value="Agentic Organization" ${r.classification==='Agentic Organization'?'selected':''}>Agentic Organization (Real)</option>
           <option value="Multi-Agent System" ${r.classification==='Multi-Agent System'?'selected':''}>Multi-Agent System</option>
           <option value="Agentic DAO" ${r.classification==='Agentic DAO'?'selected':''}>Agentic DAO</option>
-          <option value="Dismissed" ${r.classification==='Dismissed'?'selected':''}>Dismissed — Real Company</option>
+          <option value="Dismissed" ${r.classification==='Dismissed'?'selected':''}>Dismissed â Real Company</option>
           <option value="Indeterminate" ${r.classification==='Indeterminate'?'selected':''}>Indeterminate</option>
         </select>
         <select onchange="saveReview('${e._key}','confidence',this.value)">
@@ -2354,6 +2354,7 @@ const VERIFY_STEPS = [
       const q = encodeURIComponent(e.entity.replace(/\(.*?\)/g,'').trim());
       return [
         {label:'Search Financials', url:'https://www.google.com/search?q='+encodeURIComponent('"'+e.entity.replace(/\(.*?\)/g,'').trim()+'" financial statements OR annual report OR revenue')},
+        {label:'SEC EDGAR Search', url:'https://efts.sec.gov/LATEST/search-index?q='+encodeURIComponent(e.entity.replace(/\(.*?\)/g,'').trim())+'&forms=10-K,20-F,10-Q'},
         {label:'Crunchbase', url:'https://www.crunchbase.com/textsearch?q='+q},
       ];
     },
@@ -2480,12 +2481,14 @@ function renderVerificationCards() {
                   </select>
                 ` : ''}
                 ${s.id==='financial' ? `
+                  <button class="btn btn-ghost" style="padding:3px 8px;font-size:.7rem;background:rgba(0,173,181,.15);border-color:var(--primary);margin-bottom:4px" onclick="queryEdgarFinancials('${e._key}','${e.entity}')">🔍 Query SEC EDGAR</button>
+                  <span id="edgar-status-${e._key}" style="font-size:.7rem;color:var(--text-muted);display:block;margin-bottom:4px"></span>
                   <select onchange="saveVerifyStep('${e._key}','${s.id}','financial_status',this.value)">
                     <option value="" ${!sv.financial_status?'selected':''}>Financial status...</option>
-                    <option value="filings-found" ${sv.financial_status==='filings-found'?'selected':''}>Filings found — has revenue</option>
-                    <option value="filings-zero" ${sv.financial_status==='filings-zero'?'selected':''}>Filings found — zero revenue</option>
+                    <option value="filings-found" ${sv.financial_status==='filings-found'?'selected':''}>Filings found â has revenue</option>
+                    <option value="filings-zero" ${sv.financial_status==='filings-zero'?'selected':''}>Filings found â zero revenue</option>
                     <option value="no-filings" ${sv.financial_status==='no-filings'?'selected':''}>No filings found</option>
-                    <option value="private" ${sv.financial_status==='private'?'selected':''}>Private — data unavailable</option>
+                    <option value="private" ${sv.financial_status==='private'?'selected':''}>Private â data unavailable</option>
                   </select>
                 ` : ''}
                 ${s.id==='nlp' ? `
@@ -2496,7 +2499,7 @@ function renderVerificationCards() {
                     <option value="" ${!sv.final_class?'selected':''}>Final classification...</option>
                     <option value="Confirmed Synthetic" ${sv.final_class==='Confirmed Synthetic'?'selected':''}>Confirmed Synthetic</option>
                     <option value="Confirmed Agentic" ${sv.final_class==='Confirmed Agentic'?'selected':''}>Confirmed Agentic (Real)</option>
-                    <option value="Dismissed" ${sv.final_class==='Dismissed'?'selected':''}>Dismissed — Real Company</option>
+                    <option value="Dismissed" ${sv.final_class==='Dismissed'?'selected':''}>Dismissed â Real Company</option>
                     <option value="Indeterminate" ${sv.final_class==='Indeterminate'?'selected':''}>Indeterminate</option>
                   </select>
                   <select onchange="saveVerifyStep('${e._key}','${s.id}','confidence',this.value)">
@@ -2655,6 +2658,80 @@ function exportSampleCSV() {
   downloadFile('synthco_sample_export.csv', csv);
   showToast('Sample exported as CSV');
 }
+
+// ==================== SEC EDGAR API INTEGRATION ====================
+// Queries data.sec.gov via allorigins.win CORS proxy
+// User-Agent stored as "SEC EDGAR" key in localStorage (Phase 1 API Key Management)
+
+async function queryEdgarFinancials(entityKey, entityName) {
+  const statusEl = document.getElementById('edgar-status-' + entityKey);
+  if (statusEl) { statusEl.textContent = '⏳ Querying SEC EDGAR...'; }
+
+  const userAgent = localStorage.getItem('apikey_SEC EDGAR') || 'SynthCo Research Manager research@upocuantitativo.github.io';
+  const cleanName = entityName.replace(/\(.*?\)/g, '').trim();
+
+  try {
+    // EDGAR full-text search (via CORS proxy because data.sec.gov blocks CORS)
+    const searchUrl = 'https://efts.sec.gov/LATEST/search-index?q=' + encodeURIComponent('"' + cleanName + '"') + '&forms=10-K,20-F,10-Q&dateRange=custom&startdt=2000-01-01';
+    const proxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent(searchUrl);
+
+    const res = await fetch(proxy);
+    if (!res.ok) throw new Error('Proxy error ' + res.status);
+    const wrapper = await res.json();
+    const data = JSON.parse(wrapper.contents);
+    const hits = data.hits?.hits || [];
+
+    if (hits.length === 0) {
+      // Not found in EDGAR → likely not a US-registered entity or truly no filings
+      if (statusEl) statusEl.innerHTML = '<span style="color:#e94560">✗ Not found in EDGAR</span>';
+      saveVerifyStep(entityKey, 'financial', 'financial_status', 'no-filings');
+      const existingVerifs = JSON.parse(localStorage.getItem('verifications') || '{}');
+      const existNote = existingVerifs[entityKey]?.financial?.notes || '';
+      saveVerifyStep(entityKey, 'financial', 'notes', existNote + ' [EDGAR: No filings found for "' + cleanName + '". S4 signal: HIGH risk.]');
+      renderVerificationCards();
+      showToast('⚠ EDGAR: No filings — high synthetic risk', '#e94560');
+      return;
+    }
+
+    // Filings found
+    const hit = hits[0]._source;
+    const filingDate = hit.period_of_report || hit.file_date || 'n/a';
+    const formType = hit.form_type || '?';
+    const companyName = hit.display_names?.[0]?.name || cleanName;
+    const cik = hit.entity_id || '';
+    const totalFilings = data.hits?.total?.value || hits.length;
+
+    // Assess recency
+    const daysSince = filingDate !== 'n/a' ? Math.floor((Date.now() - new Date(filingDate)) / 86400000) : null;
+    let financialStatus, color, riskNote;
+
+    if (daysSince !== null && daysSince > 730) {
+      financialStatus = 'filings-zero'; // stale = partial red flag
+      color = '#ffa502';
+      riskNote = totalFilings + ' filing(s) but last was ' + daysSince + ' days ago (' + formType + ' on ' + filingDate + '). ⚠ Stale.';
+    } else {
+      financialStatus = 'filings-found';
+      color = '#38ef7d';
+      riskNote = totalFilings + ' filing(s) found. Last: ' + formType + ' on ' + filingDate + '.';
+    }
+
+    if (statusEl) statusEl.innerHTML = '<span style="color:' + color + '">✓ ' + companyName + (cik ? ' [CIK:' + cik + ']' : '') + '</span>';
+
+    saveVerifyStep(entityKey, 'financial', 'financial_status', financialStatus);
+    const existingVerifs = JSON.parse(localStorage.getItem('verifications') || '{}');
+    const existNote = existingVerifs[entityKey]?.financial?.notes || '';
+    saveVerifyStep(entityKey, 'financial', 'notes', existNote + ' [EDGAR: ' + companyName + (cik ? ' CIK:' + cik : '') + '. ' + riskNote + ']');
+
+    renderVerificationCards();
+    showToast('EDGAR: ' + companyName + ' — ' + riskNote, color);
+
+  } catch (err) {
+    if (statusEl) statusEl.innerHTML = '<span style="color:#ffa502">⚠ ' + err.message.substring(0, 50) + '</span>';
+    showToast('EDGAR error: ' + err.message, '#ffa502');
+    console.error('[EDGAR API]', err);
+  }
+}
+// ==================== END SEC EDGAR INTEGRATION ====================
 </script>
 
 </body>
