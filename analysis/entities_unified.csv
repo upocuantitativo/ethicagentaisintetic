@@ -1,0 +1,90 @@
+key,entity,country,type,score,employees,domain_raw,ai_raw,status,source,real,is_user,domain_years,ai_pct,log_employees,score_bin,jurisdiction_type,type_clean,status_clean
+builtin_0,HurumoAI (Wired experiment),US,Synthetic Company,94.0,0.0,3mo,98%,Confirmed,Wired/Futurism,True,False,0.25,98.0,0.0,very_high,oecd_traditional,Synthetic Company,Confirmed
+builtin_1,Dictador — Mika (Robot CEO),Poland,Agentic Organization,72.0,150.0,20yr+,34%,Confirmed,Fortune/Fox Business,True,False,20.0,34.0,5.017279836814924,high,oecd_traditional,Agentic Organization,Confirmed
+builtin_2,NetDragon Websoft — Tang Yu (AI CEO),China,Agentic Organization,65.0,6000.0,15yr+,28%,Confirmed,Euronews/BBC,True,False,15.0,28.0,8.699681400989514,high,emerging_or_special,Agentic Organization,Confirmed
+builtin_3,Cognition AI (Devin Agent),US,Dismissed – Real Co.,22.0,50.0,2yr,18%,Dismissed – Real Co.,TechCrunch,True,False,2.0,18.0,3.9318256327243257,low,oecd_traditional,Dismissed – Real Co.,Dismissed – Real Co.
+builtin_4,Midjourney (Solo-founded),US,Dismissed – Real Co.,15.0,14.0,3yr,12%,Dismissed – Real Co.,Bloomberg,True,False,3.0,12.0,2.70805020110221,low,oecd_traditional,Dismissed – Real Co.,Dismissed – Real Co.
+builtin_5,Artificial Superintelligence Alliance (FET),Decentralized,Dismissed – Real Co.,58.0,200.0,5yr+,45%,Dismissed – Real Co.,CoinMarketCap,True,False,5.0,45.0,5.303304908059076,mid,permissive_or_decentralized,Dismissed – Real Co.,Dismissed – Real Co.
+builtin_6,Fetch.ai,UK/Decentralized,Dismissed – Real Co.,35.0,60.0,6yr,32%,Dismissed – Real Co.,BusinessWire,True,False,6.0,32.0,4.110873864173311,low,permissive_or_decentralized,Dismissed – Real Co.,Dismissed – Real Co.
+builtin_7,SingularityNET,Netherlands/Decentralized,Dismissed – Real Co.,30.0,80.0,7yr,25%,Dismissed – Real Co.,Official site,True,False,7.0,25.0,4.394449154672439,low,permissive_or_decentralized,Dismissed – Real Co.,Dismissed – Real Co.
+builtin_8,terra0 (Self-Owning Forest),Germany/Ethereum,Agentic DAO,88.0,0.0,8yr,N/A,Confirmed,NetworkCultures,True,False,8.0,,0.0,very_high,oecd_traditional,Agentic DAO,Confirmed
+builtin_9,ai16z / ElizaOS (AI Hedge Fund DAO),Decentralized,Agentic DAO,85.0,0.0,1yr,92%,Confirmed,Crypto media,True,False,1.0,92.0,0.0,very_high,permissive_or_decentralized,Agentic DAO,Confirmed
+builtin_10,Olas Governatooorr,Decentralized,Agentic DAO,82.0,0.0,1yr,88%,Confirmed,Olas Network,True,False,1.0,88.0,0.0,very_high,permissive_or_decentralized,Agentic DAO,Confirmed
+builtin_11,Facility (Autonomous Org Platform),US,Dismissed – Real Co.,52.0,15.0,2yr,48%,Dismissed – Real Co.,Product page,True,False,2.0,48.0,2.772588722239781,mid,oecd_traditional,Dismissed – Real Co.,Dismissed – Real Co.
+builtin_12,Instruct (No-code Agents),EU,Agentic Organization,40.0,8.0,1yr,35%,Confirmed,Crunchbase,True,False,1.0,35.0,2.1972245773362196,low,other,Agentic Organization,Confirmed
+builtin_13,Walbi (AI Trading Agents),Global,Agentic DAO,68.0,5.0,1yr,75%,Confirmed,Millionero,True,False,1.0,75.0,1.791759469228055,high,other,Agentic DAO,Confirmed
+builtin_14,NEAR Protocol AI Delegates,Decentralized,Agentic DAO,70.0,0.0,5yr,65%,Confirmed,NEAR blog,True,False,5.0,65.0,0.0,high,permissive_or_decentralized,Agentic DAO,Confirmed
+builtin_15,RentAHuman (Marketing stunt),US,Synthetic Company,78.0,0.0,6mo,80%,Confirmed,Press,True,False,0.5,80.0,0.0,high,oecd_traditional,Synthetic Company,Confirmed
+builtin_16,AutoGPT Ventures Ltd,US,Synthetic Company,87.0,0.0,4mo,91%,Confirmed,OSINT scan,False,False,0.3333333333333333,91.0,0.0,very_high,oecd_traditional,Synthetic Company,Confirmed
+builtin_17,SynthLab DAO,Cayman Is.,Agentic DAO,83.0,0.0,3mo,85%,Confirmed,DeepDAO scan,False,False,0.25,85.0,0.0,very_high,permissive_or_decentralized,Agentic DAO,Confirmed
+builtin_18,NeuralForge Ltd,UK,Synthetic Company,91.0,0.0,1mo,96%,Confirmed,Companies House,False,False,0.08333333333333333,96.0,0.0,very_high,oecd_traditional,Synthetic Company,Confirmed
+builtin_19,ChainMind Protocol,Singapore,Agentic DAO,76.0,2.0,6mo,67%,Confirmed,Etherscan,False,False,0.5,67.0,1.0986122886681098,high,emerging_or_special,Agentic DAO,Confirmed
+builtin_20,QuantumLeap AI GmbH,Germany,Dismissed – Real Co.,45.0,12.0,2yr,41%,Dismissed – Real Co.,Handelsregister,False,False,2.0,41.0,2.5649493574615367,mid,oecd_traditional,Dismissed – Real Co.,Dismissed – Real Co.
+builtin_21,InfiniteOps SL,Spain,Synthetic Company,88.0,0.0,2mo,93%,Confirmed,BORME/Registro,False,False,0.16666666666666666,93.0,0.0,very_high,oecd_traditional,Synthetic Company,Confirmed
+builtin_22,AgentSwarm Inc,US,Multi-Agent System,62.0,3.0,8mo,58%,Confirmed,SEC EDGAR,False,False,0.6666666666666666,58.0,1.3862943611198906,high,oecd_traditional,Multi-Agent System,Confirmed
+builtin_23,VirtualCorp SA,Switzerland,Synthetic Company,95.0,0.0,3wk,99%,Confirmed,Handelsregister,False,False,0.057692307692307696,99.0,0.0,very_high,oecd_traditional,Synthetic Company,Confirmed
+builtin_24,MetaMind DAO,Decentralized,Agentic DAO,79.0,0.0,5mo,72%,Confirmed,Snapshot.org,False,False,0.4166666666666667,72.0,0.0,high,permissive_or_decentralized,Agentic DAO,Confirmed
+builtin_25,Nexus Automata Corp,US,Agentic Organization,55.0,8.0,1yr,45%,Confirmed,Crunchbase,False,False,1.0,45.0,2.1972245773362196,mid,oecd_traditional,Agentic Organization,Confirmed
+builtin_26,RoboDirector Ltd,UK,Synthetic Company,90.0,0.0,6wk,94%,Confirmed,Companies House,False,False,0.11538461538461539,94.0,0.0,very_high,oecd_traditional,Synthetic Company,Confirmed
+builtin_27,PhantomTech BV,Netherlands,AI-Enhanced Shell,82.0,1.0,4mo,78%,Confirmed,KvK scan,False,False,0.3333333333333333,78.0,0.6931471805599453,very_high,oecd_traditional,AI-Enhanced Shell,Confirmed
+builtin_28,ZeroStaff Inc,US,Synthetic Company,93.0,0.0,5wk,97%,Confirmed,OSINT scan,False,False,0.09615384615384616,97.0,0.0,very_high,oecd_traditional,Synthetic Company,Confirmed
+builtin_29,CryptoAgent Foundation,Estonia,Agentic DAO,71.0,0.0,7mo,64%,Confirmed,e-Residency reg.,False,False,0.5833333333333334,64.0,0.0,high,permissive_or_decentralized,Agentic DAO,Confirmed
+builtin_30,AIpex Solutions FZE,UAE,Agentic Organization,48.0,5.0,1yr,39%,Confirmed,DMCC registry,False,False,1.0,39.0,1.791759469228055,mid,emerging_or_special,Agentic Organization,Confirmed
+builtin_31,NovaMind Collective,Canada,Multi-Agent System,59.0,4.0,9mo,52%,Confirmed,SEDAR+,False,False,0.75,52.0,1.6094379124341003,mid,oecd_traditional,Multi-Agent System,Confirmed
+builtin_32,GhostWork GmbH,Germany,AI-Enhanced Shell,85.0,0.0,2mo,88%,Confirmed,Handelsregister,False,False,0.16666666666666666,88.0,0.0,very_high,oecd_traditional,AI-Enhanced Shell,Confirmed
+builtin_33,AutonomousX LLC,US (Delaware),Synthetic Company,96.0,0.0,2wk,99%,Confirmed,DE Corp. registry,False,False,0.038461538461538464,99.0,0.0,very_high,oecd_traditional,Synthetic Company,Confirmed
+builtin_34,SmartEntity Pte,Singapore,Dismissed – Real Co.,42.0,18.0,2yr,30%,Dismissed – Real Co.,ACRA,False,False,2.0,30.0,2.9444389791664403,mid,emerging_or_special,Dismissed – Real Co.,Dismissed – Real Co.
+builtin_35,AlgoTrust DAO,Decentralized,Agentic DAO,74.0,0.0,4mo,69%,Confirmed,Tally.xyz,False,False,0.3333333333333333,69.0,0.0,high,permissive_or_decentralized,Agentic DAO,Confirmed
+builtin_36,VoidLabs AI,US,Synthetic Company,89.0,0.0,6wk,92%,Confirmed,OSINT scan,False,False,0.11538461538461539,92.0,0.0,very_high,oecd_traditional,Synthetic Company,Confirmed
+builtin_37,Sentient Solutions Ltd,UK,AI-Enhanced Shell,80.0,1.0,3mo,82%,Confirmed,Companies House,False,False,0.25,82.0,0.6931471805599453,high,oecd_traditional,AI-Enhanced Shell,Confirmed
+builtin_38,AgentDAO,Decentralized,Agentic DAO,77.0,0.0,5mo,71%,Confirmed,Snapshot.org,False,False,0.4166666666666667,71.0,0.0,high,permissive_or_decentralized,Agentic DAO,Confirmed
+builtin_39,MindForge AG,Switzerland,Agentic Organization,50.0,6.0,1yr,43%,Confirmed,Zefix,False,False,1.0,43.0,1.9459101490553132,mid,oecd_traditional,Agentic Organization,Confirmed
+builtin_40,AutoPilot Systèmes SAS,France,Synthetic Company,86.0,0.0,2mo,90%,Confirmed,Infogreffe,False,False,0.16666666666666666,90.0,0.0,very_high,oecd_traditional,Synthetic Company,Confirmed
+builtin_41,AutoGenesis KK,Japan,Agentic Organization,47.0,10.0,1yr,38%,Confirmed,EDINET,False,False,1.0,38.0,2.3978952727983707,mid,oecd_traditional,Agentic Organization,Confirmed
+builtin_42,SynthTech Pty,Australia,Synthetic Company,84.0,0.0,1mo,87%,Confirmed,ASIC,False,False,0.08333333333333333,87.0,0.0,very_high,oecd_traditional,Synthetic Company,Confirmed
+builtin_43,RoboVentures AB,Sweden,Agentic Organization,44.0,7.0,1yr,36%,Confirmed,Bolagsverket,False,False,1.0,36.0,2.0794415416798357,mid,oecd_traditional,Agentic Organization,Confirmed
+builtin_44,DeepAgent Protocol,Decentralized,Agentic DAO,73.0,0.0,6mo,68%,Confirmed,DeepDAO,False,False,0.5,68.0,0.0,high,permissive_or_decentralized,Agentic DAO,Confirmed
+builtin_45,NoHuman Labs Inc,US,Synthetic Company,92.0,0.0,4wk,95%,Confirmed,OSINT scan,False,False,0.07692307692307693,95.0,0.0,very_high,oecd_traditional,Synthetic Company,Confirmed
+builtin_46,CyberEntity BV,Netherlands,AI-Enhanced Shell,81.0,0.0,3mo,79%,Confirmed,KvK scan,False,False,0.25,79.0,0.0,very_high,oecd_traditional,AI-Enhanced Shell,Confirmed
+builtin_47,AIFoundry Ltd,Ireland,Agentic Organization,46.0,9.0,2yr,37%,Confirmed,CRO Ireland,False,False,2.0,37.0,2.302585092994046,mid,oecd_traditional,Agentic Organization,Confirmed
+builtin_48,SoloUnicorn Corp,US (Wyoming),Agentic Organization,60.0,1.0,8mo,55%,Confirmed,WY SoS,False,False,0.6666666666666666,55.0,0.6931471805599453,mid,oecd_traditional,Agentic Organization,Confirmed
+builtin_49,SmartContract Ventures,Cayman Is.,Agentic DAO,75.0,0.0,5mo,70%,Confirmed,CIMA registry,False,False,0.4166666666666667,70.0,0.0,high,permissive_or_decentralized,Agentic DAO,Confirmed
+builtin_50,BotCorp SpA,Italy,Synthetic Company,83.0,0.0,6wk,86%,Confirmed,InfoCamere,False,False,0.11538461538461539,86.0,0.0,very_high,oecd_traditional,Synthetic Company,Confirmed
+builtin_51,DataPhantom Ltd,Israel,AI-Enhanced Shell,78.0,2.0,4mo,73%,Confirmed,Companies Reg.,False,False,0.3333333333333333,73.0,1.0986122886681098,high,oecd_traditional,AI-Enhanced Shell,Confirmed
+builtin_52,AgentNet Foundation,Liechtenstein,Agentic DAO,69.0,0.0,7mo,62%,Confirmed,Public registry,False,False,0.5833333333333334,62.0,0.0,high,permissive_or_decentralized,Agentic DAO,Confirmed
+builtin_53,ZeroOps Technologies,India,Synthetic Company,81.0,0.0,2mo,84%,Confirmed,MCA India,False,False,0.16666666666666666,84.0,0.0,very_high,other,Synthetic Company,Confirmed
+builtin_54,Automind SA,Brazil,Agentic Organization,43.0,11.0,1yr,33%,Confirmed,Junta Comercial,False,False,1.0,33.0,2.4849066497880004,mid,other,Agentic Organization,Confirmed
+builtin_55,GhostChain DAO,Decentralized,Agentic DAO,80.0,0.0,4mo,76%,Confirmed,Tally.xyz,False,False,0.3333333333333333,76.0,0.0,high,permissive_or_decentralized,Agentic DAO,Confirmed
+builtin_56,SilentOps Ltd,South Korea,Synthetic Company,87.0,0.0,5wk,91%,Confirmed,DART system,False,False,0.09615384615384616,91.0,0.0,very_high,oecd_traditional,Synthetic Company,Confirmed
+builtin_57,DigitalNomad Pte,Singapore,Agentic Organization,51.0,3.0,10mo,46%,Confirmed,ACRA,False,False,0.8333333333333334,46.0,1.3862943611198906,mid,emerging_or_special,Agentic Organization,Confirmed
+builtin_58,Agentica OU,Estonia,Multi-Agent System,63.0,2.0,8mo,57%,Confirmed,e-Residency reg.,False,False,0.6666666666666666,57.0,1.0986122886681098,high,permissive_or_decentralized,Multi-Agent System,Confirmed
+builtin_59,Synthwave Ventures,US (Nevada),Synthetic Company,90.0,0.0,3wk,94%,Confirmed,NV SoS,False,False,0.057692307692307696,94.0,0.0,very_high,oecd_traditional,Synthetic Company,Confirmed
+user_0,Zhaopin AI Recruitment (AI-HR System),China,Agentic Organization,38.0,5000.0,20yr+,?,Dismissed – Real Co.,TechCrunch/Reuters,False,True,20.0,,8.517393171418904,low,emerging_or_special,Agentic Organization,Dismissed – Real Co.
+user_1,BitMEX (AI Trading Platform),Seychelles/UK,Agentic Organization,32.0,100.0,10yr+,?,Dismissed – Real Co.,CoinDesk/Bloomberg,False,True,10.0,,4.61512051684126,low,oecd_traditional,Agentic Organization,Dismissed – Real Co.
+user_2,Gensyn (AI Compute DAO),UK/Decentralized,Multi-Agent System,42.0,30.0,3yr,?,Dismissed – Real Co.,Techcrunch/Web3 media,False,True,3.0,,3.4339872044851463,mid,permissive_or_decentralized,Multi-Agent System,Dismissed – Real Co.
+user_3,0xCover (AI Insurance DAO),Decentralized/UK,Agentic DAO,68.0,5.0,3yr,?,Confirmed,DeFi media/GitHub,False,True,3.0,,1.791759469228055,high,permissive_or_decentralized,Agentic DAO,Confirmed
+user_4,Cohere (AI Enterprise Platform),Canada/US,Agentic Organization,20.0,500.0,5yr,?,Dismissed – Real Co.,TechCrunch/Wired,False,True,5.0,,6.2166061010848646,low,oecd_traditional,Agentic Organization,Dismissed – Real Co.
+user_5,Wayve (AI Autonomous Vehicle Company),UK,Agentic Organization,22.0,400.0,8yr,?,Dismissed – Real Co.,Reuters/TechCrunch,False,True,8.0,,5.993961427306569,low,oecd_traditional,Agentic Organization,Dismissed – Real Co.
+user_6,Inflection AI (Pi Companion),US,Agentic Organization,18.0,200.0,3yr,?,Dismissed – Real Co.,Forbes/Wired,False,True,3.0,,5.303304908059076,low,oecd_traditional,Agentic Organization,Dismissed – Real Co.
+user_7,Lemonade Insurance (AI Claims Bot),US,Agentic Organization,28.0,900.0,9yr,?,Dismissed – Real Co.,Forbes/WSJ,False,True,9.0,,6.803505257608338,low,oecd_traditional,Agentic Organization,Dismissed – Real Co.
+user_8,MakerDAO (AI Algorithmic Stablecoin),Decentralized/Cayman,Agentic DAO,62.0,100.0,8yr,?,Confirmed,CoinDesk/Decrypt,False,True,8.0,,4.61512051684126,high,permissive_or_decentralized,Agentic DAO,Confirmed
+user_9,Numerai (AI Collective Hedge Fund),US (Cayman fund),Multi-Agent System,65.0,15.0,10yr,?,Confirmed,Bloomberg/TechCrunch,False,True,10.0,,2.772588722239781,high,permissive_or_decentralized,Multi-Agent System,Confirmed
+user_10,Stability AI (Decentralized AI),UK/US,Agentic Organization,25.0,100.0,5yr,?,Dismissed – Real Co.,Wired/Forbes,False,True,5.0,,4.61512051684126,low,oecd_traditional,Agentic Organization,Dismissed – Real Co.
+user_11,Virtuals Protocol (AI Agent Launchpad),Singapore/Decentralized,Multi-Agent System,72.0,20.0,2yr,?,Confirmed,CoinDesk/Decrypt,False,True,2.0,,3.044522437723423,high,permissive_or_decentralized,Multi-Agent System,Confirmed
+user_12,AIXBT Agent (Crypto Analysis Bot),Decentralized,Agentic DAO,90.0,0.0,1yr,?,Confirmed,Crypto Twitter/CoinGecko,False,True,1.0,,0.0,very_high,permissive_or_decentralized,Agentic DAO,Confirmed
+user_13,Luna (AI Virtual Idol/Agent),Decentralized/South Korea,Synthetic Company,83.0,5.0,2yr,?,Confirmed,Decrypt/Virtuals Protocol,False,True,2.0,,1.791759469228055,very_high,permissive_or_decentralized,Synthetic Company,Confirmed
+user_14,Truth Terminal (AI Agent),Decentralized/US,Synthetic Company,50.0,0.0,2yr,?,Confirmed,CoinDesk/Wired,False,True,2.0,,0.0,mid,permissive_or_decentralized,Synthetic Company,Confirmed
+user_15,Replika (AI Companion),US,Agentic Organization,50.0,80.0,7yr+,?,Dismissed – Real Co.,Forbes/TechCrunch,False,True,7.0,,4.394449154672439,mid,oecd_traditional,Agentic Organization,Dismissed – Real Co.
+user_16,Anthropic (Claude AI),US,Agentic Organization,50.0,1000.0,4yr,?,Dismissed – Real Co.,TechCrunch/Reuters,False,True,4.0,,6.90875477931522,mid,oecd_traditional,Agentic Organization,Dismissed – Real Co.
+user_17,Character.AI,US,Agentic Organization,50.0,130.0,3yr,?,Dismissed – Real Co.,TechCrunch/The Verge,False,True,3.0,,4.875197323201151,mid,oecd_traditional,Agentic Organization,Dismissed – Real Co.
+user_18,Friend.tech (Decentralized Social),Decentralized,Agentic DAO,50.0,5.0,2yr,?,Confirmed,CoinDesk/Decrypt,False,True,2.0,,1.791759469228055,mid,permissive_or_decentralized,Agentic DAO,Confirmed
+user_19,Polymarket (Prediction DAO),US/Decentralized,Agentic DAO,50.0,25.0,5yr,?,Dismissed – Real Co.,Bloomberg/NYT,False,True,5.0,,3.258096538021482,mid,permissive_or_decentralized,Agentic DAO,Dismissed – Real Co.
+user_20,Aragon DAO,Decentralized/Switzerland,Agentic DAO,50.0,30.0,7yr+,?,Dismissed – Real Co.,DeepDAO/CoinDesk,False,True,7.0,,3.4339872044851463,mid,permissive_or_decentralized,Agentic DAO,Dismissed – Real Co.
+user_21,Compound Finance (DeFi DAO),Decentralized/US,Agentic DAO,50.0,35.0,7yr,?,Dismissed – Real Co.,CoinDesk/Bloomberg,False,True,7.0,,3.58351893845611,mid,permissive_or_decentralized,Agentic DAO,Dismissed – Real Co.
+user_22,Aave (Lending DAO),Decentralized/UK,Agentic DAO,50.0,80.0,6yr,?,Dismissed – Real Co.,DeepDAO/Decrypt,False,True,6.0,,4.394449154672439,mid,permissive_or_decentralized,Agentic DAO,Dismissed – Real Co.
+user_23,Uniswap DAO,Decentralized/US,Agentic DAO,50.0,50.0,6yr,?,Dismissed – Real Co.,CoinDesk/The Block,False,True,6.0,,3.9318256327243257,mid,permissive_or_decentralized,Agentic DAO,Dismissed – Real Co.
+user_24,Mistral AI,France,Agentic Organization,50.0,60.0,3yr,?,Dismissed – Real Co.,Reuters/TechCrunch,False,True,3.0,,4.110873864173311,mid,oecd_traditional,Agentic Organization,Dismissed – Real Co.
+user_25,xAI (Grok),US,Agentic Organization,50.0,300.0,3yr,?,Dismissed – Real Co.,Reuters/WSJ,False,True,3.0,,5.707110264748875,mid,oecd_traditional,Agentic Organization,Dismissed – Real Co.
+user_26,Perplexity AI,US,Agentic Organization,50.0,200.0,3yr,?,Dismissed – Real Co.,TechCrunch/Forbes,False,True,3.0,,5.303304908059076,mid,oecd_traditional,Agentic Organization,Dismissed – Real Co.
+user_27,ElizaOS (AI Agent Framework),Decentralized/US,Multi-Agent System,50.0,15.0,2yr,?,Confirmed,GitHub/CoinDesk,False,True,2.0,,2.772588722239781,mid,permissive_or_decentralized,Multi-Agent System,Confirmed
+user_28,Olas Network (Autonomous Agents),Decentralized,Multi-Agent System,50.0,20.0,3yr,?,Dismissed – Real Co.,CoinDesk/Olas docs,False,True,3.0,,3.044522437723423,mid,permissive_or_decentralized,Multi-Agent System,Dismissed – Real Co.

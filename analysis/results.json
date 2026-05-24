@@ -1,0 +1,925 @@
+{
+  "rounds": [
+    {
+      "label": "Round 1: all entities, 4-class taxonomy",
+      "n": 89,
+      "descriptives": {
+        "n_total": 89,
+        "n_user": 29,
+        "n_builtin": 60,
+        "status_counts": {
+          "Confirmed": 61,
+          "Dismissed \u2013 Real Co.": 28
+        },
+        "type_counts": {
+          "Agentic Organization": 25,
+          "Agentic DAO": 24,
+          "Synthetic Company": 19,
+          "Dismissed \u2013 Real Co.": 8,
+          "Multi-Agent System": 8,
+          "AI-Enhanced Shell": 5
+        },
+        "jurisdiction_counts": {
+          "oecd_traditional": 47,
+          "permissive_or_decentralized": 32,
+          "emerging_or_special": 6,
+          "other": 4
+        },
+        "score_quartiles": {
+          "min": 15.0,
+          "q1": 50.0,
+          "median": 63.0,
+          "q3": 82.0,
+          "max": 96.0,
+          "mean": 62.68539325842696,
+          "sd": 21.257402724280002
+        },
+        "employees_quartiles": {
+          "min": 0.0,
+          "q1": 0.0,
+          "median": 5.0,
+          "q3": 35.0,
+          "max": 6000.0,
+          "mean": 180.80898876404495,
+          "sd": 830.0308027746003
+        },
+        "domain_years_quartiles": {
+          "n_known": 89,
+          "median": 1.0,
+          "mean": 2.840103716508211
+        },
+        "ai_pct_known": 59,
+        "pct_zero_employees": 0.38202247191011235
+      },
+      "group_comparisons": {
+        "score_by_type": {
+          "kruskal_H": 61.58773531290102,
+          "p_value": 5.7073107715010776e-12,
+          "eta_squared": 0.6817799435289279
+        },
+        "employees_by_type": {
+          "kruskal_H": 54.08487327711896,
+          "p_value": 2.0133122699499877e-10,
+          "eta_squared": 0.5913840153869754
+        }
+      },
+      "clustering": {
+        "features": [
+          "score",
+          "log_employees",
+          "domain_years",
+          "ai_pct"
+        ],
+        "solutions": {
+          "k=3": {
+            "silhouette_kmeans": 0.46310852848240436,
+            "silhouette_agglom": 0.47816741228651244,
+            "ARI_kmeans_vs_agglom": 0.8237875957396619,
+            "ARI_kmeans_vs_taxonomy": 0.2741305348222397,
+            "ARI_agglom_vs_taxonomy": 0.23539242222479542,
+            "ARI_gmm_vs_taxonomy": 0.20285313349977574
+          },
+          "k=4": {
+            "silhouette_kmeans": 0.5045882481480551,
+            "silhouette_agglom": 0.5042237017376762,
+            "ARI_kmeans_vs_agglom": 0.8703863278142558,
+            "ARI_kmeans_vs_taxonomy": 0.2588438580359482,
+            "ARI_agglom_vs_taxonomy": 0.21590001063769257,
+            "ARI_gmm_vs_taxonomy": 0.208856737504803
+          },
+          "k=5": {
+            "silhouette_kmeans": 0.4458214411864275,
+            "silhouette_agglom": 0.4378955309569735,
+            "ARI_kmeans_vs_agglom": 0.7978199698178857,
+            "ARI_kmeans_vs_taxonomy": 0.2896075028397134,
+            "ARI_agglom_vs_taxonomy": 0.2853375399486959,
+            "ARI_gmm_vs_taxonomy": 0.21690867945631198
+          }
+        },
+        "preferred_k": "k=4"
+      },
+      "classification": {
+        "n_splits": 5,
+        "classes": [
+          "AI-Enhanced Shell",
+          "Agentic DAO",
+          "Agentic Organization",
+          "Dismissed \u2013 Real Co.",
+          "Multi-Agent System",
+          "Synthetic Company"
+        ],
+        "logistic": {
+          "cv_accuracy_mean": 0.6392156862745098,
+          "cv_accuracy_sd": 0.08196297335788902,
+          "cv_f1_macro_mean": 0.407032227032227,
+          "cv_f1_macro_sd": 0.0838962568801502,
+          "in_sample_accuracy": 0.6966292134831461
+        },
+        "random_forest": {
+          "cv_accuracy_mean": 0.7294117647058823,
+          "cv_accuracy_sd": 0.08515314019846455,
+          "cv_f1_macro_mean": 0.6224651274651274,
+          "cv_f1_macro_sd": 0.16509928930789947,
+          "in_sample_accuracy": 1.0
+        },
+        "gradient_boosting": {
+          "cv_accuracy_mean": 0.6405228758169934,
+          "cv_accuracy_sd": 0.025059201977360505,
+          "cv_f1_macro_mean": 0.5363131313131313,
+          "cv_f1_macro_sd": 0.03735459180785897,
+          "in_sample_accuracy": 1.0
+        },
+        "permutation_importance": {
+          "score": {
+            "mean": 0.11505617977528089,
+            "sd": 0.023088178946591143
+          },
+          "log_employees": {
+            "mean": 0.28112359550561794,
+            "sd": 0.03093379028491721
+          },
+          "domain_years": {
+            "mean": 0.21842696629213482,
+            "sd": 0.03115096350770958
+          },
+          "ai_pct": {
+            "mean": 0.2534831460674158,
+            "sd": 0.03511375278134762
+          }
+        },
+        "surrogate_tree": "|--- ai_pct <= 79.50\n|   |--- score <= 66.50\n|   |   |--- ai_pct <= 32.50\n|   |   |   |--- class: 3\n|   |   |--- ai_pct >  32.50\n|   |   |   |--- class: 2\n|   |--- score >  66.50\n|   |   |--- ai_pct <= 77.00\n|   |   |   |--- class: 1\n|   |   |--- ai_pct >  77.00\n|   |   |   |--- class: 0\n|--- ai_pct >  79.50\n|   |--- domain_years <= 0.75\n|   |   |--- log_employees <= 0.35\n|   |   |   |--- class: 5\n|   |   |--- log_employees >  0.35\n|   |   |   |--- class: 0\n|   |--- domain_years >  0.75\n|   |   |--- class: 1\n",
+        "surrogate_fidelity": 0.7191011235955056,
+        "shap_global_importance": {
+          "score": 0.03102034606259399,
+          "log_employees": 0.10016975572628278,
+          "domain_years": 0.0939727793389482,
+          "ai_pct": 0.04683044027903701
+        },
+        "rf_in_sample_confusion": {
+          "labels": [
+            "AI-Enhanced Shell",
+            "Agentic DAO",
+            "Agentic Organization",
+            "Dismissed \u2013 Real Co.",
+            "Multi-Agent System",
+            "Synthetic Company"
+          ],
+          "matrix": [
+            [
+              5,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              24,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              25,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              8,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              8,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              19
+            ]
+          ]
+        }
+      },
+      "robustness": {
+        "threshold_sensitivity": [
+          {
+            "threshold": 40,
+            "n_confirmed_at_threshold": 78,
+            "share_synthetic_or_dao": 0.6153846153846154
+          },
+          {
+            "threshold": 45,
+            "n_confirmed_at_threshold": 73,
+            "share_synthetic_or_dao": 0.6575342465753424
+          },
+          {
+            "threshold": 50,
+            "n_confirmed_at_threshold": 69,
+            "share_synthetic_or_dao": 0.6956521739130435
+          },
+          {
+            "threshold": 55,
+            "n_confirmed_at_threshold": 51,
+            "share_synthetic_or_dao": 0.803921568627451
+          },
+          {
+            "threshold": 60,
+            "n_confirmed_at_threshold": 48,
+            "share_synthetic_or_dao": 0.8541666666666666
+          }
+        ],
+        "leave_one_class_out": {
+          "AI-Enhanced Shell": {
+            "cv_accuracy_mean": 0.7610294117647058,
+            "cv_accuracy_sd": 0.05705048453314945
+          },
+          "Agentic DAO": {
+            "cv_accuracy_mean": 0.8153846153846155,
+            "cv_accuracy_sd": 0.03768445758127964
+          },
+          "Agentic Organization": {
+            "cv_accuracy_mean": 0.75,
+            "cv_accuracy_sd": 0.1321197233639821
+          },
+          "Dismissed \u2013 Real Co.": {
+            "cv_accuracy_mean": 0.7639705882352941,
+            "cv_accuracy_sd": 0.0849384063423156
+          },
+          "Multi-Agent System": {
+            "cv_accuracy_mean": 0.7522058823529412,
+            "cv_accuracy_sd": 0.058482467132788735
+          },
+          "Synthetic Company": {
+            "cv_accuracy_mean": 0.7714285714285715,
+            "cv_accuracy_sd": 0.09476070829586856
+          }
+        },
+        "rf_oob_bootstrap": {
+          "mean": 0.6788433399062608,
+          "ci95": [
+            0.5156158357771261,
+            0.8310714285714285
+          ],
+          "iterations": 500
+        },
+        "kappa_excluding_disputed": {
+          "n_dropped": 4,
+          "n_remaining": 21,
+          "kappa": 1.0
+        }
+      },
+      "kappa": {
+        "n": 25,
+        "agreement": 0.84,
+        "kappa": 0.771689497716895,
+        "kappa_ci95": [
+          0.5412580407044185,
+          0.9422632794457275
+        ],
+        "confidence_agreement": 0.84,
+        "boot_iterations": 2000
+      },
+      "solvency": {
+        "claims": [
+          {
+            "id": "C1_taxonomy_separable",
+            "convergent": true,
+            "stable": true,
+            "score": 2,
+            "headline": "RF 5-fold CV accuracy=0.73, bootstrap mean=0.68 (95% CI lower=0.52)."
+          },
+          {
+            "id": "C2_kappa_above_0_70",
+            "convergent": true,
+            "stable": true,
+            "score": 2,
+            "headline": "Cohen's Kappa=0.772, bootstrap 95% CI lower=0.541."
+          },
+          {
+            "id": "C3_score_threshold_selects_synthetic_dominated",
+            "convergent": true,
+            "stable": true,
+            "score": 2,
+            "headline": "At score>=50 0.70 of selected entities fall in synthetic/DAO/shell classes."
+          },
+          {
+            "id": "C4_unsupervised_recovers_taxonomy_partially",
+            "convergent": true,
+            "stable": true,
+            "score": 2,
+            "headline": "At k=4, ARI(kmeans, agglom)=0.87, max ARI vs taxonomy=0.26."
+          }
+        ],
+        "n_failed": 0,
+        "needs_recursion": false,
+        "failures": []
+      }
+    },
+    {
+      "label": "Round 2: 2-class collapse (synthetic_or_dao vs agentic_or_other)",
+      "n": 89,
+      "descriptives": {
+        "n_total": 89,
+        "n_user": 29,
+        "n_builtin": 60,
+        "status_counts": {
+          "Confirmed": 61,
+          "Dismissed \u2013 Real Co.": 28
+        },
+        "type_counts": {
+          "synthetic_or_dao": 48,
+          "agentic_or_other": 41
+        },
+        "jurisdiction_counts": {
+          "oecd_traditional": 47,
+          "permissive_or_decentralized": 32,
+          "emerging_or_special": 6,
+          "other": 4
+        },
+        "score_quartiles": {
+          "min": 15.0,
+          "q1": 50.0,
+          "median": 63.0,
+          "q3": 82.0,
+          "max": 96.0,
+          "mean": 62.68539325842696,
+          "sd": 21.257402724280002
+        },
+        "employees_quartiles": {
+          "min": 0.0,
+          "q1": 0.0,
+          "median": 5.0,
+          "q3": 35.0,
+          "max": 6000.0,
+          "mean": 180.80898876404495,
+          "sd": 830.0308027746003
+        },
+        "domain_years_quartiles": {
+          "n_known": 89,
+          "median": 1.0,
+          "mean": 2.840103716508211
+        },
+        "ai_pct_known": 59,
+        "pct_zero_employees": 0.38202247191011235
+      },
+      "group_comparisons": {
+        "score_by_type": {
+          "kruskal_H": 49.59191634090025,
+          "p_value": 1.8929204685070262e-12,
+          "eta_squared": 0.5585277740333362
+        },
+        "employees_by_type": {
+          "kruskal_H": 47.91250665836686,
+          "p_value": 4.456696463399347e-12,
+          "eta_squared": 0.5392242144639868
+        }
+      },
+      "clustering": {
+        "features": [
+          "score",
+          "log_employees",
+          "domain_years",
+          "ai_pct"
+        ],
+        "solutions": {
+          "k=3": {
+            "silhouette_kmeans": 0.46310852848240436,
+            "silhouette_agglom": 0.47816741228651244,
+            "ARI_kmeans_vs_agglom": 0.8237875957396619,
+            "ARI_kmeans_vs_taxonomy": 0.5355758359751982,
+            "ARI_agglom_vs_taxonomy": 0.42117660822867387,
+            "ARI_gmm_vs_taxonomy": 0.28176900664244897
+          },
+          "k=4": {
+            "silhouette_kmeans": 0.5045882481480551,
+            "silhouette_agglom": 0.5042237017376762,
+            "ARI_kmeans_vs_agglom": 0.8703863278142558,
+            "ARI_kmeans_vs_taxonomy": 0.5201537093296797,
+            "ARI_agglom_vs_taxonomy": 0.40572502614584627,
+            "ARI_gmm_vs_taxonomy": 0.2825634479824289
+          },
+          "k=5": {
+            "silhouette_kmeans": 0.4458214411864275,
+            "silhouette_agglom": 0.4378955309569735,
+            "ARI_kmeans_vs_agglom": 0.7978199698178857,
+            "ARI_kmeans_vs_taxonomy": 0.28251450189287036,
+            "ARI_agglom_vs_taxonomy": 0.24103842624899172,
+            "ARI_gmm_vs_taxonomy": 0.30952419541621073
+          }
+        },
+        "preferred_k": "k=4"
+      },
+      "classification": {
+        "n_splits": 5,
+        "classes": [
+          "agentic_or_other",
+          "synthetic_or_dao"
+        ],
+        "logistic": {
+          "cv_accuracy_mean": 0.9215686274509804,
+          "cv_accuracy_sd": 0.026709564368238643,
+          "cv_f1_macro_mean": 0.9203454268469748,
+          "cv_f1_macro_sd": 0.028122642499717777,
+          "in_sample_accuracy": 0.9101123595505618
+        },
+        "random_forest": {
+          "cv_accuracy_mean": 0.9222222222222222,
+          "cv_accuracy_sd": 0.08314794192830981,
+          "cv_f1_macro_mean": 0.9198790201886176,
+          "cv_f1_macro_sd": 0.08717916531689439,
+          "in_sample_accuracy": 1.0
+        },
+        "gradient_boosting": {
+          "cv_accuracy_mean": 0.9444444444444444,
+          "cv_accuracy_sd": 0.06085806194501844,
+          "cv_f1_macro_mean": 0.9434232640424591,
+          "cv_f1_macro_sd": 0.06260070356420505,
+          "in_sample_accuracy": 1.0
+        },
+        "permutation_importance": {
+          "score": {
+            "mean": 0.09842696629213485,
+            "sd": 0.026547306832579522
+          },
+          "log_employees": {
+            "mean": 0.15820224719101122,
+            "sd": 0.029543511783451316
+          },
+          "domain_years": {
+            "mean": 0.05955056179775282,
+            "sd": 0.013341957401166208
+          },
+          "ai_pct": {
+            "mean": 0.07640449438202249,
+            "sd": 0.018666570478467585
+          }
+        },
+        "surrogate_tree": "|--- score <= 66.50\n|   |--- ai_pct <= 64.00\n|   |   |--- class: 0\n|   |--- ai_pct >  64.00\n|   |   |--- log_employees <= 4.75\n|   |   |   |--- class: 0\n|   |   |--- log_employees >  4.75\n|   |   |   |--- class: 0\n|--- score >  66.50\n|   |--- log_employees <= 2.42\n|   |   |--- class: 1\n|   |--- log_employees >  2.42\n|   |   |--- class: 0\n",
+        "surrogate_fidelity": 0.9101123595505618,
+        "shap_global_importance": {
+          "error": "index 2 is out of bounds for axis 0 with size 2"
+        },
+        "rf_in_sample_confusion": {
+          "labels": [
+            "agentic_or_other",
+            "synthetic_or_dao"
+          ],
+          "matrix": [
+            [
+              41,
+              0
+            ],
+            [
+              0,
+              48
+            ]
+          ]
+        }
+      },
+      "robustness": {
+        "threshold_sensitivity": [
+          {
+            "threshold": 40,
+            "n_confirmed_at_threshold": 78,
+            "share_synthetic_or_dao": 0.0
+          },
+          {
+            "threshold": 45,
+            "n_confirmed_at_threshold": 73,
+            "share_synthetic_or_dao": 0.0
+          },
+          {
+            "threshold": 50,
+            "n_confirmed_at_threshold": 69,
+            "share_synthetic_or_dao": 0.0
+          },
+          {
+            "threshold": 55,
+            "n_confirmed_at_threshold": 51,
+            "share_synthetic_or_dao": 0.0
+          },
+          {
+            "threshold": 60,
+            "n_confirmed_at_threshold": 48,
+            "share_synthetic_or_dao": 0.0
+          }
+        ],
+        "leave_one_class_out": {},
+        "rf_oob_bootstrap": {
+          "mean": 0.9041913383457381,
+          "ci95": [
+            0.78125,
+            1.0
+          ],
+          "iterations": 500
+        },
+        "kappa_excluding_disputed": {
+          "n_dropped": 4,
+          "n_remaining": 21,
+          "kappa": 1.0
+        }
+      },
+      "kappa": {
+        "n": 25,
+        "agreement": 0.84,
+        "kappa": 0.771689497716895,
+        "kappa_ci95": [
+          0.5515695067264574,
+          0.9427950273241172
+        ],
+        "confidence_agreement": 0.84,
+        "boot_iterations": 2000
+      },
+      "solvency": {
+        "claims": [
+          {
+            "id": "C1_taxonomy_separable",
+            "convergent": true,
+            "stable": true,
+            "score": 2,
+            "headline": "RF 5-fold CV accuracy=0.92, bootstrap mean=0.90 (95% CI lower=0.78)."
+          },
+          {
+            "id": "C2_kappa_above_0_70",
+            "convergent": true,
+            "stable": true,
+            "score": 2,
+            "headline": "Cohen's Kappa=0.772, bootstrap 95% CI lower=0.552."
+          },
+          {
+            "id": "C3_score_threshold_selects_synthetic_dominated",
+            "convergent": false,
+            "stable": false,
+            "score": 0,
+            "headline": "At score>=50 0.00 of selected entities fall in synthetic/DAO/shell classes."
+          },
+          {
+            "id": "C4_unsupervised_recovers_taxonomy_partially",
+            "convergent": true,
+            "stable": true,
+            "score": 2,
+            "headline": "At k=4, ARI(kmeans, agglom)=0.87, max ARI vs taxonomy=0.52."
+          }
+        ],
+        "n_failed": 1,
+        "needs_recursion": true,
+        "failures": [
+          {
+            "id": "C3_score_threshold_selects_synthetic_dominated",
+            "convergent": false,
+            "stable": false,
+            "score": 0,
+            "headline": "At score>=50 0.00 of selected entities fall in synthetic/DAO/shell classes."
+          }
+        ]
+      }
+    },
+    {
+      "label": "Round 3: only score >= 40 entities (no easy controls)",
+      "n": 78,
+      "descriptives": {
+        "n_total": 78,
+        "n_user": 22,
+        "n_builtin": 56,
+        "status_counts": {
+          "Confirmed": 61,
+          "Dismissed \u2013 Real Co.": 17
+        },
+        "type_counts": {
+          "Agentic DAO": 24,
+          "Synthetic Company": 19,
+          "Agentic Organization": 18,
+          "Multi-Agent System": 8,
+          "AI-Enhanced Shell": 5,
+          "Dismissed \u2013 Real Co.": 4
+        },
+        "jurisdiction_counts": {
+          "oecd_traditional": 39,
+          "permissive_or_decentralized": 30,
+          "emerging_or_special": 5,
+          "other": 4
+        },
+        "score_quartiles": {
+          "min": 40.0,
+          "q1": 50.0,
+          "median": 69.5,
+          "q3": 83.0,
+          "max": 96.0,
+          "mean": 67.87179487179488,
+          "sd": 17.000656193874132
+        },
+        "employees_quartiles": {
+          "min": 0.0,
+          "q1": 0.0,
+          "median": 2.0,
+          "q3": 15.0,
+          "max": 6000.0,
+          "mean": 111.38461538461539,
+          "sd": 686.3878013092991
+        },
+        "domain_years_quartiles": {
+          "n_known": 78,
+          "median": 1.0,
+          "mean": 2.2406311637080867
+        },
+        "ai_pct_known": 55,
+        "pct_zero_employees": 0.4358974358974359
+      },
+      "group_comparisons": {
+        "score_by_type": {
+          "kruskal_H": 49.64922682532448,
+          "p_value": 1.6347942224991615e-09,
+          "eta_squared": 0.620128150351729
+        },
+        "employees_by_type": {
+          "kruskal_H": 42.77199213289933,
+          "p_value": 4.1098759228573034e-08,
+          "eta_squared": 0.524611001845824
+        }
+      },
+      "clustering": {
+        "features": [
+          "score",
+          "log_employees",
+          "domain_years",
+          "ai_pct"
+        ],
+        "solutions": {
+          "k=3": {
+            "silhouette_kmeans": 0.5072301869794059,
+            "silhouette_agglom": 0.49332576222718544,
+            "ARI_kmeans_vs_agglom": 0.6779142677782365,
+            "ARI_kmeans_vs_taxonomy": 0.22657411998016858,
+            "ARI_agglom_vs_taxonomy": 0.197483472625579,
+            "ARI_gmm_vs_taxonomy": 0.17688918902051654
+          },
+          "k=4": {
+            "silhouette_kmeans": 0.5263026556422977,
+            "silhouette_agglom": 0.5144753820587723,
+            "ARI_kmeans_vs_agglom": 0.7516484476343754,
+            "ARI_kmeans_vs_taxonomy": 0.2496724051818036,
+            "ARI_agglom_vs_taxonomy": 0.19969130673866084,
+            "ARI_gmm_vs_taxonomy": 0.2668628237706745
+          },
+          "k=5": {
+            "silhouette_kmeans": 0.4821615171878092,
+            "silhouette_agglom": 0.4793449360724004,
+            "ARI_kmeans_vs_agglom": 0.9395119795448089,
+            "ARI_kmeans_vs_taxonomy": 0.2892825283547853,
+            "ARI_agglom_vs_taxonomy": 0.28084960918240565,
+            "ARI_gmm_vs_taxonomy": 0.25656003069322725
+          }
+        },
+        "preferred_k": "k=5"
+      },
+      "classification": {
+        "n_splits": 4,
+        "classes": [
+          "AI-Enhanced Shell",
+          "Agentic DAO",
+          "Agentic Organization",
+          "Dismissed \u2013 Real Co.",
+          "Multi-Agent System",
+          "Synthetic Company"
+        ],
+        "logistic": {
+          "cv_accuracy_mean": 0.6401315789473684,
+          "cv_accuracy_sd": 0.0845260331318601,
+          "cv_f1_macro_mean": 0.3628112628112628,
+          "cv_f1_macro_sd": 0.044940032709682255,
+          "in_sample_accuracy": 0.6666666666666666
+        },
+        "random_forest": {
+          "cv_accuracy_mean": 0.7039473684210527,
+          "cv_accuracy_sd": 0.14989031077143675,
+          "cv_f1_macro_mean": 0.5679230491730491,
+          "cv_f1_macro_sd": 0.1488965902597838,
+          "in_sample_accuracy": 1.0
+        },
+        "gradient_boosting": {
+          "cv_accuracy_mean": 0.6776315789473685,
+          "cv_accuracy_sd": 0.1599482689917668,
+          "cv_f1_macro_mean": 0.5465548340548341,
+          "cv_f1_macro_sd": 0.1576998168160152,
+          "in_sample_accuracy": 1.0
+        },
+        "permutation_importance": {
+          "score": {
+            "mean": 0.13692307692307693,
+            "sd": 0.02595196087975384
+          },
+          "log_employees": {
+            "mean": 0.2379487179487179,
+            "sd": 0.033838382946304854
+          },
+          "domain_years": {
+            "mean": 0.2792307692307693,
+            "sd": 0.03805684526337404
+          },
+          "ai_pct": {
+            "mean": 0.26846153846153853,
+            "sd": 0.03674905572456171
+          }
+        },
+        "surrogate_tree": "|--- domain_years <= 0.21\n|   |--- score <= 85.50\n|   |   |--- ai_pct <= 87.50\n|   |   |   |--- class: 5\n|   |   |--- ai_pct >  87.50\n|   |   |   |--- class: 0\n|   |--- score >  85.50\n|   |   |--- class: 5\n|--- domain_years >  0.21\n|   |--- ai_pct <= 56.00\n|   |   |--- log_employees <= 2.52\n|   |   |   |--- class: 2\n|   |   |--- log_employees >  2.52\n|   |   |   |--- class: 3\n|   |--- ai_pct >  56.00\n|   |   |--- log_employees <= 4.02\n|   |   |   |--- class: 1\n|   |   |--- log_employees >  4.02\n|   |   |   |--- class: 2\n",
+        "surrogate_fidelity": 0.7307692307692307,
+        "shap_global_importance": {
+          "score": 0.03461755180958402,
+          "log_employees": 0.10321230521231148,
+          "domain_years": 0.0874567968012028,
+          "ai_pct": 0.03139116117553512
+        },
+        "rf_in_sample_confusion": {
+          "labels": [
+            "AI-Enhanced Shell",
+            "Agentic DAO",
+            "Agentic Organization",
+            "Dismissed \u2013 Real Co.",
+            "Multi-Agent System",
+            "Synthetic Company"
+          ],
+          "matrix": [
+            [
+              5,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              24,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              18,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              4,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              8,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              19
+            ]
+          ]
+        }
+      },
+      "robustness": {
+        "threshold_sensitivity": [
+          {
+            "threshold": 40,
+            "n_confirmed_at_threshold": 78,
+            "share_synthetic_or_dao": 0.6153846153846154
+          },
+          {
+            "threshold": 45,
+            "n_confirmed_at_threshold": 73,
+            "share_synthetic_or_dao": 0.6575342465753424
+          },
+          {
+            "threshold": 50,
+            "n_confirmed_at_threshold": 69,
+            "share_synthetic_or_dao": 0.6956521739130435
+          },
+          {
+            "threshold": 55,
+            "n_confirmed_at_threshold": 51,
+            "share_synthetic_or_dao": 0.803921568627451
+          },
+          {
+            "threshold": 60,
+            "n_confirmed_at_threshold": 48,
+            "share_synthetic_or_dao": 0.8541666666666666
+          }
+        ],
+        "leave_one_class_out": {
+          "AI-Enhanced Shell": {
+            "cv_accuracy_mean": 0.7090643274853802,
+            "cv_accuracy_sd": 0.15010142143087982
+          },
+          "Agentic DAO": {
+            "cv_accuracy_mean": 0.7197802197802198,
+            "cv_accuracy_sd": 0.08739546000322451
+          },
+          "Agentic Organization": {
+            "cv_accuracy_mean": 0.7833333333333334,
+            "cv_accuracy_sd": 0.055277079839256706
+          },
+          "Dismissed \u2013 Real Co.": {
+            "cv_accuracy_mean": 0.6885714285714285,
+            "cv_accuracy_sd": 0.10989997513715548
+          },
+          "Multi-Agent System": {
+            "cv_accuracy_mean": 0.7124183006535947,
+            "cv_accuracy_sd": 0.15837034243743042
+          },
+          "Synthetic Company": {
+            "cv_accuracy_mean": 0.6976190476190476,
+            "cv_accuracy_sd": 0.1069840092317189
+          }
+        },
+        "rf_oob_bootstrap": {
+          "mean": 0.6414894841798955,
+          "ci95": [
+            0.48148148148148145,
+            0.8
+          ],
+          "iterations": 500
+        },
+        "kappa_excluding_disputed": {
+          "n_dropped": 4,
+          "n_remaining": 21,
+          "kappa": 1.0
+        }
+      },
+      "kappa": {
+        "n": 25,
+        "agreement": 0.84,
+        "kappa": 0.771689497716895,
+        "kappa_ci95": [
+          0.5370131729667813,
+          0.9430523917995445
+        ],
+        "confidence_agreement": 0.84,
+        "boot_iterations": 2000
+      },
+      "solvency": {
+        "claims": [
+          {
+            "id": "C1_taxonomy_separable",
+            "convergent": true,
+            "stable": true,
+            "score": 2,
+            "headline": "RF 5-fold CV accuracy=0.70, bootstrap mean=0.64 (95% CI lower=0.48)."
+          },
+          {
+            "id": "C2_kappa_above_0_70",
+            "convergent": true,
+            "stable": true,
+            "score": 2,
+            "headline": "Cohen's Kappa=0.772, bootstrap 95% CI lower=0.537."
+          },
+          {
+            "id": "C3_score_threshold_selects_synthetic_dominated",
+            "convergent": true,
+            "stable": true,
+            "score": 2,
+            "headline": "At score>=50 0.70 of selected entities fall in synthetic/DAO/shell classes."
+          },
+          {
+            "id": "C4_unsupervised_recovers_taxonomy_partially",
+            "convergent": true,
+            "stable": true,
+            "score": 2,
+            "headline": "At k=5, ARI(kmeans, agglom)=0.94, max ARI vs taxonomy=0.29."
+          }
+        ],
+        "n_failed": 0,
+        "needs_recursion": false,
+        "failures": []
+      }
+    }
+  ]
+}

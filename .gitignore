@@ -1,0 +1,29 @@
+# Article manuscript - kept LOCAL, never pushed
+ARTICULO.md
+ARTICULO.docx
+ARTICULO.pdf
+ARTICULO.tex
+ABSTRACT.md
+HIGHLIGHTS.md
+COVER_LETTER.md
+REVIEWER_RESPONSE_TEMPLATE.md
+BIBLIOGRAPHY.bib
+MANUSCRIPT_SELF_AUDIT.md
+literature_review_raw.md
+
+# Editor and OS noise
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.vscode/
+.idea/
+
+# Python local
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Local-only Claude config (not the agent definitions, which live in ~/.claude/)
+.claude/settings.local.json
