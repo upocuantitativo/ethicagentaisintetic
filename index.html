@@ -6,67 +6,106 @@
 <title>SynthCo Research Manager — Synthetic Companies Detection Study</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect x='15' y='30' width='70' height='50' rx='10' fill='%231a1a2e' stroke='%23e94560' stroke-width='3'/><circle cx='35' cy='52' r='8' fill='%2374b9ff'/><circle cx='65' cy='52' r='8' fill='%2374b9ff'/><rect x='40' y='64' width='20' height='4' rx='2' fill='%23e94560'/><rect x='43' y='15' width='14' height='18' rx='4' fill='%231a1a2e' stroke='%2374b9ff' stroke-width='2'/><circle cx='50' cy='10' r='4' fill='%2374b9ff'/><rect x='5' y='45' width='12' height='6' rx='3' fill='%23e94560'/><rect x='83' y='45' width='12' height='6' rx='3' fill='%23e94560'/><rect x='25' y='80' width='15' height='12' rx='3' fill='%231a1a2e' stroke='%23e94560' stroke-width='2'/><rect x='60' y='80' width='15' height='12' rx='3' fill='%231a1a2e' stroke='%23e94560' stroke-width='2'/></svg>" type="image/svg+xml">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+/* ============================================================
+   ACADEMIC THEME — paper + ink, single navy accent, no gradients
+   ============================================================ */
 :root {
-  --primary: #1a1a2e;
-  --secondary: #16213e;
-  --accent: #0f3460;
-  --highlight: #e94560;
-  --success: #00b894;
-  --warning: #fdcb6e;
-  --danger: #d63031;
-  --info: #74b9ff;
-  --bg: #0f0f1a;
-  --card: #1a1a2e;
-  --text: #e0e0e0;
-  --text-muted: #888;
-  --border: #2a2a4a;
+  --ink:        #1a1a2e;       /* body text, headings */
+  --ink-muted:  #5a5a5a;       /* secondary text */
+  --paper:      #f7f5f0;       /* page background (warm off-white) */
+  --paper-soft: #efece4;       /* secondary band, hover surface */
+  --card:       #ffffff;       /* card surface */
+  --rule:       #d4d4d4;       /* hairline rules and grid */
+  --rule-soft:  #e8e6e0;       /* secondary rules (chart gridlines) */
+  --accent:     #1e3a5f;       /* single accent — deep navy */
+  --accent-soft:#dbe3ec;       /* accent surface */
+  --positive:   #1e7a3e;       /* muted journal green (semantic only) */
+  --warning:    #a66400;       /* muted amber (semantic only) */
+  --negative:   #7b2d26;       /* burgundy (semantic only) */
+  /* Legacy aliases used throughout the file */
+  --primary:   var(--paper);
+  --secondary: var(--paper-soft);
+  --highlight: var(--accent);
+  --success:   var(--positive);
+  --danger:    var(--negative);
+  --info:      var(--accent);
+  --bg:        var(--paper);
+  --text:      var(--ink);
+  --text-muted:var(--ink-muted);
+  --border:    var(--rule);
 }
 * { margin:0; padding:0; box-sizing:border-box; }
-body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height:100vh; }
+html { -webkit-text-size-adjust:100%; }
+body {
+  font-family: "Source Serif 4", "Source Serif Pro", Charter, "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  background: var(--paper);
+  color: var(--ink);
+  min-height:100vh;
+  font-size: 16px;
+  line-height: 1.55;
+  font-feature-settings: "kern", "liga";
+  text-rendering: optimizeLegibility;
+}
+h1, h2, h3, h4, h5, h6, .ui-sans,
+.topbar h2, .tab-btn, .badge, .btn, th,
+.gantt-label, .gantt-header-days, .checklist li,
+.kpi-label, .kpi-meta, .form-group label {
+  font-family: "Inter", -apple-system, "Segoe UI", system-ui, sans-serif;
+  font-feature-settings: "kern", "liga", "tnum";
+}
+h1, h2, h3, h4 { color: var(--ink); font-weight: 600; letter-spacing: -0.01em; }
+h2 { font-size: 1.4rem; line-height: 1.25; }
+h3 { font-size: 1.05rem; line-height: 1.3; }
+code, .tabular-nums { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; }
+a:hover { border-bottom-color: var(--accent); }
 
 
 /* APP LAYOUT */
 #app { display:block; }
-/* Solvency-gate cells */
-.solv-cell { display:inline-block; padding:6px 10px; border-radius:8px; font-size:.7rem; font-weight:700; letter-spacing:.3px; min-width:54px; }
-.solv-pass { background:rgba(0,184,148,.18); color:var(--success); border:1px solid rgba(0,184,148,.45); }
-.solv-partial { background:rgba(253,203,110,.18); color:var(--warning); border:1px solid rgba(253,203,110,.45); }
-.solv-fail { background:rgba(214,48,49,.18); color:var(--danger); border:1px solid rgba(214,48,49,.45); }
-.solv-na { background:rgba(136,136,136,.15); color:var(--text-muted); border:1px solid var(--border); }
-.solv-meta { display:block; font-size:.65rem; font-weight:400; opacity:.85; margin-top:2px; }
+/* Solvency-gate cells — sober glyphs, no pills */
+.solv-cell { display:inline-block; padding:4px 8px; font-size:1.05rem; font-weight:600; min-width:36px; line-height:1.1; font-family:"Inter", system-ui, sans-serif; }
+.solv-pass    { color: var(--accent); }
+.solv-partial { color: var(--warning); }
+.solv-fail    { color: var(--negative); }
+.solv-na      { color: var(--ink-muted); }
+.solv-meta { display:block; font-size:.7rem; font-weight:400; color:var(--ink-muted); margin-top:3px; letter-spacing:0; font-variant-numeric:tabular-nums; }
 
-.topbar { background: var(--primary); border-bottom:1px solid var(--border); padding:12px 24px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:100; }
-.topbar h2 { font-size:1.1rem; background: linear-gradient(90deg, var(--highlight), var(--info)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.topbar { background: var(--card); border-bottom:1px solid var(--rule); padding:14px 28px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:100; }
+.topbar h2 { font-size:1.05rem; font-weight:600; color:var(--ink); letter-spacing:-0.01em; }
 .topbar .user-info { display:flex; align-items:center; gap:12px; }
-.topbar .user-info span { color:var(--text-muted); font-size:.85rem; }
-.topbar button { background:transparent; border:1px solid var(--border); color:var(--text-muted); padding:6px 14px; border-radius:6px; cursor:pointer; font-size:.8rem; }
-.topbar button:hover { border-color:var(--highlight); color:var(--highlight); }
+.topbar .user-info span { color:var(--ink-muted); font-size:.82rem; }
+.topbar button { background:transparent; border:1px solid var(--rule); color:var(--ink); padding:6px 12px; border-radius:3px; cursor:pointer; font-size:.78rem; font-weight:500; }
+.topbar button:hover { border-color:var(--accent); color:var(--accent); }
 
 /* TABS */
-.tabs { display:flex; background:var(--secondary); border-bottom:1px solid var(--border); overflow-x:auto; }
-.tab-btn { padding:12px 20px; background:transparent; border:none; color:var(--text-muted); cursor:pointer; font-size:.85rem; white-space:nowrap; border-bottom:2px solid transparent; transition:.2s; }
-.tab-btn:hover { color:var(--text); background:rgba(255,255,255,.03); }
-.tab-btn.active { color:var(--highlight); border-bottom-color:var(--highlight); }
-.tab-content { display:none; padding:24px; max-width:1400px; margin:0 auto; }
+.tabs { display:flex; background:var(--paper); border-bottom:1px solid var(--rule); overflow-x:auto; padding:0 16px; }
+.tab-btn { padding:14px 18px; background:transparent; border:none; color:var(--ink-muted); cursor:pointer; font-size:.85rem; font-weight:500; white-space:nowrap; border-bottom:2px solid transparent; transition:.15s; letter-spacing:0; }
+.tab-btn:hover { color:var(--ink); }
+.tab-btn.active { color:var(--accent); border-bottom-color:var(--accent); font-weight:600; }
+.tab-content { display:none; padding:32px 24px; max-width:1200px; margin:0 auto; }
 .tab-content.active { display:block; }
 
 /* CARDS */
-.grid { display:grid; gap:16px; }
+.grid { display:grid; gap:18px; }
 .grid-4 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
 .grid-3 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
 .grid-2 { grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); }
-.card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:20px; }
-.card h3 { font-size:.95rem; color:var(--text-muted); margin-bottom:12px; text-transform:uppercase; letter-spacing:.5px; }
-.card .big-number { font-size:2.5rem; font-weight:700; }
-.card .sub { color:var(--text-muted); font-size:.85rem; margin-top:4px; }
+.card { background:var(--card); border:1px solid var(--rule); border-radius:4px; padding:22px 24px; }
+.card h3 { font-size:.95rem; color:var(--ink); margin-bottom:10px; font-weight:600; letter-spacing:0; text-transform:none; }
+.card .big-number { font-size:2rem; font-weight:600; color:var(--ink); font-variant-numeric:tabular-nums; line-height:1; }
+.card .sub { color:var(--ink-muted); font-size:.82rem; margin-top:4px; }
 
-/* KPI CARDS */
-.kpi { text-align:center; }
-.kpi .big-number.green { color:var(--success); }
-.kpi .big-number.yellow { color:var(--warning); }
-.kpi .big-number.red { color:var(--danger); }
-.kpi .big-number.blue { color:var(--info); }
+/* KPI CARDS — academic: ink number, small-caps label above, CI below in grey */
+.kpi { text-align:left; border-top:1px solid var(--rule); padding-top:18px; }
+.kpi-label { font-size:.7rem; color:var(--ink-muted); text-transform:uppercase; letter-spacing:1px; font-weight:600; margin-bottom:8px; }
+.kpi-number { font-family:"Inter", system-ui, sans-serif; font-size:2rem; font-weight:600; color:var(--ink); font-variant-numeric:tabular-nums; line-height:1; }
+.kpi-meta { font-size:.75rem; color:var(--ink-muted); margin-top:6px; font-variant-numeric:tabular-nums; }
+.kpi .big-number.green, .kpi .big-number.yellow, .kpi .big-number.red, .kpi .big-number.blue { color:var(--ink); }
 
 /* RISK METER */
 .risk-meter { display:flex; align-items:center; gap:16px; margin:16px 0; }
@@ -74,25 +113,25 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); co
 .risk-fill { height:100%; border-radius:12px; transition: width .8s ease; }
 .risk-label { font-size:1.5rem; font-weight:700; min-width:60px; text-align:right; }
 
-/* TABLES */
-table { width:100%; border-collapse:collapse; margin-top:12px; }
-th,td { padding:10px 12px; text-align:left; border-bottom:1px solid var(--border); font-size:.85rem; }
-th { color:var(--text-muted); text-transform:uppercase; font-size:.75rem; letter-spacing:.5px; }
-tr:hover { background:rgba(255,255,255,.02); }
-.badge { padding:3px 10px; border-radius:12px; font-size:.75rem; font-weight:600; }
-.badge-agent { background:rgba(116,185,255,.15); color:var(--info); }
-.badge-human { background:rgba(253,203,110,.15); color:var(--warning); }
-.badge-done { background:rgba(0,184,148,.15); color:var(--success); }
-.badge-progress { background:rgba(116,185,255,.15); color:var(--info); }
-.badge-pending { background:rgba(136,136,136,.15); color:var(--text-muted); }
-.badge-blocked { background:rgba(214,48,49,.15); color:var(--danger); }
+/* TABLES — academic, no zebra, hairline rules, tabular figures */
+table { width:100%; border-collapse:collapse; margin-top:14px; font-variant-numeric:tabular-nums; }
+th,td { padding:9px 12px; text-align:left; border-bottom:1px solid var(--rule); font-size:.86rem; }
+th { color:var(--ink); font-weight:600; font-size:.78rem; letter-spacing:.4px; text-transform:uppercase; border-bottom:1.5px solid var(--ink); font-family:"Inter", system-ui, sans-serif; }
+tr:hover { background:var(--paper-soft); }
+.badge { padding:2px 8px; border:1px solid var(--rule); border-radius:2px; font-size:.72rem; font-weight:500; color:var(--ink); background:var(--paper-soft); letter-spacing:.2px; }
+.badge-agent    { color:var(--accent); border-color:var(--accent); background:var(--accent-soft); }
+.badge-human    { color:var(--warning); border-color:var(--warning); background:rgba(166,100,0,.08); }
+.badge-done     { color:var(--positive); border-color:var(--positive); background:rgba(30,122,62,.08); }
+.badge-progress { color:var(--accent); border-color:var(--accent); background:var(--accent-soft); }
+.badge-pending  { color:var(--ink-muted); }
+.badge-blocked  { color:var(--negative); border-color:var(--negative); background:rgba(123,45,38,.08); }
 
 /* GANTT */
 .gantt-container { overflow-x:auto; margin-top:16px; }
 .gantt-row { display:flex; align-items:center; margin-bottom:4px; }
-.gantt-label { min-width:200px; font-size:.8rem; color:var(--text-muted); padding-right:12px; text-align:right; }
-.gantt-track { flex:1; height:28px; background:#111; border-radius:4px; position:relative; }
-.gantt-bar { position:absolute; height:100%; border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:.7rem; font-weight:600; color:#fff; min-width:20px; }
+.gantt-label { min-width:200px; font-size:.78rem; color:var(--ink-muted); padding-right:12px; text-align:right; }
+.gantt-track { flex:1; height:24px; background:var(--paper-soft); border:1px solid var(--rule-soft); position:relative; }
+.gantt-bar { position:absolute; height:100%; display:flex; align-items:center; justify-content:center; font-size:.7rem; font-weight:600; color:#fff; min-width:20px; }
 .gantt-header { display:flex; margin-bottom:8px; }
 .gantt-header-spacer { min-width:200px; }
 .gantt-header-days { flex:1; display:flex; }
@@ -100,15 +139,15 @@ tr:hover { background:rgba(255,255,255,.02); }
 
 /* PHASE CARDS */
 .phase-header { display:flex; align-items:center; gap:16px; margin-bottom:20px; }
-.phase-header .phase-icon { width:48px; height:48px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.5rem; }
+.phase-header .phase-icon { width:42px; height:42px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1rem; font-family:"Inter", system-ui, sans-serif; }
 .phase-header h2 { font-size:1.3rem; }
 .phase-header .phase-status { margin-left:auto; }
 
-.source-card { padding:16px; margin-bottom:12px; background:rgba(255,255,255,.02); border-radius:8px; border-left:3px solid var(--accent); }
-.source-card h4 { margin-bottom:6px; color:var(--info); }
-.source-card p { font-size:.85rem; color:var(--text-muted); line-height:1.5; }
+.source-card { padding:14px 18px; margin-bottom:12px; background:var(--paper-soft); border-left:3px solid var(--accent); }
+.source-card h4 { margin-bottom:4px; color:var(--ink); font-size:.92rem; }
+.source-card p { font-size:.84rem; color:var(--ink-muted); line-height:1.55; }
 .source-card .tags { margin-top:8px; display:flex; gap:6px; flex-wrap:wrap; }
-.source-card .tag { background:rgba(255,255,255,.05); padding:2px 8px; border-radius:4px; font-size:.7rem; color:var(--text-muted); }
+.source-card .tag { background:var(--card); border:1px solid var(--rule); padding:1px 7px; font-size:.7rem; color:var(--ink-muted); }
 
 /* SAMPLE TABLE */
 .sample-row td:first-child { font-weight:600; }
@@ -124,9 +163,9 @@ tr:hover { background:rgba(255,255,255,.02); }
 .checklist li input[type=checkbox] { accent-color:var(--highlight); }
 
 /* GITHUB BANNER */
-.github-banner { background:linear-gradient(90deg, rgba(233,69,96,.1), rgba(116,185,255,.1)); border:1px solid var(--border); border-radius:12px; padding:20px; margin-bottom:20px; display:flex; align-items:center; gap:16px; }
-.github-banner .gh-icon { font-size:2rem; }
-.github-banner code { background:rgba(0,0,0,.3); padding:4px 10px; border-radius:4px; font-size:.85rem; word-break:break-all; }
+.github-banner { background:var(--paper-soft); border:1px solid var(--rule); border-left:3px solid var(--accent); padding:18px 22px; margin-bottom:20px; display:flex; align-items:center; gap:16px; }
+.github-banner .gh-icon { font-size:1.4rem; color:var(--accent); }
+.github-banner code { background:var(--card); border:1px solid var(--rule); padding:3px 8px; font-size:.82rem; word-break:break-all; font-family:"SFMono-Regular", Consolas, "Liberation Mono", monospace; }
 
 /* ANALYSIS PENDING */
 
@@ -136,12 +175,12 @@ tr:hover { background:rgba(255,255,255,.02); }
 ::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
 
 /* ACTION BUTTONS */
-.btn { padding:8px 16px; border:none; border-radius:6px; cursor:pointer; font-size:.85rem; font-weight:600; transition:.2s; }
-.btn-primary { background:var(--highlight); color:#fff; }
-.btn-primary:hover { background:#c0392b; }
-.btn-secondary { background:var(--accent); color:#fff; }
-.btn-ghost { background:transparent; border:1px solid var(--border); color:var(--text-muted); }
-.btn-ghost:hover { border-color:var(--highlight); color:var(--highlight); }
+.btn { padding:7px 14px; border:1px solid var(--accent); border-radius:3px; cursor:pointer; font-size:.82rem; font-weight:500; transition:.15s; letter-spacing:.1px; }
+.btn-primary { background:var(--accent); color:#fff; }
+.btn-primary:hover { background:#142841; }
+.btn-secondary { background:var(--card); color:var(--accent); border:1px solid var(--accent); }
+.btn-ghost { background:transparent; border:1px solid var(--rule); color:var(--ink); }
+.btn-ghost:hover { border-color:var(--accent); color:var(--accent); }
 
 .mt-16 { margin-top:16px; }
 .mt-24 { margin-top:24px; }
@@ -150,83 +189,89 @@ tr:hover { background:rgba(255,255,255,.02); }
 
 /* DETECTION SIGNALS */
 .signal-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap:12px; }
-.signal-card { background:rgba(255,255,255,.02); border-radius:8px; padding:14px; border-left:3px solid; }
-.signal-card.tech { border-color:var(--info); }
+.signal-card { background:var(--paper-soft); padding:14px 16px; border-left:3px solid; }
+.signal-card.tech { border-color:var(--accent); }
 .signal-card.operational { border-color:var(--warning); }
-.signal-card.legal { border-color:var(--highlight); }
-.signal-card h4 { font-size:.85rem; margin-bottom:6px; }
-.signal-card p { font-size:.8rem; color:var(--text-muted); line-height:1.4; }
+.signal-card.legal { border-color:var(--negative); }
+.signal-card h4 { font-size:.86rem; margin-bottom:5px; color:var(--ink); }
+.signal-card p { font-size:.8rem; color:var(--ink-muted); line-height:1.45; }
 
 /* METHODOLOGY */
 .method-flow { display:flex; align-items:flex-start; gap:0; flex-wrap:wrap; justify-content:center; margin:24px 0; }
-.method-step { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:16px; width:180px; text-align:center; position:relative; }
-.method-step .step-num { width:32px; height:32px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-weight:700; font-size:.85rem; margin-bottom:8px; }
-.method-step h4 { font-size:.85rem; margin-bottom:6px; }
-.method-step p { font-size:.75rem; color:var(--text-muted); line-height:1.4; }
-.method-arrow { display:flex; align-items:center; font-size:1.5rem; color:var(--border); padding:0 4px; margin-top:30px; }
+.method-step { background:var(--card); border:1px solid var(--rule); padding:16px; width:180px; text-align:center; position:relative; }
+.method-step .step-num { width:30px; height:30px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-weight:600; font-size:.85rem; margin-bottom:8px; color:#fff; }
+.method-step h4 { font-size:.86rem; margin-bottom:6px; color:var(--ink); }
+.method-step p { font-size:.76rem; color:var(--ink-muted); line-height:1.45; }
+.method-arrow { display:flex; align-items:center; font-size:1.3rem; color:var(--rule); padding:0 4px; margin-top:28px; }
 .method-legend { display:flex; gap:20px; flex-wrap:wrap; margin-top:16px; justify-content:center; }
-.method-legend span { display:flex; align-items:center; gap:6px; font-size:.8rem; color:var(--text-muted); }
+.method-legend span { display:flex; align-items:center; gap:6px; font-size:.78rem; color:var(--ink-muted); }
 .method-legend .dot { width:12px; height:12px; border-radius:50%; }
 
-.criteria-box { background:rgba(255,255,255,.02); border-radius:8px; padding:16px; border-left:3px solid var(--accent); margin-bottom:12px; }
-.criteria-box h4 { color:var(--info); margin-bottom:8px; font-size:.9rem; }
-.criteria-box ul { padding-left:18px; font-size:.83rem; color:var(--text-muted); line-height:1.7; }
+.criteria-box { background:var(--paper-soft); padding:16px 20px; border-left:3px solid var(--accent); margin-bottom:12px; }
+.criteria-box h4 { color:var(--ink); margin-bottom:8px; font-size:.92rem; font-weight:600; }
+.criteria-box ul { padding-left:18px; font-size:.84rem; color:var(--ink-muted); line-height:1.7; }
 .criteria-box ul li { margin-bottom:2px; }
 
 /* FORMS */
 .form-group { margin-bottom:12px; }
-.form-group label { display:block; font-size:.8rem; color:var(--text-muted); margin-bottom:4px; text-transform:uppercase; letter-spacing:.5px; }
-.form-input { width:100%; padding:10px 12px; border:1px solid var(--border); border-radius:6px; background:#0f0f1a; color:var(--text); font-size:.85rem; }
-.form-input:focus { outline:none; border-color:var(--highlight); }
-.form-input::placeholder { color:#555; }
+.form-group label { display:block; font-size:.74rem; color:var(--ink-muted); margin-bottom:4px; text-transform:uppercase; letter-spacing:.7px; font-weight:600; }
+.form-input { width:100%; padding:9px 12px; border:1px solid var(--rule); border-radius:3px; background:var(--card); color:var(--ink); font-size:.86rem; font-family:inherit; }
+.form-input:focus { outline:none; border-color:var(--accent); }
+.form-input::placeholder { color:#a0a0a0; }
 select.form-input { cursor:pointer; }
-textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
+textarea.form-input { resize:vertical; min-height:60px; }
 .form-row { display:flex; gap:12px; }
 .form-row .form-group { flex:1; }
-.api-key-display { display:flex; align-items:center; gap:8px; background:#0f0f1a; padding:8px 12px; border-radius:6px; border:1px solid var(--border); margin-bottom:8px; }
-.api-key-display .key-name { font-weight:600; min-width:140px; font-size:.8rem; }
-.api-key-display .key-value { flex:1; font-family:monospace; font-size:.8rem; color:var(--success); }
-.api-key-display .btn { padding:4px 10px; font-size:.75rem; }
+.api-key-display { display:flex; align-items:center; gap:8px; background:var(--paper-soft); padding:8px 12px; border:1px solid var(--rule); margin-bottom:8px; }
+.api-key-display .key-name { font-weight:600; min-width:140px; font-size:.8rem; color:var(--ink); }
+.api-key-display .key-value { flex:1; font-family:"SFMono-Regular", Consolas, monospace; font-size:.8rem; color:var(--positive); }
+.api-key-display .btn { padding:4px 10px; font-size:.74rem; }
 .api-status { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:6px; }
-.api-status.active { background:var(--success); }
-.api-status.missing { background:var(--danger); }
+.api-status.active { background:var(--positive); }
+.api-status.missing { background:var(--negative); }
 
 /* REVIEW CARDS */
-.review-card { background:rgba(255,255,255,.02); border:1px solid var(--border); border-radius:10px; padding:16px; margin-bottom:12px; }
+.review-card { background:var(--paper-soft); border:1px solid var(--rule); padding:16px 20px; margin-bottom:12px; }
 .review-card .review-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
-.review-card .review-header h4 { font-size:.95rem; }
-.review-card .review-body { font-size:.85rem; color:var(--text-muted); line-height:1.6; }
+.review-card .review-header h4 { font-size:.95rem; color:var(--ink); }
+.review-card .review-body { font-size:.85rem; color:var(--ink-muted); line-height:1.6; }
 .review-card .review-actions { display:flex; gap:8px; margin-top:12px; flex-wrap:wrap; align-items:center; }
-.review-card .review-actions select, .review-card .review-actions input { padding:6px 10px; border:1px solid var(--border); border-radius:4px; background:#0f0f1a; color:var(--text); font-size:.8rem; }
-.review-card .review-actions textarea { padding:6px 10px; border:1px solid var(--border); border-radius:4px; background:#0f0f1a; color:var(--text); font-size:.8rem; flex:1; min-width:200px; height:32px; font-family:inherit; }
+.review-card .review-actions select, .review-card .review-actions input { padding:6px 10px; border:1px solid var(--rule); border-radius:3px; background:var(--card); color:var(--ink); font-size:.8rem; }
+.review-card .review-actions textarea { padding:6px 10px; border:1px solid var(--rule); border-radius:3px; background:var(--card); color:var(--ink); font-size:.8rem; flex:1; min-width:200px; height:32px; font-family:inherit; }
 
 /* VERIFICATION WORKSPACE */
-.verify-entity { background:var(--card); border:1px solid var(--border); border-radius:12px; margin-bottom:16px; overflow:hidden; }
+.verify-entity { background:var(--card); border:1px solid var(--rule); margin-bottom:14px; overflow:hidden; }
 .verify-entity.collapsed .verify-body { display:none; }
 .verify-header { padding:14px 20px; display:flex; align-items:center; gap:16px; cursor:pointer; transition:background .2s; }
-.verify-header:hover { background:rgba(255,255,255,.02); }
-.verify-header .entity-name { font-weight:700; flex:1; }
+.verify-header:hover { background:var(--paper-soft); }
+.verify-header .entity-name { font-weight:600; flex:1; color:var(--ink); }
 .verify-header .verify-progress { display:flex; gap:3px; }
-.verify-header .verify-progress .step-dot { width:20px; height:8px; border-radius:4px; background:#222; }
-.verify-header .verify-progress .step-dot.done { background:var(--success); }
+.verify-header .verify-progress .step-dot { width:20px; height:6px; background:var(--rule); }
+.verify-header .verify-progress .step-dot.done { background:var(--positive); }
 .verify-header .verify-progress .step-dot.partial { background:var(--warning); }
 .verify-body { padding:0 20px 20px; }
-.verify-step { display:flex; align-items:flex-start; gap:12px; padding:12px 0; border-bottom:1px solid var(--border); }
+.verify-step { display:flex; align-items:flex-start; gap:12px; padding:12px 0; border-bottom:1px solid var(--rule-soft); }
 .verify-step:last-child { border-bottom:none; }
-.verify-step .step-check { margin-top:2px; accent-color:var(--success); }
+.verify-step .step-check { margin-top:2px; accent-color:var(--positive); }
 .verify-step .step-info { flex:1; }
-.verify-step .step-info h5 { font-size:.85rem; margin-bottom:4px; display:flex; align-items:center; gap:8px; }
-.verify-step .step-info p { font-size:.8rem; color:var(--text-muted); line-height:1.4; margin-bottom:6px; }
+.verify-step .step-info h5 { font-size:.86rem; margin-bottom:4px; display:flex; align-items:center; gap:8px; color:var(--ink); }
+.verify-step .step-info p { font-size:.8rem; color:var(--ink-muted); line-height:1.45; margin-bottom:6px; }
 .verify-step .step-actions { display:flex; gap:6px; flex-wrap:wrap; align-items:center; }
 .verify-step .step-actions input, .verify-step .step-actions select, .verify-step .step-actions textarea {
-  padding:5px 8px; border:1px solid var(--border); border-radius:4px; background:#0f0f1a; color:var(--text); font-size:.8rem; font-family:inherit;
+  padding:5px 8px; border:1px solid var(--rule); border-radius:3px; background:var(--card); color:var(--ink); font-size:.8rem; font-family:inherit;
 }
 .verify-step .step-actions textarea { min-width:250px; height:28px; }
 .verify-step .step-actions a { font-size:.8rem; }
-.verify-step .auto-result { background:rgba(116,185,255,.08); border:1px solid rgba(116,185,255,.2); border-radius:6px; padding:8px 12px; margin-top:6px; font-size:.8rem; }
+.verify-step .auto-result { background:var(--accent-soft); border-left:3px solid var(--accent); padding:8px 12px; margin-top:6px; font-size:.8rem; color:var(--ink); }
 
-.toast { position:fixed; bottom:24px; right:24px; background:var(--success); color:#fff; padding:12px 20px; border-radius:8px; font-size:.85rem; font-weight:600; z-index:9999; opacity:0; transition:opacity .3s; pointer-events:none; }
+.toast { position:fixed; bottom:24px; right:24px; background:var(--ink); color:var(--paper); padding:12px 20px; border-radius:3px; font-size:.84rem; font-weight:500; z-index:9999; opacity:0; transition:opacity .3s; pointer-events:none; }
 .toast.show { opacity:1; }
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width:10px; height:10px; }
+::-webkit-scrollbar-track { background:var(--paper); }
+::-webkit-scrollbar-thumb { background:var(--rule); }
+::-webkit-scrollbar-thumb:hover { background:var(--ink-muted); }
 
 /* RESPONSIVE */
 @media (max-width:768px) {
@@ -246,8 +291,8 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
     <h2>SynthCo Research Manager</h2>
     <div class="user-info">
       <div style="position:relative;display:inline-block" onmouseenter="document.getElementById('data-tooltip').style.display='block'" onmouseleave="document.getElementById('data-tooltip').style.display='none'">
-        <button onclick="exportAllData()" style="background:rgba(0,184,148,.15);color:var(--success);border-color:var(--success)">&#11015; Export All Data</button>
-        <button onclick="document.getElementById('import-file').click()" style="background:rgba(116,185,255,.15);color:var(--info);border-color:var(--info)">&#11014; Import Data</button>
+        <button onclick="exportAllData()" class="btn btn-ghost">Export data</button>
+        <button onclick="document.getElementById('import-file').click()" class="btn btn-ghost">Import data</button>
         <button style="padding:4px 8px;font-size:.7rem;border-radius:50%;min-width:22px">?</button>
         <input type="file" id="import-file" accept=".json" style="display:none" onchange="importAllData(event)">
         <div id="data-tooltip" style="display:none;position:absolute;top:100%;right:0;margin-top:8px;width:340px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;z-index:200;box-shadow:0 8px 30px rgba(0,0,0,.5);font-size:.8rem;line-height:1.6;color:var(--text-muted)">
@@ -415,7 +460,7 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
   <!-- ============ METHODOLOGY ============ -->
   <div id="methodology" class="tab-content">
     <div class="phase-header">
-      <div class="phase-icon" style="background:rgba(116,185,255,.15)">&#128218;</div>
+      <div class="phase-icon" style="background:var(--accent-soft);color:var(--accent);font-weight:600">1</div>
       <div>
         <h2>Research Methodology</h2>
         <div class="sub">Mixed-methods approach: OSINT + NLP + Manual Verification</div>
@@ -746,7 +791,7 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
   <!-- ============ PHASE 1: SOURCES & SETUP ============ -->
   <div id="phase1" class="tab-content">
     <div class="phase-header">
-      <div class="phase-icon" style="background:rgba(116,185,255,.15)">&#128269;</div>
+      <div class="phase-icon" style="background:var(--accent-soft);color:var(--accent);font-weight:600">2</div>
       <div>
         <h2>Phase 1: Source Identification & Setup</h2>
         <div class="sub">Days 1–5 | Identify all data sources and configure collection tools</div>
@@ -879,7 +924,7 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
   <!-- ============ PHASE 2: DATA COLLECTION ============ -->
   <div id="phase2" class="tab-content">
     <div class="phase-header">
-      <div class="phase-icon" style="background:rgba(0,184,148,.15)">&#128202;</div>
+      <div class="phase-icon" style="background:var(--accent-soft);color:var(--accent);font-weight:600">3</div>
       <div>
         <h2>Phase 2: Data Collection (OSINT)</h2>
         <div class="sub">Days 5–15 | Automated and manual data gathering</div>
@@ -1048,7 +1093,7 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
   <!-- ============ PHASE 3: DETECTION & CLASSIFICATION ============ -->
   <div id="phase3" class="tab-content">
     <div class="phase-header">
-      <div class="phase-icon" style="background:rgba(253,203,110,.15)">&#129302;</div>
+      <div class="phase-icon" style="background:var(--accent-soft);color:var(--accent);font-weight:600">3b</div>
       <div>
         <h2>Phase 3: Detection & Classification</h2>
         <div class="sub">Days 12–22 | Apply detection algorithms and classify entities</div>
@@ -1173,7 +1218,7 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
   <!-- ============ PHASE 4: VERIFICATION ============ -->
   <div id="phase4" class="tab-content">
     <div class="phase-header">
-      <div class="phase-icon" style="background:rgba(233,69,96,.15)">&#9989;</div>
+      <div class="phase-icon" style="background:var(--accent-soft);color:var(--accent);font-weight:600">4</div>
       <div>
         <h2>Phase 4: Verification Protocol</h2>
         <div class="sub">Days 18–28 | Manual and automated verification of detected cases</div>
@@ -1236,7 +1281,7 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
   <!-- ============ PHASE 5: SAMPLE & VALIDATION ============ -->
   <div id="phase5" class="tab-content">
     <div class="phase-header">
-      <div class="phase-icon" style="background:rgba(0,184,148,.15)">&#128200;</div>
+      <div class="phase-icon" style="background:var(--accent-soft);color:var(--accent);font-weight:600">5</div>
       <div>
         <h2>Phase 5: Sample Construction & Validation</h2>
         <div class="sub">Days 22–30 | Build final validated sample for analysis</div>
@@ -1334,7 +1379,7 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
   <!-- ============ STATISTICAL ANALYSIS ============ -->
   <div id="analysis" class="tab-content">
     <div class="phase-header">
-      <div class="phase-icon" style="background:rgba(136,136,136,.15)">&#128202;</div>
+      <div class="phase-icon" style="background:var(--accent-soft);color:var(--accent);font-weight:600">§</div>
       <div>
         <h2>Statistical Analysis</h2>
         <div class="sub">Post-collection phase | Requires complete dataset</div>
@@ -1342,123 +1387,117 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
       <div class="phase-status"><span class="badge badge-done">Analysis Complete</span></div>
     </div>
 
-    <!-- ============ HERO: RESULTS HEADLINE ============ -->
-    <div class="card" style="background:linear-gradient(135deg, rgba(0,184,148,.12) 0%, rgba(116,185,255,.08) 50%, rgba(233,69,96,.08) 100%); border:1px solid var(--success); position:relative; overflow:hidden">
-      <div style="position:absolute;top:-40px;right:-40px;width:200px;height:200px;background:radial-gradient(circle, rgba(0,184,148,.2) 0%, transparent 70%);"></div>
-      <div style="display:flex;align-items:center;gap:16px;margin-bottom:8px;position:relative">
-        <div style="width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg, var(--success), var(--info));display:flex;align-items:center;justify-content:center;font-size:1.8rem;box-shadow:0 4px 20px rgba(0,184,148,.4)">&#129518;</div>
-        <div>
-          <h2 style="margin:0;background:linear-gradient(90deg, var(--success), var(--info));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-size:1.6rem">Results &mdash; Recursive Analysis</h2>
-          <div style="color:var(--text-muted);font-size:.85rem">XAI &middot; Robustness &middot; 5-criteria Solvency Gate</div>
-        </div>
-      </div>
-      <p style="color:var(--text-muted);font-size:.8rem;margin:8px 0 0;position:relative">
-        Pipeline: <code style="background:rgba(0,0,0,.3);padding:2px 6px;border-radius:4px">analysis/run_analysis.py</code> &middot;
-        Seed 42 &middot;
-        <a href="analysis/results.json" style="color:var(--info)">results.json</a> &middot;
-        <a href="analysis/results_summary.md" style="color:var(--info)">summary.md</a> &middot;
-        <a href="analysis/entities_unified.csv" style="color:var(--info)">dataset.csv</a>
+    <!-- ============ RESULTS HEADLINE — flat academic panel ============ -->
+    <div class="card" style="border-left:3px solid var(--accent)">
+      <h2 style="margin:0;font-size:1.45rem">Results — Recursive analysis</h2>
+      <div style="color:var(--ink-muted);font-size:.86rem;margin-top:6px">Explainable AI · Robustness · Five-criteria solvency gate</div>
+      <p style="color:var(--ink-muted);font-size:.82rem;margin:12px 0 0;border-top:1px solid var(--rule);padding-top:12px">
+        Pipeline: <code style="background:var(--paper-soft);border:1px solid var(--rule);padding:2px 6px;font-family:'SFMono-Regular',Consolas,monospace">analysis/run_analysis.py</code> ·
+        Seed 42 ·
+        <a href="analysis/results.json">results.json</a> ·
+        <a href="analysis/results_summary.md">summary.md</a> ·
+        <a href="analysis/entities_unified.csv">dataset.csv</a>
       </p>
     </div>
 
-    <!-- ============ KPI TILES ============ -->
-    <div class="grid mt-24" style="grid-template-columns:repeat(auto-fit, minmax(170px, 1fr));gap:16px">
-      <div class="card" style="text-align:center;border-top:3px solid var(--info);padding:20px 12px">
-        <div style="font-size:2.4rem;font-weight:800;color:var(--info);line-height:1">89</div>
-        <div style="font-size:.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-top:6px">Entities (n)</div>
-        <div style="font-size:.7rem;color:var(--text-muted);margin-top:4px">61 confirmed &middot; 28 controls</div>
+    <!-- ============ KPI TILES — academic: ink number, small-caps label, tabular figures ============ -->
+    <div class="grid mt-24" style="grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));gap:18px">
+      <div class="card kpi">
+        <div class="kpi-label">Sample (n)</div>
+        <div class="kpi-number">89</div>
+        <div class="kpi-meta">61 confirmed · 28 controls</div>
       </div>
-      <div class="card" style="text-align:center;border-top:3px solid var(--success);padding:20px 12px">
-        <div style="font-size:2.4rem;font-weight:800;color:var(--success);line-height:1">0.772</div>
-        <div style="font-size:.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-top:6px">Cohen&rsquo;s &kappa;</div>
-        <div style="font-size:.7rem;color:var(--text-muted);margin-top:4px">95% CI [0.541, 0.942]</div>
+      <div class="card kpi">
+        <div class="kpi-label">Cohen's κ</div>
+        <div class="kpi-number">0.772</div>
+        <div class="kpi-meta">95% CI [0.541, 0.942]</div>
       </div>
-      <div class="card" style="text-align:center;border-top:3px solid var(--warning);padding:20px 12px">
-        <div style="font-size:2.4rem;font-weight:800;color:var(--warning);line-height:1">0.73</div>
-        <div style="font-size:.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-top:6px">RF Acc &middot; 4-class</div>
-        <div style="font-size:.7rem;color:var(--text-muted);margin-top:4px">CV 5-fold &middot; n=89</div>
+      <div class="card kpi">
+        <div class="kpi-label">RF accuracy · 4-class</div>
+        <div class="kpi-number">0.73</div>
+        <div class="kpi-meta">5-fold CV · n = 89</div>
       </div>
-      <div class="card" style="text-align:center;border-top:3px solid var(--highlight);padding:20px 12px">
-        <div style="font-size:2.4rem;font-weight:800;color:var(--highlight);line-height:1">0.94</div>
-        <div style="font-size:.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-top:6px">GB Acc &middot; binary</div>
-        <div style="font-size:.7rem;color:var(--text-muted);margin-top:4px">Synthetic-or-DAO vs other</div>
+      <div class="card kpi">
+        <div class="kpi-label">GB accuracy · binary</div>
+        <div class="kpi-number">0.94</div>
+        <div class="kpi-meta">Synthetic/DAO vs other</div>
       </div>
-      <div class="card" style="text-align:center;border-top:3px solid #a29bfe;padding:20px 12px">
-        <div style="font-size:2.4rem;font-weight:800;color:#a29bfe;line-height:1">0.87</div>
-        <div style="font-size:.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-top:6px">ARI clustering</div>
-        <div style="font-size:.7rem;color:var(--text-muted);margin-top:4px">k-means vs agglom (k=4)</div>
+      <div class="card kpi">
+        <div class="kpi-label">ARI clustering</div>
+        <div class="kpi-number">0.87</div>
+        <div class="kpi-meta">k-means vs agglom (k = 4)</div>
       </div>
-      <div class="card" style="text-align:center;border-top:3px solid var(--success);padding:20px 12px">
-        <div style="font-size:2.4rem;font-weight:800;color:var(--success);line-height:1">4/4</div>
-        <div style="font-size:.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-top:6px">Solvency claims</div>
-        <div style="font-size:.7rem;color:var(--text-muted);margin-top:4px">Round 1 &middot; all pass &check;</div>
+      <div class="card kpi">
+        <div class="kpi-label">Solvency claims</div>
+        <div class="kpi-number">4/4</div>
+        <div class="kpi-meta">Round 1 · all pass</div>
       </div>
     </div>
 
     <!-- ============ CHARTS GRID ============ -->
     <div class="grid grid-2 mt-24">
       <div class="card">
-        <h3 style="margin-top:0">&#128202; Classifier accuracy &mdash; 4-class vs binary</h3>
+        <h3 style="margin-top:0">Classifier accuracy &mdash; 4-class vs binary</h3>
         <div style="color:var(--text-muted);font-size:.8rem;margin-bottom:12px">5-fold stratified CV, seed 42. Three estimators converge in the binary spec.</div>
         <div style="position:relative;height:260px"><canvas id="chart-classifiers"></canvas></div>
       </div>
       <div class="card">
-        <h3 style="margin-top:0">&#127919; Taxonomy class distribution (n = 89)</h3>
+        <h3 style="margin-top:0">Taxonomy class distribution (n = 89)</h3>
         <div style="color:var(--text-muted);font-size:.8rem;margin-bottom:12px">Analyst-coded classes plus the AI-Enhanced Shell sub-type and the in-frame controls.</div>
         <div style="position:relative;height:260px"><canvas id="chart-taxonomy"></canvas></div>
       </div>
       <div class="card">
-        <h3 style="margin-top:0">&#128270; XAI &mdash; feature importance (RF, 4-class)</h3>
+        <h3 style="margin-top:0">XAI &mdash; feature importance (RF, 4-class)</h3>
         <div style="color:var(--text-muted);font-size:.8rem;margin-bottom:12px">Permutation importance and SHAP global converge on the same drivers.</div>
         <div style="position:relative;height:260px"><canvas id="chart-xai"></canvas></div>
       </div>
       <div class="card">
-        <h3 style="margin-top:0">&#9881;&#65039; Robustness &mdash; score threshold sweep</h3>
+        <h3 style="margin-top:0">Robustness &mdash; score threshold sweep</h3>
         <div style="color:var(--text-muted);font-size:.8rem;margin-bottom:12px">Share of synthetic/DAO/shell rises monotonically as the score cutoff tightens.</div>
         <div style="position:relative;height:260px"><canvas id="chart-threshold"></canvas></div>
       </div>
     </div>
 
-    <!-- ============ SOLVENCY GATE VISUAL ============ -->
+    <!-- ============ SOLVENCY GATE — sober glyphs, no pills ============ -->
     <div class="card mt-24">
-      <h3 style="margin-top:0">&#128737;&#65039; Solvency gate &mdash; three recursion rounds &times; four headline claims</h3>
-      <div style="color:var(--text-muted);font-size:.85rem;margin-bottom:16px">Each cell scores a claim on five criteria (convergence &middot; stability &middot; interpretability &middot; LOCO &middot; threshold). Green = pass; amber = partial; red = fail.</div>
+      <h3 style="margin-top:0">Solvency gate — three recursion rounds × four headline claims</h3>
+      <div style="color:var(--ink-muted);font-size:.84rem;margin-bottom:14px">Each cell scores a claim on five criteria (convergence · stability · interpretability · LOCO · threshold). <span style="color:var(--accent)">✓ pass</span> · <span style="color:var(--warning)">○ partial</span> · <span style="color:var(--negative)">✗ fail</span> · <span style="color:var(--ink-muted)">— not applicable</span>.</div>
       <div style="overflow-x:auto">
-      <table style="width:100%;border-collapse:separate;border-spacing:0">
+      <table>
         <thead>
           <tr>
-            <th style="text-align:left;padding:10px;border-bottom:2px solid var(--border)">Round</th>
-            <th style="text-align:center;padding:10px;border-bottom:2px solid var(--border);font-size:.75rem">C1<br><span style="color:var(--text-muted);font-weight:400">Taxonomy separable</span></th>
-            <th style="text-align:center;padding:10px;border-bottom:2px solid var(--border);font-size:.75rem">C2<br><span style="color:var(--text-muted);font-weight:400">&kappa; &ge; 0.70</span></th>
-            <th style="text-align:center;padding:10px;border-bottom:2px solid var(--border);font-size:.75rem">C3<br><span style="color:var(--text-muted);font-weight:400">Score &ge; 50 dominated</span></th>
-            <th style="text-align:center;padding:10px;border-bottom:2px solid var(--border);font-size:.75rem">C4<br><span style="color:var(--text-muted);font-weight:400">Cluster recovery</span></th>
-            <th style="text-align:right;padding:10px;border-bottom:2px solid var(--border)">Outcome</th>
+            <th style="text-align:left">Round</th>
+            <th style="text-align:center">C1<div style="color:var(--ink-muted);font-weight:400;text-transform:none;letter-spacing:0;font-size:.72rem">Taxonomy separable</div></th>
+            <th style="text-align:center">C2<div style="color:var(--ink-muted);font-weight:400;text-transform:none;letter-spacing:0;font-size:.72rem">κ ≥ 0.70</div></th>
+            <th style="text-align:center">C3<div style="color:var(--ink-muted);font-weight:400;text-transform:none;letter-spacing:0;font-size:.72rem">Score ≥ 50 dominated</div></th>
+            <th style="text-align:center">C4<div style="color:var(--ink-muted);font-weight:400;text-transform:none;letter-spacing:0;font-size:.72rem">Cluster recovery</div></th>
+            <th style="text-align:right">Outcome</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td style="padding:14px 10px;border-bottom:1px solid var(--border)"><strong>R1</strong><br><span style="color:var(--text-muted);font-size:.75rem">n=89, 4-class</span></td>
-            <td style="text-align:center;padding:14px 10px;border-bottom:1px solid var(--border)"><span class="solv-cell solv-pass">PASS<br><span class="solv-meta">RF=0.73</span></span></td>
-            <td style="text-align:center;padding:14px 10px;border-bottom:1px solid var(--border)"><span class="solv-cell solv-pass">PASS<br><span class="solv-meta">&kappa;=0.772</span></span></td>
-            <td style="text-align:center;padding:14px 10px;border-bottom:1px solid var(--border)"><span class="solv-cell solv-pass">PASS<br><span class="solv-meta">70%</span></span></td>
-            <td style="text-align:center;padding:14px 10px;border-bottom:1px solid var(--border)"><span class="solv-cell solv-pass">PASS<br><span class="solv-meta">ARI=0.87</span></span></td>
-            <td style="text-align:right;padding:14px 10px;border-bottom:1px solid var(--border);color:var(--success);font-weight:700">4/4 &check;</td>
+            <td><strong>R1</strong><div style="color:var(--ink-muted);font-size:.75rem">n = 89, 4-class</div></td>
+            <td style="text-align:center"><span class="solv-cell solv-pass">✓</span><span class="solv-meta">RF = 0.73</span></td>
+            <td style="text-align:center"><span class="solv-cell solv-pass">✓</span><span class="solv-meta">κ = 0.772</span></td>
+            <td style="text-align:center"><span class="solv-cell solv-pass">✓</span><span class="solv-meta">70%</span></td>
+            <td style="text-align:center"><span class="solv-cell solv-pass">✓</span><span class="solv-meta">ARI = 0.87</span></td>
+            <td style="text-align:right;color:var(--accent);font-weight:600">4 / 4</td>
           </tr>
           <tr>
-            <td style="padding:14px 10px;border-bottom:1px solid var(--border)"><strong>R2</strong><br><span style="color:var(--text-muted);font-size:.75rem">binary collapse</span></td>
-            <td style="text-align:center;padding:14px 10px;border-bottom:1px solid var(--border)"><span class="solv-cell solv-pass">PASS<br><span class="solv-meta">RF=0.92</span></span></td>
-            <td style="text-align:center;padding:14px 10px;border-bottom:1px solid var(--border)"><span class="solv-cell solv-pass">PASS<br><span class="solv-meta">&kappa;=0.772</span></span></td>
-            <td style="text-align:center;padding:14px 10px;border-bottom:1px solid var(--border)"><span class="solv-cell solv-na">n/a<br><span class="solv-meta">recoded</span></span></td>
-            <td style="text-align:center;padding:14px 10px;border-bottom:1px solid var(--border)"><span class="solv-cell solv-pass">PASS<br><span class="solv-meta">ARI=0.87</span></span></td>
-            <td style="text-align:right;padding:14px 10px;border-bottom:1px solid var(--border);color:var(--success);font-weight:700">3/3 &check;</td>
+            <td><strong>R2</strong><div style="color:var(--ink-muted);font-size:.75rem">binary collapse</div></td>
+            <td style="text-align:center"><span class="solv-cell solv-pass">✓</span><span class="solv-meta">RF = 0.92</span></td>
+            <td style="text-align:center"><span class="solv-cell solv-pass">✓</span><span class="solv-meta">κ = 0.772</span></td>
+            <td style="text-align:center"><span class="solv-cell solv-na">—</span><span class="solv-meta">recoded</span></td>
+            <td style="text-align:center"><span class="solv-cell solv-pass">✓</span><span class="solv-meta">ARI = 0.87</span></td>
+            <td style="text-align:right;color:var(--accent);font-weight:600">3 / 3</td>
           </tr>
           <tr>
-            <td style="padding:14px 10px"><strong>R3</strong><br><span style="color:var(--text-muted);font-size:.75rem">n=78, score&ge;40</span></td>
-            <td style="text-align:center;padding:14px 10px"><span class="solv-cell solv-pass">PASS<br><span class="solv-meta">RF=0.70</span></span></td>
-            <td style="text-align:center;padding:14px 10px"><span class="solv-cell solv-pass">PASS<br><span class="solv-meta">&kappa;=0.772</span></span></td>
-            <td style="text-align:center;padding:14px 10px"><span class="solv-cell solv-pass">PASS<br><span class="solv-meta">70%</span></span></td>
-            <td style="text-align:center;padding:14px 10px"><span class="solv-cell solv-pass">PASS<br><span class="solv-meta">ARI=0.94</span></span></td>
-            <td style="text-align:right;padding:14px 10px;color:var(--success);font-weight:700">4/4 &check;</td>
+            <td><strong>R3</strong><div style="color:var(--ink-muted);font-size:.75rem">n = 78, score ≥ 40</div></td>
+            <td style="text-align:center"><span class="solv-cell solv-pass">✓</span><span class="solv-meta">RF = 0.70</span></td>
+            <td style="text-align:center"><span class="solv-cell solv-pass">✓</span><span class="solv-meta">κ = 0.772</span></td>
+            <td style="text-align:center"><span class="solv-cell solv-pass">✓</span><span class="solv-meta">70%</span></td>
+            <td style="text-align:center"><span class="solv-cell solv-pass">✓</span><span class="solv-meta">ARI = 0.94</span></td>
+            <td style="text-align:right;color:var(--accent);font-weight:600">4 / 4</td>
           </tr>
         </tbody>
       </table>
@@ -1468,7 +1507,7 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
     <!-- ============ DETAILED SECTIONS (grouped, narrative) ============ -->
     <div class="grid grid-2 mt-24">
       <div class="card">
-        <h3 style="margin-top:0;color:var(--info)">&#128100; Sample</h3>
+        <h3 style="margin-top:0">Sample</h3>
         <ul style="line-height:1.7">
           <li><strong>n = 89</strong> (60 built-in + 29 user-added); 61 confirmed synthetic/agentic + 28 control real-co.</li>
           <li>Jurisdictions: 47 OECD-traditional &middot; 32 permissive/decentralized (Cayman, Estonia, on-chain) &middot; 6 emerging &middot; 4 other.</li>
@@ -1476,35 +1515,35 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
         </ul>
       </div>
       <div class="card">
-        <h3 style="margin-top:0;color:var(--success)">&#129309; Inter-rater reliability (R1 vs R2, n=25)</h3>
+        <h3 style="margin-top:0">Inter-rater reliability (R1 vs R2, n = 25)</h3>
         <ul style="line-height:1.7">
           <li><strong>&kappa; = 0.772</strong> (substantial &mdash; above the 0.70 threshold). Bootstrap 95% CI [0.541, 0.942] over 2,000 resamples.</li>
           <li><strong>&kappa; &rarr; 1.00</strong> after removing 4 disputed cases &mdash; disagreements model real taxonomic frontiers (Synthetic &harr; Shell; MAS &harr; DAO), not noise.</li>
         </ul>
       </div>
       <div class="card">
-        <h3 style="margin-top:0;color:var(--warning)">&#128200; Group comparisons (Kruskal&ndash;Wallis)</h3>
+        <h3 style="margin-top:0">Group comparisons (Kruskal–Wallis)</h3>
         <ul style="line-height:1.7">
           <li>Score by class: <strong>H=61.59, p&lt;1&times;10<sup>&minus;11</sup>, &eta;<sup>2</sup>=0.68</strong> (large).</li>
           <li>Employees by class: <strong>H=54.08, p&lt;1&times;10<sup>&minus;9</sup>, &eta;<sup>2</sup>=0.59</strong> (large).</li>
         </ul>
       </div>
       <div class="card">
-        <h3 style="margin-top:0;color:#a29bfe">&#128302; Clustering (k-means + agglom + GMM)</h3>
+        <h3 style="margin-top:0">Clustering (k-means + agglomerative + GMM)</h3>
         <ul style="line-height:1.7">
           <li>Preferred k=4. Silhouette=0.50. <strong>ARI(km, agg) = 0.87</strong>.</li>
           <li>ARI vs analyst-coded taxonomy = 0.22&ndash;0.29 &mdash; structure recovers venture shape <em>partially</em>; taxonomy adds content beyond OSINT features.</li>
         </ul>
       </div>
       <div class="card">
-        <h3 style="margin-top:0;color:var(--info)">&#129504; Explainable AI</h3>
+        <h3 style="margin-top:0">Explainable AI</h3>
         <ul style="line-height:1.7">
           <li>Permutation, SHAP and a depth-3 surrogate tree converge on <strong>employee scale, AI %, and venture age</strong> as drivers.</li>
           <li>Surrogate tree fidelity = <strong>71.9%</strong>. First split: ai_pct &le; 79.5%; then score &le; 66.5.</li>
         </ul>
       </div>
       <div class="card">
-        <h3 style="margin-top:0;color:var(--highlight)">&#128737;&#65039; Robustness</h3>
+        <h3 style="margin-top:0">Robustness</h3>
         <ul style="line-height:1.7">
           <li><strong>Bootstrap</strong> (500 OOB): 4-class RF=0.679 [0.516, 0.831]; binary RF=0.904 [0.781, 1.000].</li>
           <li><strong>LOCO</strong>: re-fit after dropping each class &rarr; CV 0.75&ndash;0.82. No collapse.</li>
@@ -1515,30 +1554,15 @@ textarea.form-input { resize:vertical; min-height:60px; font-family:inherit; }
     </div>
 
     <!-- ============ HEADLINE TAKEAWAYS ============ -->
-    <div class="card mt-24" style="background:linear-gradient(135deg, rgba(116,185,255,.06), rgba(0,184,148,.04));border-left:4px solid var(--info)">
-      <h3 style="margin-top:0">&#10024; Headline takeaways</h3>
-      <div class="grid grid-2" style="gap:14px;margin-top:12px">
-        <div style="display:flex;gap:12px;align-items:flex-start">
-          <div style="font-size:1.6rem;flex-shrink:0">&#128202;</div>
-          <div><strong style="color:var(--info)">Detectable.</strong> A new class of entrepreneurial entity is empirically detectable with OSINT features alone (4-class RF=0.73; binary=0.92&ndash;0.94).</div>
-        </div>
-        <div style="display:flex;gap:12px;align-items:flex-start">
-          <div style="font-size:1.6rem;flex-shrink:0">&#128270;</div>
-          <div><strong style="color:var(--success)">Interpretable.</strong> Scale, AI content and venture age drive the classification &mdash; not OSINT pipeline artefacts.</div>
-        </div>
-        <div style="display:flex;gap:12px;align-items:flex-start">
-          <div style="font-size:1.6rem;flex-shrink:0">&#128737;&#65039;</div>
-          <div><strong style="color:var(--highlight)">Robust.</strong> Bootstrap, LOCO, threshold sensitivity and alternative coding schemes all preserve the result.</div>
-        </div>
-        <div style="display:flex;gap:12px;align-items:flex-start">
-          <div style="font-size:1.6rem;flex-shrink:0">&#129309;</div>
-          <div><strong style="color:var(--success)">Reliable.</strong> &kappa;=0.772 substantial; rises to perfect once two real frontiers are acknowledged as substantive.</div>
-        </div>
-        <div style="display:flex;gap:12px;align-items:flex-start;grid-column:span 2">
-          <div style="font-size:1.6rem;flex-shrink:0">&#128302;</div>
-          <div><strong style="color:#a29bfe">Theoretically motivated.</strong> Unsupervised structure recovers venture-shape groupings only <em>partially</em> &mdash; the analyst-coded taxonomy is theoretically motivated, not mechanically induced from the data.</div>
-        </div>
-      </div>
+    <div class="card mt-24" style="border-left:3px solid var(--accent);background:var(--paper-soft)">
+      <h3 style="margin-top:0">Headline takeaways</h3>
+      <ul style="line-height:1.8;margin-top:12px">
+        <li><strong>Detectable.</strong> A new class of entrepreneurial entity is empirically detectable with OSINT features alone (4-class RF=0.73; binary=0.92&ndash;0.94).</li>
+        <li><strong>Interpretable.</strong> Scale, AI content and venture age drive the classification &mdash; not OSINT pipeline artefacts.</li>
+        <li><strong>Robust.</strong> Bootstrap, LOCO, threshold sensitivity and alternative coding schemes all preserve the result.</li>
+        <li><strong>Reliable.</strong> &kappa; = 0.772 substantial; rises to perfect once two real frontiers are acknowledged as substantive.</li>
+        <li><strong>Theoretically motivated.</strong> Unsupervised structure recovers venture-shape groupings only <em>partially</em> &mdash; the analyst-coded taxonomy is theoretically motivated, not mechanically induced from the data.</li>
+      </ul>
     </div>
 
     <div class="grid grid-3 mt-24">
@@ -2019,7 +2043,20 @@ function renderMethodologyCharts() {
 }
 
 function renderResultsCharts() {
-  const txt = '#888', grid = '#2a2a4a';
+  // Academic theme — paper bg, ink text, Okabe-Ito colour-blind-safe palette
+  const ink = '#1a1a2e', muted = '#5a5a5a', grid = '#e8e6e0';
+  // Okabe-Ito (consistent across all 4 charts — vermillion = synthetic class)
+  const OI = {
+    black:'#000000', orange:'#E69F00', skyBlue:'#56B4E9', green:'#009E73',
+    yellow:'#F0E442', blue:'#0072B2', vermillion:'#D55E00', mauve:'#CC79A7'
+  };
+  const fontBase = '"Inter", -apple-system, "Segoe UI", system-ui, sans-serif';
+
+  // Global Chart.js defaults (applied lazily here, scoped to these charts)
+  Chart.defaults.font.family = fontBase;
+  Chart.defaults.font.size = 11;
+  Chart.defaults.color = muted;
+  Chart.defaults.borderColor = grid;
 
   // 1) Classifier accuracy — grouped bars (4-class vs binary)
   const cls = document.getElementById('chart-classifiers');
@@ -2028,17 +2065,21 @@ function renderResultsCharts() {
     data: {
       labels: ['Logistic regression', 'Random forest', 'Gradient boosting'],
       datasets: [
-        {label:'4-class CV accuracy', data:[0.639, 0.729, 0.641], backgroundColor:'rgba(253,203,110,.55)', borderColor:'#fdcb6e', borderWidth:1.5, borderRadius:6},
-        {label:'2-class CV accuracy', data:[0.922, 0.922, 0.944], backgroundColor:'rgba(0,184,148,.6)', borderColor:'#00b894', borderWidth:1.5, borderRadius:6},
+        {label:'4-class CV accuracy', data:[0.639, 0.729, 0.641],
+         backgroundColor: OI.orange, borderColor: ink, borderWidth: 0.6, borderRadius: 0, barPercentage: 0.85, categoryPercentage: 0.7},
+        {label:'Binary CV accuracy', data:[0.922, 0.922, 0.944],
+         backgroundColor: OI.vermillion, borderColor: ink, borderWidth: 0.6, borderRadius: 0, barPercentage: 0.85, categoryPercentage: 0.7},
       ]
     },
     options: {
       responsive:true, maintainAspectRatio:false,
-      plugins:{legend:{position:'bottom', labels:{color:txt, font:{size:11}}},
-        tooltip:{callbacks:{label:c=>c.dataset.label+': '+(c.parsed.y*100).toFixed(1)+'%'}}},
+      plugins:{
+        legend:{position:'bottom', labels:{color:ink, font:{size:11, family:fontBase}, boxWidth:14, boxHeight:10, padding:14}},
+        tooltip:{callbacks:{label:c=>c.dataset.label+': '+(c.parsed.y*100).toFixed(1)+'%'}}
+      },
       scales:{
-        x:{ticks:{color:txt, font:{size:11}}, grid:{color:grid}},
-        y:{beginAtZero:true, max:1, ticks:{color:txt, callback:v=>(v*100).toFixed(0)+'%'}, grid:{color:grid}}
+        x:{ticks:{color:ink, font:{size:11}}, grid:{display:false}, border:{color:ink}},
+        y:{beginAtZero:true, max:1, ticks:{color:muted, callback:v=>(v*100).toFixed(0)+'%'}, grid:{color:grid, drawBorder:false}, border:{display:false}, title:{display:true, text:'5-fold CV accuracy', color:ink, font:{size:11}}}
       }
     }
   });
@@ -2048,43 +2089,48 @@ function renderResultsCharts() {
   if (tax) new Chart(tax, {
     type: 'doughnut',
     data: {
-      labels: ['Agentic Organization (25)','Agentic DAO (24)','Synthetic Company (19)','Multi-Agent System (8)','Dismissed–Real Co. (8)','AI-Enhanced Shell (5)'],
+      labels: ['Agentic Organization (25)','Agentic DAO (24)','Synthetic Company (19)','Multi-Agent System (8)','Dismissed real-co. (8)','AI-Enhanced Shell (5)'],
       datasets: [{
         data: [25, 24, 19, 8, 8, 5],
-        backgroundColor: ['#74b9ff','#a29bfe','#e94560','#00b894','#888','#fdcb6e'],
-        borderColor: '#1a1a2e', borderWidth: 2
+        // Synthetic = vermillion (kept consistent with figure colour code across all 4 charts)
+        backgroundColor: [OI.blue, OI.skyBlue, OI.vermillion, OI.green, '#bdbdbd', OI.orange],
+        borderColor: '#ffffff', borderWidth: 2
       }]
     },
     options: {
       responsive:true, maintainAspectRatio:false, cutout:'58%',
-      plugins:{legend:{position:'right', labels:{color:txt, font:{size:10.5}, boxWidth:14}},
-        tooltip:{callbacks:{label:c=>c.label+' — '+(c.parsed/89*100).toFixed(1)+'%'}}}
+      plugins:{
+        legend:{position:'right', labels:{color:ink, font:{size:10.5, family:fontBase}, boxWidth:12, padding:10}},
+        tooltip:{callbacks:{label:c=>c.label+' — '+(c.parsed/89*100).toFixed(1)+'%'}}
+      }
     }
   });
 
-  // 3) XAI — feature importance (permutation + SHAP, both normalized for visual comparison)
+  // 3) XAI — permutation + SHAP horizontal bars
   const xai = document.getElementById('chart-xai');
   if (xai) new Chart(xai, {
     type: 'bar',
     data: {
       labels: ['log_employees','ai_pct','domain_years','synthetic score'],
       datasets: [
-        {label:'Permutation importance', data:[0.281, 0.253, 0.218, 0.115], backgroundColor:'rgba(116,185,255,.6)', borderColor:'#74b9ff', borderWidth:1.5, borderRadius:6},
-        {label:'SHAP global (mean |φ|)', data:[0.100, 0.047, 0.094, 0.031], backgroundColor:'rgba(233,69,96,.6)', borderColor:'#e94560', borderWidth:1.5, borderRadius:6}
+        {label:'Permutation importance', data:[0.281, 0.253, 0.218, 0.115],
+         backgroundColor: OI.blue, borderColor: ink, borderWidth: 0.6, borderRadius: 0},
+        {label:'SHAP global (mean |φ|)', data:[0.100, 0.047, 0.094, 0.031],
+         backgroundColor: OI.vermillion, borderColor: ink, borderWidth: 0.6, borderRadius: 0}
       ]
     },
     options: {
       indexAxis: 'y',
       responsive:true, maintainAspectRatio:false,
-      plugins:{legend:{position:'bottom', labels:{color:txt, font:{size:11}}}},
+      plugins:{legend:{position:'bottom', labels:{color:ink, font:{size:11, family:fontBase}, boxWidth:14, padding:14}}},
       scales:{
-        x:{beginAtZero:true, ticks:{color:txt}, grid:{color:grid}},
-        y:{ticks:{color:txt, font:{size:11}}, grid:{color:grid}}
+        x:{beginAtZero:true, ticks:{color:muted}, grid:{color:grid, drawBorder:false}, border:{display:false}, title:{display:true, text:'Importance', color:ink, font:{size:11}}},
+        y:{ticks:{color:ink, font:{size:11, family:'"SFMono-Regular", Consolas, monospace'}}, grid:{display:false}, border:{color:ink}}
       }
     }
   });
 
-  // 4) Threshold sensitivity — line
+  // 4) Threshold sensitivity — line chart, monotonic trend
   const thr = document.getElementById('chart-threshold');
   if (thr) new Chart(thr, {
     type: 'line',
@@ -2093,19 +2139,22 @@ function renderResultsCharts() {
       datasets: [{
         label:'% synthetic / DAO / shell in retained sample',
         data:[61.5, 65.8, 69.6, 80.4, 85.4],
-        borderColor:'#00b894',
-        backgroundColor:'rgba(0,184,148,.18)',
-        borderWidth:2.5, tension:.25, fill:true,
-        pointBackgroundColor:'#00b894', pointRadius:5, pointHoverRadius:7
+        borderColor: OI.vermillion,
+        backgroundColor:'rgba(213,94,0,.10)',
+        borderWidth: 2, tension: .2, fill: true,
+        pointBackgroundColor: OI.vermillion, pointBorderColor: ink, pointBorderWidth: 0.8,
+        pointRadius: 5, pointHoverRadius: 7
       }]
     },
     options: {
       responsive:true, maintainAspectRatio:false,
-      plugins:{legend:{position:'bottom', labels:{color:txt, font:{size:11}}},
-        tooltip:{callbacks:{label:c=>c.parsed.y.toFixed(1)+'% at score ≥ '+c.label}}},
+      plugins:{
+        legend:{position:'bottom', labels:{color:ink, font:{size:11, family:fontBase}, boxWidth:14, padding:14}},
+        tooltip:{callbacks:{label:c=>c.parsed.y.toFixed(1)+'% at score ≥ '+c.label}}
+      },
       scales:{
-        x:{title:{display:true, text:'Score cutoff', color:txt}, ticks:{color:txt}, grid:{color:grid}},
-        y:{beginAtZero:true, max:100, ticks:{color:txt, callback:v=>v+'%'}, grid:{color:grid}}
+        x:{title:{display:true, text:'Score cutoff', color:ink, font:{size:11}}, ticks:{color:muted}, grid:{display:false}, border:{color:ink}},
+        y:{beginAtZero:true, max:100, ticks:{color:muted, callback:v=>v+'%'}, grid:{color:grid, drawBorder:false}, border:{display:false}}
       }
     }
   });
