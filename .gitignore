@@ -10,6 +10,7 @@ REVIEWER_RESPONSE_TEMPLATE.md
 BIBLIOGRAPHY.bib
 MANUSCRIPT_SELF_AUDIT.md
 literature_review_raw.md
+EMAIL_*.md
 
 # Editor and OS noise
 .DS_Store
