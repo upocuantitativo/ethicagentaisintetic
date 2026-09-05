@@ -1,0 +1,871 @@
+{
+  "sample": {
+    "rows_in_workbench": 89,
+    "excluded_demo_record": 44,
+    "excluded_not_established": 0,
+    "analytic_n": 45,
+    "confirmed": 19,
+    "control": 26,
+    "by_channel": {
+      "stage4_manual": 29,
+      "stage3_score_pipeline": 16
+    },
+    "by_jurisdiction": {
+      "permissive_or_decentralized": 22,
+      "oecd_traditional": 19,
+      "other": 2,
+      "emerging_or_special": 2
+    },
+    "by_source_family": {
+      "press": 22,
+      "chain_analytics": 17,
+      "company_or_startup_db": 4,
+      "other": 2
+    },
+    "zero_employee_n": 8,
+    "zero_employee_pct": 17.8
+  },
+  "dimensions": {
+    "marginals": {
+      "D1_legal_form": {
+        "registered_company": 40,
+        "unincorporated_on_chain": 5
+      },
+      "D2_human_participation": {
+        "substantial_workforce": 22,
+        "small_team": 15,
+        "none": 8
+      },
+      "D3_ai_authority": {
+        "single_function": 21,
+        "governance": 14,
+        "none_or_advisory": 6,
+        "multi_function": 4
+      },
+      "D4_architecture": {
+        "single_agent": 19,
+        "not_agentic": 17,
+        "multi_agent": 9
+      },
+      "D5_governance_substrate": {
+        "conventional": 21,
+        "on_chain": 14,
+        "hybrid": 10
+      }
+    },
+    "n_distinct_profiles": 15,
+    "n_possible_profiles": 216,
+    "top_profiles": {
+      "registered_company|substantial_workforce|single_function|single_agent|conventional": 14,
+      "registered_company|small_team|governance|not_agentic|on_chain": 5,
+      "registered_company|small_team|single_function|multi_agent|hybrid": 4,
+      "registered_company|substantial_workforce|none_or_advisory|not_agentic|hybrid": 3,
+      "registered_company|substantial_workforce|governance|not_agentic|on_chain": 3,
+      "unincorporated_on_chain|none|governance|not_agentic|on_chain": 3,
+      "registered_company|none|multi_function|single_agent|conventional": 2,
+      "registered_company|small_team|none_or_advisory|not_agentic|conventional": 2,
+      "registered_company|small_team|single_function|multi_agent|conventional": 2,
+      "unincorporated_on_chain|none|governance|multi_agent|on_chain": 2
+    },
+    "cramers_v_between_dimensions": {
+      "D1_legal_form~D2_human_participation": 0.76,
+      "D1_legal_form~D3_ai_authority": 0.526,
+      "D1_legal_form~D4_architecture": 0.307,
+      "D1_legal_form~D5_governance_substrate": 0.526,
+      "D2_human_participation~D3_ai_authority": 0.494,
+      "D2_human_participation~D4_architecture": 0.452,
+      "D2_human_participation~D5_governance_substrate": 0.345,
+      "D3_ai_authority~D4_architecture": 0.67,
+      "D3_ai_authority~D5_governance_substrate": 0.731,
+      "D4_architecture~D5_governance_substrate": 0.522
+    },
+    "delegation_index": {
+      "mean": 0.365,
+      "sd": 0.287,
+      "by_status": {
+        "0": 0.226,
+        "1": 0.556
+      },
+      "mannwhitney_u": 411.0,
+      "p": 8.775535516141032e-05,
+      "rank_biserial": 0.664
+    }
+  },
+  "irr": {
+    "all_double_coded_r0": {
+      "n": 25,
+      "raw_agreement": 0.84,
+      "kappa": 0.772,
+      "kappa_ci95": [
+        0.543,
+        0.944
+      ],
+      "pabak": 0.68,
+      "threshold_0_70_established": false,
+      "labels": [
+        "Agentic DAO",
+        "Agentic Organization",
+        "Dismissed",
+        "Multi-Agent System"
+      ],
+      "confusion_matrix": [
+        [
+          5,
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          9,
+          0,
+          3
+        ],
+        [
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          5
+        ]
+      ],
+      "per_class_specific_agreement": {
+        "Agentic DAO": {
+          "rater1_n": 6,
+          "rater2_n": 5,
+          "both": 5,
+          "specific_agreement": 0.909
+        },
+        "Agentic Organization": {
+          "rater1_n": 12,
+          "rater2_n": 9,
+          "both": 9,
+          "specific_agreement": 0.857
+        },
+        "Dismissed": {
+          "rater1_n": 2,
+          "rater2_n": 2,
+          "both": 2,
+          "specific_agreement": 1.0
+        },
+        "Multi-Agent System": {
+          "rater1_n": 5,
+          "rater2_n": 9,
+          "both": 5,
+          "specific_agreement": 0.714
+        }
+      },
+      "disagreements": [
+        {
+          "entity_id": "builtin_25",
+          "entity": "Nexus Automata Corp",
+          "rater1": "Agentic Organization",
+          "rater2": "Multi-Agent System"
+        },
+        {
+          "entity_id": "builtin_48",
+          "entity": "SoloUnicorn Corp",
+          "rater1": "Agentic Organization",
+          "rater2": "Multi-Agent System"
+        },
+        {
+          "entity_id": "builtin_57",
+          "entity": "DigitalNomad Pte",
+          "rater1": "Agentic Organization",
+          "rater2": "Multi-Agent System"
+        },
+        {
+          "entity_id": "user_3",
+          "entity": "0xCover (AI Insurance DAO)",
+          "rater1": "Agentic DAO",
+          "rater2": "Multi-Agent System"
+        }
+      ]
+    },
+    "analytic_sample_only": {
+      "n": 10,
+      "raw_agreement": 0.9,
+      "kappa": 0.846,
+      "kappa_ci95": [
+        0.459,
+        1.0
+      ],
+      "pabak": 0.8,
+      "threshold_0_70_established": false,
+      "labels": [
+        "Agentic DAO",
+        "Agentic Organization",
+        "Multi-Agent System"
+      ],
+      "confusion_matrix": [
+        [
+          4,
+          0,
+          1
+        ],
+        [
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          0,
+          2
+        ]
+      ],
+      "per_class_specific_agreement": {
+        "Agentic DAO": {
+          "rater1_n": 5,
+          "rater2_n": 4,
+          "both": 4,
+          "specific_agreement": 0.889
+        },
+        "Agentic Organization": {
+          "rater1_n": 3,
+          "rater2_n": 3,
+          "both": 3,
+          "specific_agreement": 1.0
+        },
+        "Multi-Agent System": {
+          "rater1_n": 2,
+          "rater2_n": 3,
+          "both": 2,
+          "specific_agreement": 0.8
+        }
+      },
+      "disagreements": [
+        {
+          "entity_id": "user_3",
+          "entity": "0xCover (AI Insurance DAO)",
+          "rater1": "Agentic DAO",
+          "rater2": "Multi-Agent System"
+        }
+      ]
+    }
+  },
+  "score_as_detector": {
+    "all_observed": {
+      "n": 45,
+      "positives": 19,
+      "auc": 0.921,
+      "auc_ci95": [
+        0.83,
+        0.985
+      ],
+      "at_cutoff_50": {
+        "sensitivity": 0.947,
+        "specificity": 0.462,
+        "precision": 0.562,
+        "tn": 12,
+        "fp": 14,
+        "fn": 1,
+        "tp": 18
+      },
+      "n_score_at_default_50": 15
+    },
+    "stage4_score_independent": {
+      "n": 29,
+      "positives": 9,
+      "auc": 0.9,
+      "auc_ci95": [
+        0.783,
+        1.0
+      ],
+      "at_cutoff_50": {
+        "sensitivity": 1.0,
+        "specificity": 0.4,
+        "precision": 0.429,
+        "tn": 8,
+        "fp": 12,
+        "fn": 0,
+        "tp": 9
+      },
+      "n_score_at_default_50": 15
+    }
+  },
+  "supervised": {
+    "primary_no_score_no_detector": {
+      "n": 45,
+      "positives": 19,
+      "features": {
+        "numeric": [
+          "log_employees",
+          "domain_years"
+        ],
+        "categorical": [
+          "jurisdiction_type",
+          "source_family"
+        ]
+      },
+      "baseline_majority": {
+        "mean": 0.578,
+        "sd": 0.044
+      },
+      "baseline_stratified": {
+        "mean": 0.511,
+        "sd": 0.141
+      },
+      "logistic": {
+        "cv_accuracy_mean": 0.822,
+        "cv_accuracy_sd": 0.122,
+        "cv_accuracy_ci95": [
+          0.581,
+          1.0
+        ],
+        "cv_balanced_accuracy_mean": 0.811,
+        "cv_f1_macro_mean": 0.808,
+        "cv_roc_auc_mean": 0.868,
+        "oof_confusion_matrix": [
+          [
+            23,
+            3
+          ],
+          [
+            4,
+            15
+          ]
+        ],
+        "per_class": {
+          "0": {
+            "precision": 0.852,
+            "recall": 0.885,
+            "f1-score": 0.868,
+            "support": 26.0
+          },
+          "1": {
+            "precision": 0.833,
+            "recall": 0.789,
+            "f1-score": 0.811,
+            "support": 19.0
+          }
+        },
+        "permutation_test": {
+          "score": 0.822,
+          "null_mean": 0.537,
+          "p_value": 0.0033
+        }
+      },
+      "random_forest": {
+        "cv_accuracy_mean": 0.858,
+        "cv_accuracy_sd": 0.097,
+        "cv_accuracy_ci95": [
+          0.667,
+          1.0
+        ],
+        "cv_balanced_accuracy_mean": 0.842,
+        "cv_f1_macro_mean": 0.844,
+        "cv_roc_auc_mean": 0.911,
+        "oof_confusion_matrix": [
+          [
+            24,
+            2
+          ],
+          [
+            5,
+            14
+          ]
+        ],
+        "per_class": {
+          "0": {
+            "precision": 0.828,
+            "recall": 0.923,
+            "f1-score": 0.873,
+            "support": 26.0
+          },
+          "1": {
+            "precision": 0.875,
+            "recall": 0.737,
+            "f1-score": 0.8,
+            "support": 19.0
+          }
+        },
+        "permutation_test": {
+          "score": 0.867,
+          "null_mean": 0.533,
+          "p_value": 0.0033
+        }
+      },
+      "grouped_cv_by_source_family": {
+        "mean": 0.848,
+        "sd": 0.092,
+        "n_groups": 4
+      }
+    },
+    "sensitivity_with_ai_detector": {
+      "n": 45,
+      "positives": 19,
+      "features": {
+        "numeric": [
+          "log_employees",
+          "domain_years",
+          "ai_pct"
+        ],
+        "categorical": [
+          "jurisdiction_type",
+          "source_family"
+        ]
+      },
+      "baseline_majority": {
+        "mean": 0.578,
+        "sd": 0.044
+      },
+      "baseline_stratified": {
+        "mean": 0.511,
+        "sd": 0.141
+      },
+      "logistic": {
+        "cv_accuracy_mean": 0.813,
+        "cv_accuracy_sd": 0.129,
+        "cv_accuracy_ci95": [
+          0.581,
+          1.0
+        ],
+        "cv_balanced_accuracy_mean": 0.797,
+        "cv_f1_macro_mean": 0.794,
+        "cv_roc_auc_mean": 0.851,
+        "oof_confusion_matrix": [
+          [
+            25,
+            1
+          ],
+          [
+            5,
+            14
+          ]
+        ],
+        "per_class": {
+          "0": {
+            "precision": 0.833,
+            "recall": 0.962,
+            "f1-score": 0.893,
+            "support": 26.0
+          },
+          "1": {
+            "precision": 0.933,
+            "recall": 0.737,
+            "f1-score": 0.824,
+            "support": 19.0
+          }
+        },
+        "permutation_test": {
+          "score": 0.8,
+          "null_mean": 0.538,
+          "p_value": 0.0033
+        }
+      },
+      "random_forest": {
+        "cv_accuracy_mean": 0.838,
+        "cv_accuracy_sd": 0.1,
+        "cv_accuracy_ci95": [
+          0.667,
+          1.0
+        ],
+        "cv_balanced_accuracy_mean": 0.816,
+        "cv_f1_macro_mean": 0.815,
+        "cv_roc_auc_mean": 0.903,
+        "oof_confusion_matrix": [
+          [
+            24,
+            2
+          ],
+          [
+            7,
+            12
+          ]
+        ],
+        "per_class": {
+          "0": {
+            "precision": 0.774,
+            "recall": 0.923,
+            "f1-score": 0.842,
+            "support": 26.0
+          },
+          "1": {
+            "precision": 0.857,
+            "recall": 0.632,
+            "f1-score": 0.727,
+            "support": 19.0
+          }
+        },
+        "permutation_test": {
+          "score": 0.844,
+          "null_mean": 0.533,
+          "p_value": 0.0033
+        }
+      }
+    },
+    "r0_style_with_score_leaky": {
+      "n": 45,
+      "positives": 19,
+      "features": {
+        "numeric": [
+          "log_employees",
+          "domain_years",
+          "ai_pct",
+          "score"
+        ],
+        "categorical": []
+      },
+      "baseline_majority": {
+        "mean": 0.578,
+        "sd": 0.044
+      },
+      "baseline_stratified": {
+        "mean": 0.511,
+        "sd": 0.141
+      },
+      "logistic": {
+        "cv_accuracy_mean": 0.891,
+        "cv_accuracy_sd": 0.105,
+        "cv_accuracy_ci95": [
+          0.667,
+          1.0
+        ],
+        "cv_balanced_accuracy_mean": 0.875,
+        "cv_f1_macro_mean": 0.876,
+        "cv_roc_auc_mean": 0.929,
+        "oof_confusion_matrix": [
+          [
+            26,
+            0
+          ],
+          [
+            4,
+            15
+          ]
+        ],
+        "per_class": {
+          "0": {
+            "precision": 0.867,
+            "recall": 1.0,
+            "f1-score": 0.929,
+            "support": 26.0
+          },
+          "1": {
+            "precision": 1.0,
+            "recall": 0.789,
+            "f1-score": 0.882,
+            "support": 19.0
+          }
+        },
+        "permutation_test": {
+          "score": 0.911,
+          "null_mean": 0.544,
+          "p_value": 0.0033
+        }
+      },
+      "random_forest": {
+        "cv_accuracy_mean": 0.933,
+        "cv_accuracy_sd": 0.074,
+        "cv_accuracy_ci95": [
+          0.778,
+          1.0
+        ],
+        "cv_balanced_accuracy_mean": 0.933,
+        "cv_f1_macro_mean": 0.931,
+        "cv_roc_auc_mean": 0.996,
+        "oof_confusion_matrix": [
+          [
+            24,
+            2
+          ],
+          [
+            2,
+            17
+          ]
+        ],
+        "per_class": {
+          "0": {
+            "precision": 0.923,
+            "recall": 0.923,
+            "f1-score": 0.923,
+            "support": 26.0
+          },
+          "1": {
+            "precision": 0.895,
+            "recall": 0.895,
+            "f1-score": 0.895,
+            "support": 19.0
+          }
+        },
+        "permutation_test": {
+          "score": 0.911,
+          "null_mean": 0.529,
+          "p_value": 0.0033
+        }
+      }
+    }
+  },
+  "holdouts": [
+    {
+      "tag": "temporal_youngest_half",
+      "n_train": 22,
+      "n_test": 23,
+      "accuracy": 0.696,
+      "majority_baseline": 0.565,
+      "beats_majority": true,
+      "confusion_matrix": [
+        [
+          10,
+          0
+        ],
+        [
+          7,
+          6
+        ]
+      ]
+    },
+    {
+      "tag": "jurisdictional_permissive_decentralized",
+      "n_train": 23,
+      "n_test": 22,
+      "accuracy": 0.682,
+      "majority_baseline": 0.545,
+      "beats_majority": true,
+      "confusion_matrix": [
+        [
+          10,
+          0
+        ],
+        [
+          7,
+          5
+        ]
+      ]
+    },
+    {
+      "tag": "source_family_press",
+      "n_train": 23,
+      "n_test": 22,
+      "accuracy": 0.818,
+      "majority_baseline": 0.682,
+      "beats_majority": true,
+      "confusion_matrix": [
+        [
+          15,
+          0
+        ],
+        [
+          4,
+          3
+        ]
+      ]
+    },
+    {
+      "tag": "source_family_chain_analytics",
+      "n_train": 28,
+      "n_test": 17,
+      "accuracy": 0.824,
+      "majority_baseline": 0.588,
+      "beats_majority": true,
+      "confusion_matrix": [
+        [
+          7,
+          0
+        ],
+        [
+          3,
+          7
+        ]
+      ]
+    },
+    {
+      "tag": "source_family_company_or_startup_db",
+      "n_test": 4,
+      "note": "holdout not estimable"
+    },
+    {
+      "tag": "source_family_other",
+      "n_test": 2,
+      "note": "holdout not estimable"
+    },
+    {
+      "tag": "channel_stage4_manual_as_independent_test",
+      "n_train": 16,
+      "n_test": 29,
+      "accuracy": 0.828,
+      "majority_baseline": 0.69,
+      "beats_majority": true,
+      "confusion_matrix": [
+        [
+          19,
+          1
+        ],
+        [
+          4,
+          5
+        ]
+      ]
+    }
+  ],
+  "clustering": {
+    "criterion": {
+      "partial_recovery_band": [
+        0.15,
+        0.45
+      ],
+      "n_configurations": 18,
+      "ari_vs_taxonomy_min": 0.0,
+      "ari_vs_taxonomy_max": 0.216,
+      "ari_vs_taxonomy_median": 0.09,
+      "share_in_partial_band": 0.111
+    },
+    "grid": {
+      "without_score|kmeans|k=3": {
+        "silhouette": 0.536,
+        "ari_vs_taxonomy": 0.002
+      },
+      "without_score|agglomerative|k=3": {
+        "silhouette": 0.537,
+        "ari_vs_taxonomy": 0.0
+      },
+      "without_score|gaussian_mixture|k=3": {
+        "silhouette": 0.536,
+        "ari_vs_taxonomy": 0.002
+      },
+      "without_score|kmeans|k=4": {
+        "silhouette": 0.41,
+        "ari_vs_taxonomy": 0.129
+      },
+      "without_score|agglomerative|k=4": {
+        "silhouette": 0.384,
+        "ari_vs_taxonomy": 0.084
+      },
+      "without_score|gaussian_mixture|k=4": {
+        "silhouette": 0.283,
+        "ari_vs_taxonomy": 0.115
+      },
+      "without_score|kmeans|k=5": {
+        "silhouette": 0.426,
+        "ari_vs_taxonomy": 0.216
+      },
+      "without_score|agglomerative|k=5": {
+        "silhouette": 0.416,
+        "ari_vs_taxonomy": 0.168
+      },
+      "without_score|gaussian_mixture|k=5": {
+        "silhouette": 0.19,
+        "ari_vs_taxonomy": 0.099
+      },
+      "without_score|kmeans~agglomerative|k=3": {
+        "ari_between_algorithms": 0.906
+      },
+      "without_score|kmeans~gaussian_mixture|k=3": {
+        "ari_between_algorithms": 1.0
+      },
+      "without_score|agglomerative~gaussian_mixture|k=3": {
+        "ari_between_algorithms": 0.906
+      },
+      "without_score|kmeans~agglomerative|k=4": {
+        "ari_between_algorithms": 0.741
+      },
+      "without_score|kmeans~gaussian_mixture|k=4": {
+        "ari_between_algorithms": 0.408
+      },
+      "without_score|agglomerative~gaussian_mixture|k=4": {
+        "ari_between_algorithms": 0.317
+      },
+      "without_score|kmeans~agglomerative|k=5": {
+        "ari_between_algorithms": 0.878
+      },
+      "without_score|kmeans~gaussian_mixture|k=5": {
+        "ari_between_algorithms": 0.525
+      },
+      "without_score|agglomerative~gaussian_mixture|k=5": {
+        "ari_between_algorithms": 0.464
+      },
+      "with_score|kmeans|k=3": {
+        "silhouette": 0.463,
+        "ari_vs_taxonomy": 0.05
+      },
+      "with_score|agglomerative|k=3": {
+        "silhouette": 0.463,
+        "ari_vs_taxonomy": 0.002
+      },
+      "with_score|gaussian_mixture|k=3": {
+        "silhouette": 0.271,
+        "ari_vs_taxonomy": 0.107
+      },
+      "with_score|kmeans|k=4": {
+        "silhouette": 0.357,
+        "ari_vs_taxonomy": 0.111
+      },
+      "with_score|agglomerative|k=4": {
+        "silhouette": 0.356,
+        "ari_vs_taxonomy": 0.064
+      },
+      "with_score|gaussian_mixture|k=4": {
+        "silhouette": 0.292,
+        "ari_vs_taxonomy": 0.093
+      },
+      "with_score|kmeans|k=5": {
+        "silhouette": 0.357,
+        "ari_vs_taxonomy": 0.096
+      },
+      "with_score|agglomerative|k=5": {
+        "silhouette": 0.351,
+        "ari_vs_taxonomy": 0.071
+      },
+      "with_score|gaussian_mixture|k=5": {
+        "silhouette": 0.155,
+        "ari_vs_taxonomy": 0.087
+      },
+      "with_score|kmeans~agglomerative|k=3": {
+        "ari_between_algorithms": 0.753
+      },
+      "with_score|kmeans~gaussian_mixture|k=3": {
+        "ari_between_algorithms": 0.438
+      },
+      "with_score|agglomerative~gaussian_mixture|k=3": {
+        "ari_between_algorithms": 0.602
+      },
+      "with_score|kmeans~agglomerative|k=4": {
+        "ari_between_algorithms": 0.293
+      },
+      "with_score|kmeans~gaussian_mixture|k=4": {
+        "ari_between_algorithms": 0.361
+      },
+      "with_score|agglomerative~gaussian_mixture|k=4": {
+        "ari_between_algorithms": 0.571
+      },
+      "with_score|kmeans~agglomerative|k=5": {
+        "ari_between_algorithms": 0.91
+      },
+      "with_score|kmeans~gaussian_mixture|k=5": {
+        "ari_between_algorithms": 0.301
+      },
+      "with_score|agglomerative~gaussian_mixture|k=5": {
+        "ari_between_algorithms": 0.348
+      }
+    }
+  },
+  "missingness": {
+    "ai_pct_missing_n": 30,
+    "ai_pct_missing_pct": 66.7,
+    "by_channel": {
+      "stage3_score_pipeline": {
+        "false": 15,
+        "true": 1
+      },
+      "stage4_manual": {
+        "false": 0,
+        "true": 29
+      }
+    },
+    "chi2_missing_vs_channel_p": 0.0,
+    "fisher_missing_vs_status_p": 0.11582,
+    "note": "Missingness is structurally tied to recruitment channel, so it is not missing at random; median imputation can bias in either direction. The primary model therefore excludes the variable."
+  },
+  "_meta": {
+    "seed": 42,
+    "n_workbench": 89,
+    "n_analytic": 45,
+    "generated_by": "analysis/run_analysis_v2.py"
+  }
+}

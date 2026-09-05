@@ -1,0 +1,15 @@
+stage,description,n,note
+S1,Raw scrape across six source families,520,Reported in R0 Section 3.2; per-record log not retained.
+S2,AI-keyword filter (>=2 AI signals),210,Reported in R0 Section 3.2; per-record log not retained.
+S3,Score pipeline - rows carried into the workbench,60,"Includes 12 rows scoring <50 retained deliberately as hard negatives, so the R0 text's '>=50 retained' description was inexact."
+S4,Stage-4 structured manual expansion,29,Named entities added by hand; not selected by the synthetic score.
+S5,Total rows in the R0 workbench,89,S3 + S4.
+S6,Excluded - dashboard demonstration records,44,"Seeded in index.html with real:false; no source URL, archive date or registry ID."
+S7,  of which searched in the claimed registry,44,"R1 audit searched each row in the registry it claimed, plus OpenCorporates and the open web."
+S7a,    referent NOT FOUND,36,No entity of that name located in any source.
+S7b,    NAME COLLISION only,8,An unrelated real company shares a similar name; none evidences the recorded AI-run or zero-employee attributes.
+S7c,    referent confirmed FOUND,0,Promoted back into the analytic sample.
+S8,Analytic sample - observed entities,45,Every row carries a public evidence URL.
+S9,  of which verified synthetic/agentic,19,Verification status from the seven-step protocol.
+S10,  of which control (dismissed as real company),26,Hard negatives.
+S11,  double-coded by two raters,10,Borderline cases only.

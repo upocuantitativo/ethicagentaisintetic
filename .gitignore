@@ -28,3 +28,15 @@ venv/
 
 # Local-only Claude config (not the agent definitions, which live in ~/.claude/)
 .claude/settings.local.json
+
+# --- R1 revision (2026-09) ---
+# Peer-review correspondence and the manuscript package stay local.
+revision.txt
+revision_r1/
+submission/
+ARTICULO_ia_revisado.docx
+ARTICULO_revision_ia.json
+ARTICULO_revision_ia.md
+Paper beyond final.docx
+Resumen Ejecutivo.docx
+analysis/_v2_run.log

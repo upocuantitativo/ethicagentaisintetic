@@ -1387,168 +1387,193 @@ textarea.form-input { resize:vertical; min-height:60px; }
       <div class="phase-status"><span class="badge badge-done">Analysis Complete</span></div>
     </div>
 
-    <!-- ============ RESULTS HEADLINE — flat academic panel ============ -->
-    <div class="card" style="border-left:3px solid var(--accent)">
-      <h2 style="margin:0;font-size:1.45rem">Results — Recursive analysis</h2>
-      <div style="color:var(--ink-muted);font-size:.86rem;margin-top:6px">Explainable AI · Robustness · Five-criteria solvency gate</div>
-      <p style="color:var(--ink-muted);font-size:.82rem;margin:12px 0 0;border-top:1px solid var(--rule);padding-top:12px">
-        Pipeline: <code style="background:var(--paper-soft);border:1px solid var(--rule);padding:2px 6px;font-family:'SFMono-Regular',Consolas,monospace">analysis/run_analysis.py</code> ·
-        Seed 42 ·
-        <a href="analysis/results.json">results.json</a> ·
-        <a href="analysis/results_summary.md">summary.md</a> ·
-        <a href="analysis/entities_unified.csv">dataset.csv</a>
+
+    <!-- ============ R1 REVISION NOTICE ============ -->
+    <div class="card" style="border-left:3px solid var(--negative);background:var(--paper-soft)">
+      <h2 style="margin:0;font-size:1.2rem">Revised analysis &mdash; supersedes the first-round results</h2>
+      <p style="margin:10px 0 0;line-height:1.7;font-size:.9rem">
+        Preparing the case-level audit dataset requested in peer review, we re-derived the
+        provenance of every row in the first-round workbench and established that
+        <strong>44 of the 89 rows were demonstration records seeded into this dashboard, not
+        observed entities</strong>. Each was searched in the registry it claimed, in
+        OpenCorporates and on the open web: <strong>36 not found, 8 name collisions with
+        unrelated companies, none established</strong>. All 44 are retained in the released
+        dataset, flagged, with their search logs.
+      </p>
+      <p style="margin:10px 0 0;line-height:1.7;font-size:.9rem">
+        Everything below is recomputed on the <strong>45 entities that carry a public evidence
+        URL</strong>. The first-round figures &mdash; n&nbsp;=&nbsp;89, a four-class classifier,
+        0.92&ndash;0.94 binary accuracy, and four passing solvency claims &mdash; are withdrawn.
+        <strong>Two of the four propositions now fail</strong>, and are reported as failing.
       </p>
     </div>
 
-    <!-- ============ KPI TILES — academic: ink number, small-caps label, tabular figures ============ -->
+    <!-- ============ RESULTS HEADLINE ============ -->
+    <div class="card mt-24" style="border-left:3px solid var(--accent)">
+      <h2 style="margin:0;font-size:1.45rem">Results &mdash; reconstructed analysis</h2>
+      <div style="color:var(--ink-muted);font-size:.86rem;margin-top:6px">Five-dimensional coding &middot; nested cross-validation &middot; permutation and majority baselines &middot; four holdouts</div>
+      <p style="color:var(--ink-muted);font-size:.82rem;margin:12px 0 0;border-top:1px solid var(--rule);padding-top:12px">
+        Pipeline: <code style="background:var(--paper-soft);border:1px solid var(--rule);padding:2px 6px;font-family:'SFMono-Regular',Consolas,monospace">analysis/run_analysis_v2.py</code> &middot;
+        Seed 42 &middot;
+        <a href="analysis/results_v2.json">results_v2.json</a> &middot;
+        <a href="analysis/results_v2_summary.md">summary.md</a> &middot;
+        <a href="analysis/audit_dataset.csv">audit_dataset.csv</a> &middot;
+        <a href="analysis/consort_flow.csv">consort_flow.csv</a> &middot;
+        <a href="analysis/registry_verdicts.csv">registry_verdicts.csv</a>
+      </p>
+    </div>
+
     <div class="grid mt-24" style="grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));gap:18px">
       <div class="card kpi">
-        <div class="kpi-label">Sample (n)</div>
-        <div class="kpi-number">89</div>
-        <div class="kpi-meta">61 confirmed · 28 controls</div>
+        <div class="kpi-label">Analytic sample (n)</div>
+        <div class="kpi-number">45</div>
+        <div class="kpi-meta">19 verified &middot; 26 controls</div>
       </div>
       <div class="card kpi">
-        <div class="kpi-label">Cohen's κ</div>
-        <div class="kpi-number">0.772</div>
-        <div class="kpi-meta">95% CI [0.541, 0.942]</div>
+        <div class="kpi-label">Excluded rows</div>
+        <div class="kpi-number">44</div>
+        <div class="kpi-meta">demonstration records &middot; 0 established</div>
       </div>
       <div class="card kpi">
-        <div class="kpi-label">RF accuracy · 4-class</div>
-        <div class="kpi-number">0.73</div>
-        <div class="kpi-meta">5-fold CV · n = 89</div>
+        <div class="kpi-label">RF accuracy &middot; primary</div>
+        <div class="kpi-number">0.858</div>
+        <div class="kpi-meta">vs 0.578 majority &middot; perm p = 0.003</div>
       </div>
       <div class="card kpi">
-        <div class="kpi-label">GB accuracy · binary</div>
-        <div class="kpi-number">0.94</div>
-        <div class="kpi-meta">Synthetic/DAO vs other</div>
+        <div class="kpi-label">Cost of the score</div>
+        <div class="kpi-number">&minus;0.075</div>
+        <div class="kpi-meta">0.933 with leakage &rarr; 0.858 without</div>
       </div>
       <div class="card kpi">
-        <div class="kpi-label">ARI clustering</div>
-        <div class="kpi-number">0.87</div>
-        <div class="kpi-meta">k-means vs agglom (k = 4)</div>
+        <div class="kpi-label">Score as detector</div>
+        <div class="kpi-number">0.900</div>
+        <div class="kpi-meta">AUC on the 29 it did not select</div>
       </div>
       <div class="card kpi">
-        <div class="kpi-label">Solvency claims</div>
-        <div class="kpi-number">4/4</div>
-        <div class="kpi-meta">Round 1 · all pass</div>
+        <div class="kpi-label">Propositions upheld</div>
+        <div class="kpi-number">2/4</div>
+        <div class="kpi-meta">P1, P2 supported &middot; P3, P4 not</div>
       </div>
     </div>
 
     <!-- ============ CHARTS GRID ============ -->
     <div class="grid grid-2 mt-24">
       <div class="card">
-        <h3 style="margin-top:0">Classifier accuracy &mdash; 4-class vs binary</h3>
-        <div style="color:var(--text-muted);font-size:.8rem;margin-bottom:12px">5-fold stratified CV, seed 42. Three estimators converge in the binary spec.</div>
+        <h3 style="margin-top:0">Classification vs the majority baseline</h3>
+        <div style="color:var(--text-muted);font-size:.8rem;margin-bottom:12px">Nested CV, seed 42. Target is verification status. The prior specification is shown for comparison only &mdash; it includes the selection score.</div>
         <div style="position:relative;height:260px"><canvas id="chart-classifiers"></canvas></div>
       </div>
       <div class="card">
-        <h3 style="margin-top:0">Taxonomy class distribution (n = 89)</h3>
-        <div style="color:var(--text-muted);font-size:.8rem;margin-bottom:12px">Analyst-coded classes plus the AI-Enhanced Shell sub-type and the in-frame controls.</div>
+        <h3 style="margin-top:0">Dimension profiles occupied</h3>
+        <div style="color:var(--text-muted);font-size:.8rem;margin-bottom:12px">15 of 216 combinatorially possible profiles are occupied across the five dimensions.</div>
         <div style="position:relative;height:260px"><canvas id="chart-taxonomy"></canvas></div>
       </div>
       <div class="card">
-        <h3 style="margin-top:0">XAI &mdash; feature importance (RF, 4-class)</h3>
-        <div style="color:var(--text-muted);font-size:.8rem;margin-bottom:12px">Permutation importance and SHAP global converge on the same drivers.</div>
+        <h3 style="margin-top:0">Holdouts vs their own baselines</h3>
+        <div style="color:var(--text-muted);font-size:.8rem;margin-bottom:12px">Temporal, jurisdictional, source-family and recruitment-channel transfer.</div>
         <div style="position:relative;height:260px"><canvas id="chart-xai"></canvas></div>
       </div>
       <div class="card">
-        <h3 style="margin-top:0">Robustness &mdash; score threshold sweep</h3>
-        <div style="color:var(--text-muted);font-size:.8rem;margin-bottom:12px">Share of synthetic/DAO/shell rises monotonically as the score cutoff tightens.</div>
+        <h3 style="margin-top:0">Clustering vs the pre-set recovery band</h3>
+        <div style="color:var(--text-muted);font-size:.8rem;margin-bottom:12px">18 configurations (3 algorithms &times; k &isin; {3,4,5} &times; with/without score), standardised. The band [0.15, 0.45] was fixed before inspection.</div>
         <div style="position:relative;height:260px"><canvas id="chart-threshold"></canvas></div>
       </div>
     </div>
 
-    <!-- ============ SOLVENCY GATE — sober glyphs, no pills ============ -->
+    <!-- ============ PROPOSITION OUTCOMES ============ -->
     <div class="card mt-24">
-      <h3 style="margin-top:0">Solvency gate — three recursion rounds × four headline claims</h3>
-      <div style="color:var(--ink-muted);font-size:.84rem;margin-bottom:14px">Each cell scores a claim on five criteria (convergence · stability · interpretability · LOCO · threshold). <span style="color:var(--accent)">✓ pass</span> · <span style="color:var(--warning)">○ partial</span> · <span style="color:var(--negative)">✗ fail</span> · <span style="color:var(--ink-muted)">— not applicable</span>.</div>
+      <h3 style="margin-top:0">Proposition outcomes</h3>
+      <div style="color:var(--ink-muted);font-size:.84rem;margin-bottom:14px">The solvency gate is withdrawn: a workflow discipline is not evidence, and the executed procedure differed from the stated rule. Claims are now judged against pre-set criteria and reported as they fall.</div>
       <div style="overflow-x:auto">
       <table>
         <thead>
-          <tr>
-            <th style="text-align:left">Round</th>
-            <th style="text-align:center">C1<div style="color:var(--ink-muted);font-weight:400;text-transform:none;letter-spacing:0;font-size:.72rem">Taxonomy separable</div></th>
-            <th style="text-align:center">C2<div style="color:var(--ink-muted);font-weight:400;text-transform:none;letter-spacing:0;font-size:.72rem">κ ≥ 0.70</div></th>
-            <th style="text-align:center">C3<div style="color:var(--ink-muted);font-weight:400;text-transform:none;letter-spacing:0;font-size:.72rem">Score ≥ 50 dominated</div></th>
-            <th style="text-align:center">C4<div style="color:var(--ink-muted);font-weight:400;text-transform:none;letter-spacing:0;font-size:.72rem">Cluster recovery</div></th>
-            <th style="text-align:right">Outcome</th>
-          </tr>
+          <tr><th style="text-align:left">&nbsp;</th><th style="text-align:left">Criterion</th><th style="text-align:left">Result</th><th style="text-align:right">Verdict</th></tr>
         </thead>
         <tbody>
           <tr>
-            <td><strong>R1</strong><div style="color:var(--ink-muted);font-size:.75rem">n = 89, 4-class</div></td>
-            <td style="text-align:center"><span class="solv-cell solv-pass">✓</span><span class="solv-meta">RF = 0.73</span></td>
-            <td style="text-align:center"><span class="solv-cell solv-pass">✓</span><span class="solv-meta">κ = 0.772</span></td>
-            <td style="text-align:center"><span class="solv-cell solv-pass">✓</span><span class="solv-meta">70%</span></td>
-            <td style="text-align:center"><span class="solv-cell solv-pass">✓</span><span class="solv-meta">ARI = 0.87</span></td>
-            <td style="text-align:right;color:var(--accent);font-weight:600">4 / 4</td>
+            <td><strong>P1</strong><div style="color:var(--ink-muted);font-size:.75rem">Distinguishable from controls</div></td>
+            <td>Beats majority; permutation null rejected</td>
+            <td>RF 0.858 vs 0.578; p = 0.003</td>
+            <td style="text-align:right;color:var(--accent);font-weight:600">Supported</td>
           </tr>
           <tr>
-            <td><strong>R2</strong><div style="color:var(--ink-muted);font-size:.75rem">binary collapse</div></td>
-            <td style="text-align:center"><span class="solv-cell solv-pass">✓</span><span class="solv-meta">RF = 0.92</span></td>
-            <td style="text-align:center"><span class="solv-cell solv-pass">✓</span><span class="solv-meta">κ = 0.772</span></td>
-            <td style="text-align:center"><span class="solv-cell solv-na">—</span><span class="solv-meta">recoded</span></td>
-            <td style="text-align:center"><span class="solv-cell solv-pass">✓</span><span class="solv-meta">ARI = 0.87</span></td>
-            <td style="text-align:right;color:var(--accent);font-weight:600">3 / 3</td>
+            <td><strong>P2</strong><div style="color:var(--ink-muted);font-size:.75rem">Dimensions non-redundant</div></td>
+            <td>Cram&eacute;r's V &lt; 1; delegation differs by status</td>
+            <td>V = 0.31&ndash;0.76; U = 411, p = 8.8&times;10<sup>&minus;5</sup></td>
+            <td style="text-align:right;color:var(--accent);font-weight:600">Supported</td>
           </tr>
           <tr>
-            <td><strong>R3</strong><div style="color:var(--ink-muted);font-size:.75rem">n = 78, score ≥ 40</div></td>
-            <td style="text-align:center"><span class="solv-cell solv-pass">✓</span><span class="solv-meta">RF = 0.70</span></td>
-            <td style="text-align:center"><span class="solv-cell solv-pass">✓</span><span class="solv-meta">κ = 0.772</span></td>
-            <td style="text-align:center"><span class="solv-cell solv-pass">✓</span><span class="solv-meta">70%</span></td>
-            <td style="text-align:center"><span class="solv-cell solv-pass">✓</span><span class="solv-meta">ARI = 0.94</span></td>
-            <td style="text-align:right;color:var(--accent);font-weight:600">4 / 4</td>
+            <td><strong>P3</strong><div style="color:var(--ink-muted);font-size:.75rem">Clustering recovers coding</div></td>
+            <td>ARI within the pre-set band [0.15, 0.45]</td>
+            <td>median 0.090, range [0.000, 0.216]; 11% in band</td>
+            <td style="text-align:right;color:var(--negative);font-weight:600">Not supported</td>
+          </tr>
+          <tr>
+            <td><strong>P4</strong><div style="color:var(--ink-muted);font-size:.75rem">&kappa; &ge; 0.70</div></td>
+            <td>Threshold established at conventional confidence</td>
+            <td>&kappa; = 0.772, CI [0.543, 0.944] &mdash; lower bound below 0.70</td>
+            <td style="text-align:right;color:var(--negative);font-weight:600">Not established</td>
           </tr>
         </tbody>
       </table>
       </div>
     </div>
 
-    <!-- ============ DETAILED SECTIONS (grouped, narrative) ============ -->
     <div class="grid grid-2 mt-24">
       <div class="card">
         <h3 style="margin-top:0">Sample</h3>
         <ul style="line-height:1.7">
-          <li><strong>n = 89</strong> (60 built-in + 29 user-added); 61 confirmed synthetic/agentic + 28 control real-co.</li>
-          <li>Jurisdictions: 47 OECD-traditional &middot; 32 permissive/decentralized (Cayman, Estonia, on-chain) &middot; 6 emerging &middot; 4 other.</li>
-          <li><strong>38%</strong> of the sample reports zero employees. Median score=63, age=1 yr, employees=5 (max 6,000).</li>
+          <li><strong>n = 45</strong> observed entities: 19 verified AI-delegated + 26 controls. 44 demonstration rows excluded.</li>
+          <li>Recruitment: 16 via the score pipeline &middot; 29 via manual search (score-independent).</li>
+          <li>Jurisdictions: 19 OECD-traditional &middot; 22 permissive/decentralized &middot; 4 other.</li>
+          <li><strong>17.8%</strong> report zero continuous employees (was reported as 38% on the unaudited sample).</li>
         </ul>
       </div>
       <div class="card">
-        <h3 style="margin-top:0">Inter-rater reliability (R1 vs R2, n = 25)</h3>
+        <h3 style="margin-top:0">Inter-rater reliability</h3>
         <ul style="line-height:1.7">
-          <li><strong>&kappa; = 0.772</strong> (substantial &mdash; above the 0.70 threshold). Bootstrap 95% CI [0.541, 0.942] over 2,000 resamples.</li>
-          <li><strong>&kappa; &rarr; 1.00</strong> after removing 4 disputed cases &mdash; disagreements model real taxonomic frontiers (Synthetic &harr; Shell; MAS &harr; DAO), not noise.</li>
+          <li><strong>&kappa; = 0.772</strong>, bootstrap 95% CI [0.543, 0.944] over 5,000 resamples. The lower bound falls below 0.70, so <strong>the threshold is not established</strong>.</li>
+          <li>The &kappa; &rarr; 1.00 claim is <strong>withdrawn</strong> as tautological: removing every disagreement leaves only agreements.</li>
+          <li>All four disagreements involve the <strong>Multi-Agent System</strong> label &mdash; the architecture axis colliding with delegated function and governance. The first-round claim that three fell on the Synthetic/Shell frontier was wrong.</li>
+          <li>Only <strong>10 double-coded cases</strong> survive into the analytic sample; reliability is a limitation, not a strength.</li>
         </ul>
       </div>
       <div class="card">
-        <h3 style="margin-top:0">Group comparisons (Kruskal–Wallis)</h3>
+        <h3 style="margin-top:0">Leakage removed</h3>
         <ul style="line-height:1.7">
-          <li>Score by class: <strong>H=61.59, p&lt;1&times;10<sup>&minus;11</sup>, &eta;<sup>2</sup>=0.68</strong> (large).</li>
-          <li>Employees by class: <strong>H=54.08, p&lt;1&times;10<sup>&minus;9</sup>, &eta;<sup>2</sup>=0.59</strong> (large).</li>
+          <li>The synthetic score is <strong>excluded from every model</strong>. Reported only as a detector.</li>
+          <li>Prior specification (score included): RF 0.933. Primary (score excluded): RF 0.858. <strong>The gap is what the earlier figure owed to leakage.</strong></li>
+          <li>Adding the AI-text detector score <em>lowers</em> accuracy, consistent with it being noise.</li>
+          <li>15 manually-added rows carry the data-entry default score of exactly 50 &mdash; flagged in the released dataset.</li>
         </ul>
       </div>
       <div class="card">
-        <h3 style="margin-top:0">Clustering (k-means + agglomerative + GMM)</h3>
+        <h3 style="margin-top:0">Score as a detector</h3>
         <ul style="line-height:1.7">
-          <li>Preferred k=4. Silhouette=0.50. <strong>ARI(km, agg) = 0.87</strong>.</li>
-          <li>ARI vs analyst-coded taxonomy = 0.22&ndash;0.29 &mdash; structure recovers venture shape <em>partially</em>; taxonomy adds content beyond OSINT features.</li>
+          <li>All observed entities: <strong>AUC = 0.921</strong> [0.830, 0.985].</li>
+          <li>On the 29 entities it played no part in selecting: <strong>AUC = 0.900</strong> [0.783, 1.000].</li>
+          <li>Caveat: those scores were analyst-assigned under the same rubric, so this establishes independence of <em>selection</em>, not of analyst judgement.</li>
         </ul>
       </div>
       <div class="card">
-        <h3 style="margin-top:0">Explainable AI</h3>
+        <h3 style="margin-top:0">Holdouts</h3>
         <ul style="line-height:1.7">
-          <li>Permutation, SHAP and a depth-3 surrogate tree converge on <strong>employee scale, AI %, and venture age</strong> as drivers.</li>
-          <li>Surrogate tree fidelity = <strong>71.9%</strong>. First split: ai_pct &le; 79.5%; then score &le; 66.5.</li>
+          <li>temporal youngest half: <strong>0.696</strong> vs 0.565 majority.</li>
+          <li>jurisdictional permissive decentralized: <strong>0.682</strong> vs 0.545 majority.</li>
+          <li>source family press: <strong>0.818</strong> vs 0.682 majority.</li>
+          <li>source family chain analytics: <strong>0.824</strong> vs 0.588 majority.</li>
+          <li>channel stage4 manual as independent test: <strong>0.828</strong> vs 0.690 majority.</li>
+          <li>Group-aware CV by source family: <strong>0.848</strong> (SD 0.092).</li>
+          <li>Transfer to unseen periods and jurisdictions settles near <strong>0.68&ndash;0.70</strong> &mdash; the honest expectation for a new cohort.</li>
         </ul>
       </div>
       <div class="card">
-        <h3 style="margin-top:0">Robustness</h3>
+        <h3 style="margin-top:0">Withdrawn from the first round</h3>
         <ul style="line-height:1.7">
-          <li><strong>Bootstrap</strong> (500 OOB): 4-class RF=0.679 [0.516, 0.831]; binary RF=0.904 [0.781, 1.000].</li>
-          <li><strong>LOCO</strong>: re-fit after dropping each class &rarr; CV 0.75&ndash;0.82. No collapse.</li>
-          <li><strong>Threshold sweep</strong> 40&rarr;60: share synthetic/DAO/shell rises 62%&rarr;85%.</li>
-          <li><strong>Alternative coding</strong>: &kappa; &isin; [0.78, 0.92].</li>
+          <li><strong>Leave-one-class-out</strong> &mdash; removing a class makes the problem easier; it tests nothing.</li>
+          <li><strong>Threshold sweep</strong> &mdash; close to tautological, since the score was built to select those cases.</li>
+          <li><strong>Solvency gate</strong> &mdash; a workflow discipline is not statistical identification, and no timestamped pre-specification exists.</li>
+          <li><strong>Four-class classifier</strong> and the 1/6 baseline &mdash; withdrawn with the nominal class structure.</li>
         </ul>
       </div>
     </div>
@@ -1557,11 +1582,11 @@ textarea.form-input { resize:vertical; min-height:60px; }
     <div class="card mt-24" style="border-left:3px solid var(--accent);background:var(--paper-soft)">
       <h3 style="margin-top:0">Headline takeaways</h3>
       <ul style="line-height:1.8;margin-top:12px">
-        <li><strong>Detectable.</strong> A new class of entrepreneurial entity is empirically detectable with OSINT features alone (4-class RF=0.73; binary=0.92&ndash;0.94).</li>
-        <li><strong>Interpretable.</strong> Scale, AI content and venture age drive the classification &mdash; not OSINT pipeline artefacts.</li>
-        <li><strong>Robust.</strong> Bootstrap, LOCO, threshold sensitivity and alternative coding schemes all preserve the result.</li>
-        <li><strong>Reliable.</strong> &kappa; = 0.772 substantial; rises to perfect once two real frontiers are acknowledged as substantive.</li>
-        <li><strong>Theoretically motivated.</strong> Unsupervised structure recovers venture-shape groupings only <em>partially</em> &mdash; the analyst-coded taxonomy is theoretically motivated, not mechanically induced from the data.</li>
+        <li><strong>Detectable, more modestly.</strong> AI-delegated entities separate from human-led controls at 0.858 against a 0.578 majority baseline, on features that played no part in selecting them.</li>
+        <li><strong>Leakage quantified.</strong> Removing the selection score costs 0.075 accuracy. The earlier 0.92&ndash;0.94 headline is superseded.</li>
+        <li><strong>Multidimensional, not four classes.</strong> Five separately coded dimensions; 15 of 216 profiles occupied; the coders' own disagreements show why a single axis failed.</li>
+        <li><strong>Two propositions fail.</strong> Clustering does not recover the coding against a pre-set band, and reliability does not establish &kappa; &ge; 0.70. Reported as failures.</li>
+        <li><strong>Auditable.</strong> Every row, including the 44 excluded, ships with its provenance, registry verdict and search log.</li>
       </ul>
     </div>
 
@@ -1612,13 +1637,15 @@ textarea.form-input { resize:vertical; min-height:60px; }
       <table>
         <thead><tr><th>Metric</th><th>Current</th><th>Required</th><th>Status</th></tr></thead>
         <tbody>
-          <tr><td>Total entities screened</td><td>89</td><td>50+</td><td><span class="badge badge-done">100%+</span></td></tr>
-          <tr><td>Confirmed synthetic/agentic</td><td>61</td><td>30+</td><td><span class="badge badge-done">100%+</span></td></tr>
-          <tr><td>Control real-company cases</td><td>28</td><td>20+</td><td><span class="badge badge-done">100%+</span></td></tr>
+          <tr><td>Rows screened into the workbench</td><td>89</td><td>50+</td><td><span class="badge badge-done">100%+</span></td></tr>
+          <tr><td>Excluded &mdash; demonstration records (0 established)</td><td>44</td><td>&mdash;</td><td><span class="badge badge-done">Audited</span></td></tr>
+          <tr><td>Analytic sample (public evidence for every row)</td><td>45</td><td>&mdash;</td><td><span class="badge badge-done">Verified</span></td></tr>
+          <tr><td>Confirmed AI-delegated</td><td>19</td><td>30+</td><td><span class="badge badge-progress">63%</span></td></tr>
+          <tr><td>Control real-company cases</td><td>26</td><td>20+</td><td><span class="badge badge-done">100%+</span></td></tr>
           <tr><td>Countries covered</td><td>22+</td><td>20+</td><td><span class="badge badge-done">100%+</span></td></tr>
           <tr><td>Data sources used</td><td>9</td><td>10</td><td><span class="badge badge-progress">90%</span></td></tr>
           <tr><td>Pending human verification</td><td>0</td><td>&mdash;</td><td><span class="badge badge-done">Complete</span></td></tr>
-          <tr><td>Inter-rater reliability (Cohen's &kappa;)</td><td>0.772</td><td>&ge; 0.70</td><td><span class="badge badge-done">Pass</span></td></tr>
+          <tr><td>Inter-rater reliability (Cohen's &kappa;)</td><td>0.772 &nbsp;<span style="color:var(--ink-muted);font-size:.85em">CI [0.543, 0.944]</span></td><td>&ge; 0.70</td><td><span class="badge badge-progress">Not established</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -1637,12 +1664,19 @@ if (document.readyState === 'loading') {
 }
 
 // ==================== TABS ====================
+let _chartsDrawn = false;
 document.querySelectorAll('.tab-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
     btn.classList.add('active');
     document.getElementById(btn.dataset.tab).classList.add('active');
+    // Chart.js needs a laid-out canvas: draw on first reveal, not at load.
+    if (btn.dataset.tab === 'analysis' && !_chartsDrawn) {
+      _chartsDrawn = true;
+      // Wait for the revealed panel to be laid out; rAF alone fires too early.
+      setTimeout(() => renderResultsCharts(), 60);
+    }
   });
 });
 
@@ -1694,6 +1728,11 @@ const TASKS = [
 ];
 
 // ==================== SAMPLE DATA ====================
+// NOTE (R1 audit): rows with real:false are DEMONSTRATION RECORDS seeded for
+// UI development. They are not observed entities: all 44 were searched in the
+// registry each claims, in OpenCorporates and on the open web, and none could
+// be established (36 not found, 8 name collisions). They are excluded from the
+// analytic sample. See analysis/registry_verdicts.csv.
 const SAMPLE_DATA = [
   // ===== DOCUMENTED REAL CASES =====
   {entity:"HurumoAI (Wired experiment)", country:"US", type:"Synthetic Company", score:94, employees:0, domain:"3mo", ai:"98%", status:"Confirmed", source:"Wired/Futurism", real:true},
@@ -1766,7 +1805,7 @@ function initApp() {
   renderGantt();
   renderCharts();
   renderMethodologyCharts();
-  renderResultsCharts();
+  // renderResultsCharts() now runs on first reveal of the analysis tab.
   renderSampleTable();
   renderChecklists();
   renderApiKeys();
@@ -2063,12 +2102,16 @@ function renderResultsCharts() {
   if (cls) new Chart(cls, {
     type: 'bar',
     data: {
-      labels: ['Logistic regression', 'Random forest', 'Gradient boosting'],
+      labels: ['Primary (no score)', 'Sensitivity (+ detector)', 'Prior spec (score in)'],
       datasets: [
-        {label:'4-class CV accuracy', data:[0.639, 0.729, 0.641],
+        {type:'bar', label:'Logistic regression', data:[0.822, 0.813, 0.891],
          backgroundColor: OI.orange, borderColor: ink, borderWidth: 0.6, borderRadius: 0, barPercentage: 0.85, categoryPercentage: 0.7},
-        {label:'Binary CV accuracy', data:[0.922, 0.922, 0.944],
+        {type:'bar', label:'Random forest', data:[0.858, 0.838, 0.933],
          backgroundColor: OI.vermillion, borderColor: ink, borderWidth: 0.6, borderRadius: 0, barPercentage: 0.85, categoryPercentage: 0.7},
+        {type:'line', label:'Majority baseline (0.578)', data:[0.578, 0.578, 0.578],
+         borderColor: ink, borderWidth: 1.4, borderDash:[6,4], pointRadius: 0, fill:false},
+        {type:'line', label:'Stratified-random (0.511)', data:[0.511, 0.511, 0.511],
+         borderColor: '#9e9e9e', borderWidth: 1.2, borderDash:[2,3], pointRadius: 0, fill:false},
       ]
     },
     options: {
@@ -2079,7 +2122,7 @@ function renderResultsCharts() {
       },
       scales:{
         x:{ticks:{color:ink, font:{size:11}}, grid:{display:false}, border:{color:ink}},
-        y:{beginAtZero:true, max:1, ticks:{color:muted, callback:v=>(v*100).toFixed(0)+'%'}, grid:{color:grid, drawBorder:false}, border:{display:false}, title:{display:true, text:'5-fold CV accuracy', color:ink, font:{size:11}}}
+        y:{beginAtZero:true, max:1, ticks:{color:muted, callback:v=>(v*100).toFixed(0)+'%'}, grid:{color:grid, drawBorder:false}, border:{display:false}, title:{display:true, text:'Nested CV accuracy', color:ink, font:{size:11}}}
       }
     }
   });
@@ -2089,9 +2132,9 @@ function renderResultsCharts() {
   if (tax) new Chart(tax, {
     type: 'doughnut',
     data: {
-      labels: ['Agentic Organization (25)','Agentic DAO (24)','Synthetic Company (19)','Multi-Agent System (8)','Dismissed real-co. (8)','AI-Enhanced Shell (5)'],
+      labels: ['Single function (21)', 'Governance (14)', 'None / advisory (6)', 'Multi-function (4)'],
       datasets: [{
-        data: [25, 24, 19, 8, 8, 5],
+        data: [21, 14, 6, 4],
         // Synthetic = vermillion (kept consistent with figure colour code across all 4 charts)
         backgroundColor: [OI.blue, OI.skyBlue, OI.vermillion, OI.green, '#bdbdbd', OI.orange],
         borderColor: '#ffffff', borderWidth: 2
@@ -2101,7 +2144,7 @@ function renderResultsCharts() {
       responsive:true, maintainAspectRatio:false, cutout:'58%',
       plugins:{
         legend:{position:'right', labels:{color:ink, font:{size:10.5, family:fontBase}, boxWidth:12, padding:10}},
-        tooltip:{callbacks:{label:c=>c.label+' — '+(c.parsed/89*100).toFixed(1)+'%'}}
+        tooltip:{callbacks:{label:c=>c.label+' — '+(c.parsed/45*100).toFixed(1)+'%'}}
       }
     }
   });
@@ -2111,12 +2154,12 @@ function renderResultsCharts() {
   if (xai) new Chart(xai, {
     type: 'bar',
     data: {
-      labels: ['log_employees','ai_pct','domain_years','synthetic score'],
+      labels: ['temporal', 'jurisdiction', 'src: press', 'src: chain analytics', 'channel: manual'],
       datasets: [
-        {label:'Permutation importance', data:[0.281, 0.253, 0.218, 0.115],
+        {label:'Holdout accuracy', data:[0.696, 0.682, 0.818, 0.824, 0.828],
          backgroundColor: OI.blue, borderColor: ink, borderWidth: 0.6, borderRadius: 0},
-        {label:'SHAP global (mean |φ|)', data:[0.100, 0.047, 0.094, 0.031],
-         backgroundColor: OI.vermillion, borderColor: ink, borderWidth: 0.6, borderRadius: 0}
+        {label:'Majority baseline in holdout', data:[0.565, 0.545, 0.682, 0.588, 0.69],
+         backgroundColor: '#bdbdbd', borderColor: ink, borderWidth: 0.6, borderRadius: 0}
       ]
     },
     options: {
@@ -2124,7 +2167,7 @@ function renderResultsCharts() {
       responsive:true, maintainAspectRatio:false,
       plugins:{legend:{position:'bottom', labels:{color:ink, font:{size:11, family:fontBase}, boxWidth:14, padding:14}}},
       scales:{
-        x:{beginAtZero:true, ticks:{color:muted}, grid:{color:grid, drawBorder:false}, border:{display:false}, title:{display:true, text:'Importance', color:ink, font:{size:11}}},
+        x:{beginAtZero:true, ticks:{color:muted}, grid:{color:grid, drawBorder:false}, border:{display:false}, title:{display:true, text:'Accuracy', color:ink, font:{size:11}}},
         y:{ticks:{color:ink, font:{size:11, family:'"SFMono-Regular", Consolas, monospace'}}, grid:{display:false}, border:{color:ink}}
       }
     }
@@ -2135,10 +2178,10 @@ function renderResultsCharts() {
   if (thr) new Chart(thr, {
     type: 'line',
     data: {
-      labels: [40, 45, 50, 55, 60],
+      labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
       datasets: [{
-        label:'% synthetic / DAO / shell in retained sample',
-        data:[61.5, 65.8, 69.6, 80.4, 85.4],
+        label:'ARI vs analyst coding, 18 configurations (sorted)',
+        data:[0.000, 0.002, 0.002, 0.002, 0.050, 0.064, 0.071, 0.084, 0.087, 0.093, 0.096, 0.099, 0.107, 0.111, 0.115, 0.129, 0.168, 0.216],
         borderColor: OI.vermillion,
         backgroundColor:'rgba(213,94,0,.10)',
         borderWidth: 2, tension: .2, fill: true,
@@ -2150,11 +2193,11 @@ function renderResultsCharts() {
       responsive:true, maintainAspectRatio:false,
       plugins:{
         legend:{position:'bottom', labels:{color:ink, font:{size:11, family:fontBase}, boxWidth:14, padding:14}},
-        tooltip:{callbacks:{label:c=>c.parsed.y.toFixed(1)+'% at score ≥ '+c.label}}
+        tooltip:{callbacks:{label:c=>'ARI = '+c.parsed.y.toFixed(3)}}
       },
       scales:{
-        x:{title:{display:true, text:'Score cutoff', color:ink, font:{size:11}}, ticks:{color:muted}, grid:{display:false}, border:{color:ink}},
-        y:{beginAtZero:true, max:100, ticks:{color:muted, callback:v=>v+'%'}, grid:{color:grid, drawBorder:false}, border:{display:false}}
+        x:{title:{display:true, text:'Configuration (algorithm × k × feature set)', color:ink, font:{size:11}}, ticks:{color:muted}, grid:{display:false}, border:{color:ink}},
+        y:{beginAtZero:true, max:0.5, ticks:{color:muted, callback:v=>v.toFixed(2)}, grid:{color:grid, drawBorder:false}, border:{display:false}, title:{display:true, text:'ARI (band [0.15, 0.45])', color:ink, font:{size:11}}}
       }
     }
   });
