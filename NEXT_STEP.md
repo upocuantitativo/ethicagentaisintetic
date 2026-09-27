@@ -104,7 +104,7 @@ Verificado en navegador.
 ## Siguiente paso
 
 1. ~~Marcador [AUTHOR TO CONFIRM]~~ resuelto por el autor (retirado del manuscrito, 2026-09-27).
-2. **Publicar el repositorio (PENDIENTE: el commit b21357e está sin push; la web aún muestra 0.92)** con `analysis/audit_dataset.csv`, `consort_flow.csv`,
+2. **Publicar el repositorio (HECHO 2026-09-27: push realizado, web y audit_dataset.csv públicos; falta solo sustituir "URL withheld" tras la aceptación)** con `analysis/audit_dataset.csv`, `consort_flow.csv`,
    `registry_verdicts.csv`, `results_v2.json` y el código, y sustituir "URL withheld" por el
    enlace real al aceptarse.
 3. **Enviar a `jemi@cognitione.org`** antes del **31 de octubre de 2026**: portada + manuscrito
