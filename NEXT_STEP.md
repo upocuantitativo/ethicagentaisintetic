@@ -2,6 +2,19 @@
 
 ## Hecho
 
+### 2026-09-27 — Sincronización Clean → Marked y control final pre-envío
+- Cambios del autor en `JEMI_R1_Manuscript_Clean.docx` (eliminación de rayas, recortes de frases,
+  retirada de los dos marcadores [AUTHOR TO CONFIRM], "anchoring lens" → "primary analytical framework")
+  trasladados a `JEMI_R1_Manuscript_Marked.docx` (azul = añadido, rojo tachado = eliminado); quitados
+  los "###" residuales de los títulos del Marked.
+- Correcciones: cita Poltronieri (Martins → Xavier, verificado en Crossref); título Floridi
+  "AI4People—An ethical framework"; orden alfabético de referencias (S…, Weber-Wulff/Williamson);
+  abstract "It has been assembled an…" → "An … sample … was assembled."; Apéndice B empezaba por "Second,".
+- Cartas: quitada mención a [AUTHOR TO CONFIRM] (Cover Letter y Response to Editors); recuentos
+  actualizados (cuerpo 11,676 palabras; abstract 342).
+- Citas ↔ referencias: 45/45 cruzadas, sin huérfanas. Tablas 1–3 y Figuras 1–6 citadas. PDFs regenerados.
+- Copias de seguridad previas en el scratchpad de la sesión.
+
 ### 2026-09-05 — REVISIÓN R1 PARA JEMI (major revision) — paquete completo
 
 **Hallazgo central de la sesión.** Al preparar el *case-level audit dataset* que exige el
@@ -90,11 +103,8 @@ Verificado en navegador.
 
 ## Siguiente paso
 
-1. **Confirmar el marcador `[AUTHOR TO CONFIRM]`** (2 apariciones: §3.5 y declaración de
-   consentimiento): ¿se recibió alguna respuesta al paso de contacto directo fuera del registro
-   de auditoría y, en tal caso, influyó en alguna clasificación? El registro liberado no
-   contiene respuestas y ninguna clasificación cita una. Es lo único que bloquea el envío.
-2. **Publicar el repositorio** con `analysis/audit_dataset.csv`, `consort_flow.csv`,
+1. ~~Marcador [AUTHOR TO CONFIRM]~~ resuelto por el autor (retirado del manuscrito, 2026-09-27).
+2. **Publicar el repositorio (PENDIENTE: el commit b21357e está sin push; la web aún muestra 0.92)** con `analysis/audit_dataset.csv`, `consort_flow.csv`,
    `registry_verdicts.csv`, `results_v2.json` y el código, y sustituir "URL withheld" por el
    enlace real al aceptarse.
 3. **Enviar a `jemi@cognitione.org`** antes del **31 de octubre de 2026**: portada + manuscrito
