@@ -8,8 +8,8 @@
   fuera de `SAMPLE_DATA` para no alterar los ids que lee `run_analysis.py`). "To Verify" = 0.
 - Pasos marcados solo con base registrada: clasificación final (dataset de auditoría) y verificación de terceros
   donde hay fuente independiente (22). El resto de pasos (registro, contacto, dirección, financiero, NLP) siguen abiertos.
-- `analysis/evidence_urls.csv`: URL de evidencia comprobada para 43/45. **Sin fuente pública: 0xCover (user_3,
-  clasificada Confirmed) y Facility (builtin_11, dominio aparcado)** → el manuscrito dice "every record carries
+- `analysis/evidence_urls.csv`: URL de evidencia comprobada para 43/45. **Facility resuelta (facilityai.com, 2026-09-28). Sin fuente: 0xCover (user_3,
+  clasificada Confirmed; xcover.com = Cover Genius, NO coincide con la codificación DAO on-chain)** → el manuscrito dice "every record carries
   public evidence": hay que resolverlo antes de enviar.
 - Referencia Ratliff (2025): URL de Wired corregida (la anterior daba 404). Saurabh et al.: título corregido.
 - Todos los DOI resuelven (Crossref); muestra y consort_flow sin cambios.
