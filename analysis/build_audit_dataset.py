@@ -98,6 +98,35 @@ def apply_verification(df: pd.DataFrame) -> pd.DataFrame:
 
 
 # ---------------------------------------------------------------------------
+# 2b. Public-evidence overlay for the observed rows
+# ---------------------------------------------------------------------------
+def apply_evidence_urls(df: pd.DataFrame) -> pd.DataFrame:
+    """Attach the public evidence located for each observed entity.
+
+    `analysis/evidence_urls.csv` (entity_id,evidence_url,evidence_url_2,
+    evidence_kind,checked_on) records the source checked for each row. An
+    empty URL means no public source could be located; the row is kept and
+    flagged rather than silently dropped.
+    """
+    path = ROOT / "evidence_urls.csv"
+    df["evidence_url_2"] = ""
+    df["evidence_kind"] = ""
+    df["evidence_checked_on"] = ""
+    if not path.exists():
+        return df
+    v = pd.read_csv(path, dtype=str).fillna("").set_index("entity_id")
+    for key, row in v.iterrows():
+        m = df["key"] == key
+        if not m.any():
+            continue
+        df.loc[m, "evidence_url"] = row["evidence_url"]
+        df.loc[m, "evidence_url_2"] = row["evidence_url_2"]
+        df.loc[m, "evidence_kind"] = row["evidence_kind"]
+        df.loc[m, "evidence_checked_on"] = row["checked_on"]
+    return df
+
+
+# ---------------------------------------------------------------------------
 # 3. Multidimensional taxonomy (editorial requirement 2)
 # ---------------------------------------------------------------------------
 # The R0 taxonomy forced five labels onto one nominal axis. The statistical
@@ -249,6 +278,7 @@ def consort(df: pd.DataFrame) -> pd.DataFrame:
 def main() -> None:
     df = base_frame()
     df = apply_verification(df)
+    df = apply_evidence_urls(df)
     df = code_dimensions(df)
     df = attach_raters(df)
 
@@ -259,7 +289,8 @@ def main() -> None:
 
     cols = [
         "entity_id", "entity", "country", "jurisdiction_type", "channel", "provenance",
-        "registry_verdict", "registry_id", "evidence_url", "verification_note",
+        "registry_verdict", "registry_id", "evidence_url", "evidence_url_2",
+        "evidence_kind", "evidence_checked_on", "verification_note",
         "source", "in_analytic_sample",
         "D1_legal_form", "D2_human_participation", "D3_ai_authority",
         "D4_architecture", "D5_governance_substrate", "dimension_profile",

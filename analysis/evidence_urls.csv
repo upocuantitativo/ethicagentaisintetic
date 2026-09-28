@@ -1,0 +1,46 @@
+entity_id,evidence_url,evidence_url_2,evidence_kind,checked_on
+builtin_0,https://www.wired.com/story/all-my-employees-are-ai-agents-so-are-my-executives/,https://futurism.com/artificial-intelligence/company-run-entirely-ai-generated-employees-chaos,press,2026-09-28
+builtin_1,https://fortune.com/2023/09/19/polish-spirits-company-appoints-ai-as-ceo-robot-vows-no-personal-bias-only-unbiased-and-strategic-choices,https://dictador.com/mika-the-worlds-first-ai-humanoid-ceo-leading-dictador-into-the-future/,press+official,2026-09-28
+builtin_2,https://www.prnewswire.com/news-releases/netdragon-appoints-its-first-virtual-ceo-301613062.html,https://www.euronews.com/2022/11/20/would-you-want-a-robot-as-ceo-chinese-firm-is-first-to-try-as-it-bets-on-metaverse-workpla,official+press,2026-09-28
+builtin_3,https://techcrunch.com/2025/09/08/cognition-ai-defies-turbulence-with-a-400m-raise-at-10-2b-valuation/,https://cognition.com/,press+official,2026-09-28
+builtin_4,https://www.theinformation.com/articles/midjourney-profitable-chasing-hardware-dreams-can-survive-google,https://en.wikipedia.org/wiki/Midjourney,press,2026-09-28
+builtin_5,https://www.fetch.ai/blog/fetch-ai-singularity-net-and-ocean-protocol-unite-to-create-the-superintelligence-alliance,https://www.coindesk.com/business/2024/05/29/fetchai-singularitynet-ocean-protocol-set-date-for-artificial-superintelligence-alliance-merger,official+press,2026-09-28
+builtin_6,https://www.cambridgenetwork.co.uk/news/fetchai-nabs-5m-institutional-investment,https://www.fetch.ai/blog/fetch-ai-pioneering-autonomous-supply-chains,press+official,2026-09-28
+builtin_7,https://singularitynet.io/aboutus/,https://techcrunch.com/2017/12/22/singularitynets-ben-goertzel-has-a-grand-vision-for-the-future-of-ai,official+press,2026-09-28
+builtin_8,https://terra0.org/,https://www.frieze.com/article/terra0-profile-2023,official+press,2026-09-28
+builtin_9,https://www.theblock.co/news/business/2025-01-29-ai-agent-platform-ai16z-officially-rebrands-to-elizaos-337614,https://decrypt.co/303244/ai-dao-ai16z-becomes-elizaos-amid-branding-confusion-concerns,press,2026-09-28
+builtin_10,https://olas.network/agents/governatooorr,https://medium.com/@ValoryAG/introducing-governatooorr-9edcbc212eb2,official,2026-09-28
+builtin_11,,,NOT FOUND (facility.ai is a parked domain for sale; no public source located),2026-09-28
+builtin_12,https://www.producthunt.com/products/instruct-2,https://moge.ai/product/instruct,directory,2026-09-28
+builtin_13,https://chainwire.org/2026/03/09/walbi-launches-no-code-ai-trading-agents-for-retail-crypto-traders/,https://walbi.com/ai,press release+official,2026-09-28
+builtin_14,https://gov.near.org/t/near-call-for-delegates-house-of-stake/40513,https://medium.com/@nearcommunitysquad/near-governance-101-house-of-stake-378ef7aa3c0f,official forum,2026-09-28
+builtin_15,https://builtin.com/articles/what-is-rentahuman,https://www.ycombinator.com/companies/rentahuman,press+directory,2026-09-28
+user_0,https://aimgroup.com/2023/12/04/zhaopin-introduces-new-ai-tool-for-screening-interviewing/,https://aimgroup.com/2025/08/11/zhaopin-upgrades-its-ai-recruitment-tools-to-an-ecosystem/,press,2026-09-28
+user_1,https://www.hedgeweek.com/bitmex-launches-automated-trading-bots-for-crypto-trades/,https://cryptoslate.com/press-releases/bitmex-launches-automated-trading-bots-for-effortless-crypto-trades/,official+press release,2026-09-28
+user_2,https://www.coindesk.com/business/2023/06/11/blockchain-based-ai-compute-protocol-gensyn-closes-43m-series-a-funding-round-led-by-a16z,https://www.gensyn.ai,press+official,2026-09-28
+user_3,,,NOT FOUND (0xcover.com unreachable; no public source located),2026-09-28
+user_4,https://cohere.com,,official,2026-09-28
+user_5,https://wayve.ai,,official,2026-09-28
+user_6,https://inflection.ai,,official,2026-09-28
+user_7,https://www.claimsjournal.com/news/east/2017/01/13/276202.htm,https://www.lemonade.com/blog/lemonade-sets-new-world-record/,press+official,2026-09-28
+user_8,https://www.coindesk.com/business/2024/08/27/makerdao-is-now-sky-as-7b-crypto-lender-rolls-out-new-stablecoin-governance-token,https://www.theblock.co/post/343689/sky-introduces-polaris-to-connect-to-berachain-as-part-of-agent-framework,press,2026-09-28
+user_9,https://docs.numer.ai/,https://en.wikipedia.org/wiki/Numerai,official,2026-09-28
+user_10,https://stability.ai,,official,2026-09-28
+user_11,https://whitepaper.virtuals.io/about-virtuals/agent-tokenization-platform,https://virtuals.io,official,2026-09-28
+user_12,https://www.forbes.com/sites/digital-assets/2025/01/06/how-ai-agent-aixbt-is-transforming-crypto-twitter-and-trend-analysis/,https://twitter.com/aixbt_agent,press+official,2026-09-28
+user_13,https://x.com/virtuals_io/status/1849841392241283559,https://cointelegraph.com/magazine/hype-ai-agents-crypto-just-turned-into-reality,official+press,2026-09-28
+user_14,https://www.coindesk.com/tech/2024/12/10/the-truth-terminal-ai-crypto-s-weird-future,https://techcrunch.com/2024/12/19/the-promise-and-warning-of-truth-terminal-the-ai-bot-that-secured-50000-in-bitcoin-from-marc-andreessen/,press,2026-09-28
+user_15,https://replika.com,,official,2026-09-28
+user_16,https://www.anthropic.com,,official,2026-09-28
+user_17,https://character.ai,,official,2026-09-28
+user_18,https://www.dlnews.com/articles/defi/friend-tech-shuts-down-after-revenue-and-users-plummet/,https://www.bankless.com/friend-tech-dead,press,2026-09-28
+user_19,https://polymarket.com,,official,2026-09-28
+user_20,https://aragon.org,,official,2026-09-28
+user_21,https://compound.finance,,official,2026-09-28
+user_22,https://aave.com,,official,2026-09-28
+user_23,https://uniswap.org,,official,2026-09-28
+user_24,https://mistral.ai,,official,2026-09-28
+user_25,https://x.ai,,official,2026-09-28
+user_26,https://perplexity.ai,,official,2026-09-28
+user_27,https://github.com/elizaOS/eliza,,official repository,2026-09-28
+user_28,https://olas.network,,official,2026-09-28
