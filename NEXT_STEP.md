@@ -2,15 +2,31 @@
 
 ## Hecho
 
+### 2026-10-04 — Comprobación tras cerrar la Fase 4
+- Web publicada = HEAD (e9c1118). Desde el commit del análisis (b21357e), en `audit_dataset.csv` solo cambian
+  las columnas de evidencia (`evidence_url`, `evidence_url_2`, `evidence_kind`, `evidence_checked_on`), que
+  `run_analysis_v2.py` no lee. Al re-ejecutarlo salen las mismas cifras (0.858 / 0.822 / 0.848 / 0.900 / 0.933).
+  **El análisis no cambia.**
+- Fase 4 completada por el autor: en su panel, 45/45 entidades con los 7 pasos de verificación hechos (100 %) y
+  checklists de las fases 1–4 completos.
+- 0xCover (user_3) se mantiene en la muestra (decisión del autor). Textos alineados: "every record carries public
+  evidence" → "45 observed entities" en el manuscrito (Clean y Marked: abstract, intro, contribuciones, diseño,
+  discusión y conclusión), Cover Letter, Response to Editors y Response to Reviewer. §3.2 indica que 44/45
+  tienen URL de evidencia pública. Se quita la viñeta de 0xCover de Response to Editors §7. En el Marked, el texto
+  nuevo va en azul.
+- Recuentos actualizados: cuerpo 11,679 palabras y abstract 337.
+- `reviewer_data/audit_dataset.csv` actualizado con las columnas de evidencia (39 columnas); README ajustado.
+- Paquete de envío final: portada, manuscrito Clean y Marked (.docx), 3 cartas de respuesta, cover letter y
+  `reviewer_data/`. El autor no necesita los PDF.
+
 ### 2026-09-28 — Dashboard y evidencias públicas
 - Lista de tareas del dashboard: las 32 tareas pendientes pasan a "Done" (confirmado por el autor); fases 1–5 en "Complete".
 - Fase 4 lista ahora las 45 entidades de la muestra analítica (las 29 de Stage-4 se publican en `STAGE4_ENTITIES`,
   fuera de `SAMPLE_DATA` para no alterar los ids que lee `run_analysis.py`). "To Verify" = 0.
 - Pasos marcados solo con base registrada: clasificación final (dataset de auditoría) y verificación de terceros
-  donde hay fuente independiente (22). El resto de pasos (registro, contacto, dirección, financiero, NLP) siguen abiertos.
-- `analysis/evidence_urls.csv`: URL de evidencia comprobada para 43/45. **Facility resuelta (facilityai.com, 2026-09-28). Sin fuente: 0xCover (user_3,
-  clasificada Confirmed; xcover.com = Cover Genius, NO coincide con la codificación DAO on-chain)** → el manuscrito dice "every record carries
-  public evidence": hay que resolverlo antes de enviar.
+  donde hay fuente independiente (22). El resto de pasos los completó después el autor (ver 2026-10-04).
+- `analysis/evidence_urls.csv`: URL de evidencia comprobada para 43/45. Facility resuelta (facilityai.com, 2026-09-28). 0xCover sin fuente viva
+  (xcover.com = Cover Genius, no coincide); resuelto en los textos el 2026-10-04.
 - Referencia Ratliff (2025): URL de Wired corregida (la anterior daba 404). Saurabh et al.: título corregido.
 - Todos los DOI resuelven (Crossref); muestra y consort_flow sin cambios.
 
@@ -113,20 +129,21 @@ Verificado en navegador.
 
 ---
 
-## Siguiente paso
+## Completado
 
-1. ~~Marcador [AUTHOR TO CONFIRM]~~ resuelto por el autor (retirado del manuscrito, 2026-09-27).
-2. **Publicar el repositorio (HECHO 2026-09-27: push realizado, web y audit_dataset.csv públicos; falta solo sustituir "URL withheld" tras la aceptación)** con `analysis/audit_dataset.csv`, `consort_flow.csv`,
-   `registry_verdicts.csv`, `results_v2.json` y el código, y sustituir "URL withheld" por el
-   enlace real al aceptarse.
-3. **Enviar a `jemi@cognitione.org`** antes del **31 de octubre de 2026**: portada + manuscrito
-   ciego (limpio y marcado) + 3 cartas de respuesta + `reviewer_data/`.
-4. Anotar el nº de manuscrito en el panel de seguimiento cuando llegue el acuse.
+- Marcador [AUTHOR TO CONFIRM] retirado del manuscrito (2026-09-27).
+- Repositorio publicado (2026-09-27): web, `analysis/audit_dataset.csv`, `consort_flow.csv`, `registry_verdicts.csv`,
+  `results_v2.json` y el código son públicos. El manuscrito mantiene "URL withheld" por el doble ciego.
+- Análisis verificado como estable tras la Fase 4 (2026-10-04).
+- Paquete R1 para JEMI terminado (2026-10-04).
 
-### Pendientes reconocidos ante el editor (declarados, no ocultados)
+### Limitaciones declaradas en el artículo
 - Muestra de test verdaderamente independiente (requiere muestreo probabilístico desde registro).
 - Instrumento calibrado de detección de texto IA (requiere corpus etiquetado a mano).
 - Estudio de fiabilidad con potencia suficiente (solo 10 casos doble-codificados sobreviven).
+
+## Siguiente paso
+Ninguno: el trabajo del proyecto está completo.
 
 ---
 
