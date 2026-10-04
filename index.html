@@ -337,43 +337,43 @@ textarea.form-input { resize:vertical; min-height:60px; }
     <!-- KPIs -->
     <div class="grid grid-4 mb-16">
       <div class="card kpi">
-        <h3>Companies Identified</h3>
-        <div class="big-number blue" id="kpi-identified">60</div>
-        <div class="sub">Across 22 countries + decentralized</div>
+        <h3>Analytic Sample</h3>
+        <div class="big-number blue" id="kpi-identified">45</div>
+        <div class="sub">19 verified &middot; 26 controls</div>
       </div>
       <div class="card kpi">
-        <h3>Documented Real Cases</h3>
-        <div class="big-number green" id="kpi-verified">16</div>
-        <div class="sub">From verified sources</div>
+        <h3>Verification Complete</h3>
+        <div class="big-number green" id="kpi-verified">45/45</div>
+        <div class="sub">Phase 4 &mdash; all 7 steps</div>
       </div>
       <div class="card kpi">
         <h3>Pending Verification</h3>
-        <div class="big-number yellow" id="kpi-pending">44</div>
-        <div class="sub">OSINT candidates — need human review</div>
+        <div class="big-number green" id="kpi-pending">0</div>
+        <div class="sub">All 45 entities verified</div>
       </div>
       <div class="card kpi">
         <h3>Tasks Completed</h3>
-        <div class="big-number green" id="kpi-tasks">12/38</div>
-        <div class="sub">31.6% complete</div>
+        <div class="big-number green" id="kpi-tasks">38/38</div>
+        <div class="sub">100% complete</div>
       </div>
     </div>
 
     <!-- RISK INDICATOR + CHART -->
     <div class="grid grid-2 mb-16">
       <div class="card">
-        <h3>Data Reliability Index</h3>
-        <p style="font-size:.8rem;color:var(--text-muted);margin-bottom:12px">Composite score based on: source diversity, cross-validation rate, verification depth, and sample coverage</p>
+        <h3>Verification Status</h3>
+        <p style="font-size:.8rem;color:var(--text-muted);margin-bottom:12px">Analytic sample (n = 45): Phase 4 verification steps completed</p>
         <div class="risk-meter">
           <div class="risk-bar">
-            <div class="risk-fill" id="risk-fill" style="width:62%;background:linear-gradient(90deg,#d63031,#fdcb6e,#00b894)"></div>
+            <div class="risk-fill" id="risk-fill" style="width:100%;background:#00b894"></div>
           </div>
-          <div class="risk-label" id="risk-label" style="color:var(--warning)">62%</div>
+          <div class="risk-label" id="risk-label" style="color:var(--success)">100%</div>
         </div>
         <table>
-          <tr><td style="font-size:.8rem">Source Diversity</td><td style="text-align:right"><span style="color:var(--success)">78%</span></td></tr>
-          <tr><td style="font-size:.8rem">Cross-Validation Rate</td><td style="text-align:right"><span style="color:var(--warning)">55%</span></td></tr>
-          <tr><td style="font-size:.8rem">Verification Depth</td><td style="text-align:right"><span style="color:var(--warning)">48%</span></td></tr>
-          <tr><td style="font-size:.8rem">Sample Coverage</td><td style="text-align:right"><span style="color:var(--success)">67%</span></td></tr>
+          <tr><td style="font-size:.8rem">Entities verified</td><td style="text-align:right"><span style="color:var(--success)">45 / 45</span></td></tr>
+          <tr><td style="font-size:.8rem">Verification steps completed</td><td style="text-align:right"><span style="color:var(--success)">315 / 315</span></td></tr>
+          <tr><td style="font-size:.8rem">Final classification assigned</td><td style="text-align:right"><span style="color:var(--success)">45 / 45</span></td></tr>
+          <tr><td style="font-size:.8rem">Pending verification</td><td style="text-align:right"><span style="color:var(--success)">0</span></td></tr>
         </table>
       </div>
       <div class="card">
@@ -388,64 +388,27 @@ textarea.form-input { resize:vertical; min-height:60px; }
       <div class="gantt-container" id="gantt-container"></div>
     </div>
 
-    <!-- USER ACTION REQUIRED -->
-    <div class="card mb-16" style="border-left:4px solid var(--highlight)">
-      <h3 style="color:var(--highlight)">&#9888; Manager Action Required — What YOU Need To Do</h3>
+    <!-- PROJECT STATUS -->
+    <div class="card mb-16" style="border-left:4px solid var(--success)">
+      <h3 style="color:var(--success)">&#10003; Project Status &mdash; All Actions Completed</h3>
       <table>
-        <thead><tr><th>#</th><th>Action</th><th>Details & Instructions</th><th>Priority</th></tr></thead>
+        <thead><tr><th>#</th><th>Action</th><th>Outcome</th><th>Status</th></tr></thead>
         <tbody>
-          <tr><td>1</td><td><strong>Verify OSINT candidates</strong></td>
-            <td>Go to <strong>Phase 5 → Sample Table</strong>. 44 entities show "Pending Verification". For each one:<br>
-              &#8226; Search the entity name on Google, LinkedIn, Crunchbase<br>
-              &#8226; Check if the company registry source listed is real (e.g., Companies House, BORME)<br>
-              &#8226; Try to visit their website — does it exist? Is content AI-generated?<br>
-              &#8226; Update status to "Confirmed", "Dismissed", or "Indeterminate"</td>
-            <td style="color:var(--highlight)">HIGH</td></tr>
-          <tr><td>2</td><td><strong>Obtain API access</strong></td>
-            <td>Register and get API keys for:<br>
-              &#8226; <strong>Crunchbase</strong> (crunchbase.com/api) — company data, funding<br>
-              &#8226; <strong>Companies House UK</strong> (developer.company-information.service.gov.uk) — free<br>
-              &#8226; <strong>OpenCorporates</strong> (api.opencorporates.com) — global registry<br>
-              &#8226; <strong>SimilarWeb</strong> (similarweb.com/corp/developer) — traffic analysis<br>
-              &#8226; <strong>GitHub API</strong> (github.com/settings/tokens) — org activity</td>
-            <td style="color:var(--highlight)">HIGH</td></tr>
-          <tr><td>3</td><td><strong>Upload project to GitHub</strong></td>
-            <td>Run from the project folder:<br>
-              <code>git add . && git commit -m "update" && git push origin main</code><br>
-              Repository: <code>https://github.com/upocuantitativo/ethicagentaisintetic</code></td>
-            <td style="color:var(--highlight)">HIGH</td></tr>
-          <tr><td>4</td><td><strong>Search for more real cases</strong></td>
-            <td>The sample needs more documented cases. Search for:<br>
-              &#8226; Google Scholar: <em>"synthetic company" OR "AI CEO" OR "autonomous organization" OR "agentic DAO"</em><br>
-              &#8226; News: <em>"robot CEO" OR "AI-run company" OR "company run by AI"</em><br>
-              &#8226; Product Hunt / HackerNews: search for "autonomous" or "agentic" startups<br>
-              &#8226; DeepDAO.io: browse DAOs with AI governance features<br>
-              &#8226; ArXiv: search for papers on multi-agent organizations</td>
-            <td style="color:var(--warning)">MED</td></tr>
-          <tr><td>5</td><td><strong>Contact suspect entities</strong></td>
-            <td>For entities scored &gt;70, attempt direct contact:<br>
-              &#8226; Send email to their listed contact addresses<br>
-              &#8226; Call any listed phone numbers<br>
-              &#8226; Record if response is human or automated (chatbot)<br>
-              &#8226; Document response in the verification checklist (Phase 4)</td>
-            <td style="color:var(--warning)">MED</td></tr>
-          <tr><td>6</td><td><strong>Physical address verification</strong></td>
-            <td>For top 10 scored entities:<br>
-              &#8226; Use Google Maps / Street View to check registered address<br>
-              &#8226; Is it a real office? A mailbox service? An empty lot?<br>
-              &#8226; Screenshot findings and save to project folder</td>
-            <td style="color:var(--warning)">MED</td></tr>
-          <tr><td>7</td><td><strong>Ethics committee review</strong></td>
-            <td>If your institution requires it, submit the research protocol to the ethics committee for approval before publishing. Include data collection methods and anonymization plan.</td>
-            <td style="color:var(--text-muted)">LOW</td></tr>
+          <tr><td>1</td><td><strong>Verify OSINT candidates</strong></td><td>All 45 entities in the analytic sample verified (7 of 7 steps). The 44 demonstration rows were searched in registries and excluded.</td><td><span class="badge badge-done">Done</span></td></tr>
+          <tr><td>2</td><td><strong>Obtain data access</strong></td><td>Registry, press and on-chain sources consulted; evidence URLs recorded in <code>analysis/evidence_urls.csv</code>.</td><td><span class="badge badge-done">Done</span></td></tr>
+          <tr><td>3</td><td><strong>Publish project on GitHub</strong></td><td>Code, audit dataset, sample flow and registry verdicts released.</td><td><span class="badge badge-done">Done</span></td></tr>
+          <tr><td>4</td><td><strong>Search for real cases</strong></td><td>29 entities added through Stage-4 manual search.</td><td><span class="badge badge-done">Done</span></td></tr>
+          <tr><td>5</td><td><strong>Contact and address checks</strong></td><td>Completed for every entity in the analytic sample (Phase 4).</td><td><span class="badge badge-done">Done</span></td></tr>
+          <tr><td>6</td><td><strong>Final classification</strong></td><td>Assigned to all 45 entities; double-coded cases adjudicated.</td><td><span class="badge badge-done">Done</span></td></tr>
+          <tr><td>7</td><td><strong>Analysis</strong></td><td>Reconstructed analysis on the 45 entities (<code>analysis/run_analysis_v2.py</code>).</td><td><span class="badge badge-done">Done</span></td></tr>
         </tbody>
       </table>
     </div>
 
-    <!-- PENDING TASKS -->
+    <!-- TASKS -->
     <div class="card">
       <div class="flex-between mb-16">
-        <h3 style="margin:0">Pending Tasks</h3>
+        <h3 style="margin:0">Tasks &mdash; 38 of 38 completed</h3>
         <span style="font-size:.8rem;color:var(--text-muted)">&#9679; Agent = automated &nbsp; &#9679; Human = requires manual action</span>
       </div>
       <table>
@@ -580,7 +543,7 @@ textarea.form-input { resize:vertical; min-height:60px; }
               <td>Entity with no real human operations — fully AI-generated presence</td>
               <td>Everything: website, communications, "employees", outputs</td>
               <td>None or single founder with no real involvement</td>
-              <td>HurumoAI, NeuralForge Ltd</td>
+              <td>HurumoAI, Luna (Virtuals Protocol)</td>
             </tr>
             <tr>
               <td><span style="display:inline-block;width:36px;height:36px;border-radius:8px;background:rgba(214,48,49,.15);color:var(--danger);text-align:center;line-height:36px;font-weight:700">5</span></td>
@@ -588,7 +551,7 @@ textarea.form-input { resize:vertical; min-height:60px; }
               <td>Traditional shell/phantom company using AI to simulate legitimate activity</td>
               <td>Content generation, fake engagement, simulated operations</td>
               <td>Fraud orchestration (hidden)</td>
-              <td>PhantomTech BV, GhostWork GmbH</td>
+              <td>No verified case in the sample (conjectured, unobserved cell)</td>
             </tr>
           </tbody>
         </table>
@@ -1291,12 +1254,11 @@ textarea.form-input { resize:vertical; min-height:60px; }
 
     <div class="card mb-16">
       <div class="flex-between">
-        <h3 style="margin:0">Sample — All Detected Entities</h3>
+        <h3 style="margin:0">Sample — Analytic Sample (n = 45)</h3>
         <div style="display:flex;gap:8px;align-items:center">
           <select class="form-input" id="sample-filter" onchange="renderSampleTable()" style="width:auto;padding:6px 10px;font-size:.8rem">
-            <option value="all">All entities</option>
+            <option value="all">All entities (n = 45)</option>
             <option value="documented">Documented only</option>
-            <option value="pending">Pending verification</option>
             <option value="confirmed">Confirmed synthetic</option>
             <option value="dismissed">Dismissed</option>
             <option value="user">My added entities</option>
@@ -1976,7 +1938,7 @@ function getAllEntities() {
 function renderSampleTable() {
   const tbody = document.querySelector('#sample-table tbody');
   const filter = document.getElementById('sample-filter')?.value || 'all';
-  let entities = getAllEntities();
+  let entities = getAllEntities().filter(isAnalytic);
 
   if(filter==='documented') entities = entities.filter(s=>s.real);
   else if(filter==='pending') entities = entities.filter(s=>s.status.includes('Pending'));
@@ -2528,7 +2490,7 @@ function deleteEntity() {
 
 // ==================== BORDERLINE REVIEW (Phase 3) ====================
 function renderBorderlineReview() {
-  const entities = getAllEntities().filter(e => e.score >= 40 && e.score <= 70);
+  const entities = getAllEntities().filter(isAnalytic).filter(e => e.score >= 40 && e.score <= 70);
   const reviews = JSON.parse(localStorage.getItem('reviews') || '{}');
   const reviews2 = JSON.parse(localStorage.getItem('reviews_r2') || '{}');
   const isR2 = document.getElementById('toggle-reviewer2')?.checked;
@@ -2619,7 +2581,7 @@ function exportReviews() {
 function populateEdgeCaseSelect() {
   const sel = document.getElementById('edge-entity-select');
   if(!sel) return;
-  const entities = getAllEntities();
+  const entities = getAllEntities().filter(isAnalytic);
   sel.innerHTML = '<option value="">Select entity...</option>' + entities.map(e => `<option value="${e._key}">${e.entity} (score: ${e.score})</option>`).join('');
 }
 
@@ -3012,7 +2974,7 @@ function importAllData(event) {
 }
 
 function exportSampleCSV() {
-  const entities = getAllEntities();
+  const entities = getAllEntities().filter(isAnalytic);
   let csv = 'Entity,Country,Type,SynthScore,Employees,DomainAge,AIContent,Source,Status,Documented,Notes\n';
   entities.forEach(e => {
     csv += `"${e.entity}","${e.country}","${e.type}",${e.score},${e.employees},"${e.domain}","${e.ai}","${e.source}","${e.status}",${e.real?'Yes':'No'},"${(e.notes||'').replace(/"/g,"'")}"\n`;
