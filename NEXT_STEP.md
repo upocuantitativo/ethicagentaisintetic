@@ -9,6 +9,8 @@
   **El análisis no cambia.**
 - Fase 4 completada por el autor y publicada en la web: 45/45 entidades con los 7 pasos de verificación hechos (100 %) y
   checklists de las fases 1–4 completos. Solo se publica el estado de los pasos; las notas de plantilla del navegador no.
+- Portada de la web actualizada a R1: 45 entidades, 45/45 verificadas, 0 pendientes, 38/38 tareas. Las vistas de
+  muestra (Fase 5, casos frontera, edge cases, export CSV) solo listan las 45; se quitan los ejemplos de demostración.
 - 0xCover (user_3) se mantiene en la muestra (decisión del autor). Textos alineados: "every record carries public
   evidence" → "45 observed entities" en el manuscrito (Clean y Marked: abstract, intro, contribuciones, diseño,
   discusión y conclusión), Cover Letter, Response to Editors y Response to Reviewer. §3.2 indica que 44/45
