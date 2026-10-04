@@ -7,8 +7,8 @@
   las columnas de evidencia (`evidence_url`, `evidence_url_2`, `evidence_kind`, `evidence_checked_on`), que
   `run_analysis_v2.py` no lee. Al re-ejecutarlo salen las mismas cifras (0.858 / 0.822 / 0.848 / 0.900 / 0.933).
   **El análisis no cambia.**
-- Fase 4 completada por el autor: en su panel, 45/45 entidades con los 7 pasos de verificación hechos (100 %) y
-  checklists de las fases 1–4 completos.
+- Fase 4 completada por el autor y publicada en la web: 45/45 entidades con los 7 pasos de verificación hechos (100 %) y
+  checklists de las fases 1–4 completos. Solo se publica el estado de los pasos; las notas de plantilla del navegador no.
 - 0xCover (user_3) se mantiene en la muestra (decisión del autor). Textos alineados: "every record carries public
   evidence" → "45 observed entities" en el manuscrito (Clean y Marked: abstract, intro, contribuciones, diseño,
   discusión y conclusión), Cover Letter, Response to Editors y Response to Reviewer. §3.2 indica que 44/45
