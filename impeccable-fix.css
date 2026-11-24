@@ -1,0 +1,9 @@
+/* Correcciones de legibilidad (impeccable detect), 2026-11-24. Solo color y tamaño de letra.
+   Para deshacerlas: quitar el <link> a este fichero en el HTML. */
+div.gantt-header-days > span { font-size: 12px !important; }
+div.gantt-row:nth-of-type(2) > div.gantt-track > div.gantt-bar > span { color: #005dbb !important; }
+div.gantt-row:nth-of-type(3) > div.gantt-track > div.gantt-bar > span { color: #006652 !important; }
+div.gantt-row:nth-of-type(4) > div.gantt-track > div.gantt-bar > span { color: #895a02 !important; }
+div.gantt-row:nth-of-type(5) > div.gantt-track > div.gantt-bar > span { color: #a5142c !important; }
+div.gantt-row:nth-of-type(6) > div.gantt-track > div.gantt-bar > span { color: #4436fd !important; }
+div.gantt-row:nth-of-type(7) > div.gantt-track > div.gantt-bar > span { color: #696969 !important; }
